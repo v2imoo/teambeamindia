@@ -155,37 +155,33 @@ function contactBits(){
 }
 
 function footer(){
-  const soc = Object.entries(CFG.social).map(([n,u])=>`<a href="${attr(u)}" rel="noopener">${esc(n)}</a>`).join('');
-  const dest = CFG.destinations.map(d=>`<span>${esc(d)}</span>`).join('');
+  const soc = Object.entries(CFG.social).map(([n,u])=>`<a href="${attr(u)}" rel="noopener" aria-label="${esc(n)}">${esc(n)}</a>`).join('');
   return `</main>
 <footer class="foot">
   <div class="foot__beam" aria-hidden="true"></div>
-  <div class="foot__in">
+  <div class="foot__strip">
+    <div class="switch"><span class="switch__on">India</span><a href="${CFG.homes.us}">United States</a></div>
+    <a class="foot__insights" href="${CFG.homes.blog}">Insights — the thinking behind the method <span aria-hidden="true">&#8599;</span></a>
+  </div>
+  <div class="foot__grid">
     <div class="foot__brand">
       ${wordmark('brand--foot')}
-      <p class="foot__line">Corporate team experiences — designed, delivered and measured.</p>
-      <p class="foot__contact">Talk to us: ${contactBits()}</p>
-      <p class="foot__addr">Visit <a href="${CFG.mapsUrl}" rel="noopener">${esc(CFG.address)}</a></p>
+      <p class="foot__line">Corporate team experiences — designed, delivered and measured. India &amp; worldwide.</p>
+      <p class="foot__contact"><a href="mailto:${CFG.email}">${CFG.email}</a><br><a href="tel:${CFG.phone.replace(/[^+\d]/g,'')}">${esc(CFG.phone)}</a></p>
+      <p class="foot__addr"><a href="${CFG.mapsUrl}" rel="noopener">${esc(CFG.address)}</a></p>
     </div>
-    <nav class="foot__col" aria-label="Explore">
-      <h3>Explore</h3>
-      <a href="/what-we-do">What we do</a><a href="/why-teambeam">How we work</a><a href="/who-we-serve">Who it's for</a><a href="/destinations">Where we go</a><a href="/resources">Tools</a><a href="/occasions">Occasions</a><a href="/volunteer">Volunteer</a>
-    </nav>
-    <nav class="foot__col" aria-label="TeamBeam">
-      <h3>TeamBeam</h3>
-      <a href="${CFG.homes.in}">India &amp; worldwide</a>
-      <a href="${CFG.homes.us}">United States</a>
-      <a href="${CFG.homes.blog}">Insights &#8599;</a>
-    </nav>
-    <div class="foot__col foot__social">
-      <h3>Follow</h3>
-      <div class="foot__soc">${soc}</div>
-    </div>
+    <nav class="foot__col" aria-label="Explore"><h3>Explore</h3>
+      <a href="/what-we-do">What we do</a><a href="/why-teambeam">How we work</a><a href="/who-we-serve">Who it's for</a><a href="/destinations">Where we go</a><a href="/resources">Tools</a></nav>
+    <nav class="foot__col" aria-label="What we do"><h3>What we do</h3>
+      <a href="/team-experiences">Team Experiences</a><a href="/offsites-retreats">Offsites &amp; Retreats</a><a href="/development-facilitation">Development</a><a href="/impact-csr">Impact &amp; CSR</a><a href="/beam-occasions">Occasions</a><a href="/self-serve-kits">Self-Serve &amp; Kits</a></nav>
+    <nav class="foot__col" aria-label="Tools & Company"><h3>Tools &amp; company</h3>
+      <a href="/resources-tools-offsite-roi-calculator">ROI calculator</a><a href="/resources-tools-team-health-snapshot">Team Health Snapshot</a><a href="/about">About</a><a href="/careers">Careers</a><a href="/partnerships">Partners</a><a href="/contact">Contact</a></nav>
   </div>
-  <div class="foot__dest"><span class="foot__dest-h">Where we go</span>${dest}<span class="foot__dest-more">and worldwide</span></div>
-  <div class="foot__legal">
-    <span>&copy; ${YEAR} TeamBeam Outings. One business, two homes — <a href="${CFG.homes.in}">teambeam.in</a> and <a href="${CFG.homes.us}">teambeam.us</a>.</span>
-    <span class="foot__legal-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/accessibility">Accessibility</a> <a class="foot__top" href="#top">Back to top &#8593;</a></span>
+  <div class="foot__bottom">
+    <div class="foot__soc">${soc}</div>
+    <div class="foot__law"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/accessibility">Accessibility</a></div>
+    <span class="foot__cr">&copy; ${YEAR} TeamBeam Outings · one business, two homes</span>
+    <a class="foot__top" href="#top">Back to top &#8593;</a>
   </div>
 </footer>
 <script>
@@ -247,8 +243,18 @@ function homePage(){
     <p class="eyebrow">Corporate team experiences · India &amp; worldwide</p>
     <h1 class="hero__h">We build teams.<br>And we <span class="grad">prove it.</span></h1>
     <p class="hero__sub">We design experiences around what a team actually needs, deliver them with care, and measure what changed. One practice, at home in India and across the world.</p>
-    <div class="hero__cta"><a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="#how">How we work</a></div>
+    <div class="hero__cta"><a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/why-teambeam">How we work</a></div>
   </section>
+
+  ${secNarrative({eyebrow:'The honest problem',h:'You spend the budget. Everyone has an okay time. Then nothing changes.',paras:[
+    'It is a familiar story. A team books an outing, people show up, there is food and a few games, and by the next week it is a photo on a group chat. The teams that needed to talk still do not talk. The new joiners still feel like guests.',
+    'The problem is not the activity. It is that the activity was never tied to anything, and nobody looked at whether it worked. So the next year you do it again, a little bigger, and hope. That is a great deal of money to spend on hope.'
+  ]})}
+
+  ${secNarrative({eyebrow:'A better order of operations',h:'Understand the team first. Then design the day. Then check it worked.',paras:[
+    'Before we suggest a single activity, we look at how your team is really doing — where trust is thin, where communication breaks, what the team itself says it needs. That reading shapes everything after.',
+    'Then we build a day around it, run it well, and come back at Day 14, 30 and 60 to see what shifted. You end up with proof, not just a good memory. That is the whole idea behind TeamBeam.'
+  ]})}
 
   <section class="strip" id="what">
     <div class="sec-head"><span class="eyebrow">What we do</span><h2>Experiences built around a team, not a catalogue.</h2></div>
@@ -260,6 +266,17 @@ function homePage(){
       <p class="lead">We read a team before we design for it, and we measure what moved afterwards — at Day 14, 30 and 60. That is the whole difference between a good day and a change that holds.</p></div>
     <div class="method">${['Scan','Design','Build','Deliver','Measure'].map(s=>`<span>${s}</span>`).join('')}</div>
   </section>
+
+  ${secFeatureList({eyebrow:'What we read',h:'The eight dimensions of a healthy team.',lead:'Underneath every experience is a reading of the team across eight dimensions. It is the vocabulary that turns \u201cthe team feels off\u201d into something you can design for — and measure.',items:[
+    {h:'Trust',p:'Whether people can admit a mistake, ask for help, and disagree without it costing them.'},
+    {h:'Communication',p:'Whether the important things get said — including the hard ones — and whether they land.'},
+    {h:'Alignment',p:'Whether everyone is genuinely pointed at the same thing, not just busy.'},
+    {h:'Collaboration',p:'Whether people build on each other\u2019s work or run in parallel lanes.'},
+    {h:'Decision-making',p:'Whether the team can decide and stay decided, rather than reopening everything.'},
+    {h:'Energy',p:'Whether the team has the capacity to engage, or is running on empty.'},
+    {h:'Belonging',p:'Whether people feel part of the team or adjacent to it.'},
+    {h:'Leadership',p:'Whether the people leading create the conditions the other seven need.'}
+  ]})}
 
   <section class="strip" id="who">
     <div class="sec-head"><span class="eyebrow">Who it's for</span><h2>For the people who carry the team.</h2></div>
@@ -281,11 +298,11 @@ function homePage(){
 
   <section class="strip strip--tint" id="tools">
     <div class="sec-head"><span class="eyebrow">Tools</span><h2>Think it through before you talk to us.</h2>
-      <p class="lead">A set of tools to size the opportunity and shape the brief — an ROI view, a team-health self-check, and an idea generator. Arriving with this batch of the site.</p></div>
+      <p class="lead">A set of free tools to size the opportunity and shape the brief — an ROI view, a team-health self-check, and an idea generator. No sign-up.</p></div>
     <div class="cards cards--3">
-      <div class="card card--soft"><h3>ROI calculator</h3><p>Size the cost of a disengaged team, and what a measured change is worth.</p></div>
-      <div class="card card--soft"><h3>Team Health Snapshot</h3><p>A short self-check across the eight dimensions of a healthy team.</p></div>
-      <div class="card card--soft"><h3>Idea Generator</h3><p>A starting point for the kind of experience your team needs.</p></div>
+      <a class="card" href="/resources-tools-offsite-roi-calculator"><span class="card__edge"></span><h3>ROI calculator</h3><p>Size the cost of a disengaged team, and what a measured change is worth.</p><span class="card__link">Open &rarr;</span></a>
+      <a class="card" href="/resources-tools-team-health-snapshot"><span class="card__edge"></span><h3>Team Health Snapshot</h3><p>A short self-check across the eight dimensions of a healthy team.</p><span class="card__link">Take it &rarr;</span></a>
+      <a class="card" href="/resources-tools-idea-generator"><span class="card__edge"></span><h3>Idea Generator</h3><p>A starting point for the kind of experience your team needs.</p><span class="card__link">Try it &rarr;</span></a>
     </div>
   </section>
 
@@ -294,12 +311,15 @@ function homePage(){
     <div class="principles__grid">${principles.map(([t,d])=>`<div class="pr"><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
   </section>
 
-  <section class="insights">
-    <a class="insights__link" href="${CFG.homes.blog}">
-      <span class="eyebrow">Insights</span>
-      <span class="insights__h">We think out loud about team health, measurement and the human layer of work. <span class="grad">Read the insights &#8599;</span></span>
-    </a>
-  </section>
+  ${secBlog({h:'The thinking behind the method.',links:[{t:'The eight dimensions of a healthy team',href:'/the-eight-dimensions-of-a-healthy-team/'},{t:'Why measurement changes the conversation',href:'/why-measurement-changes-the-conversation/'}]})}
+
+  ${secUS({})}
+
+  ${secRelated({eyebrow:'Explore',h:'Where to go next.',links:[
+    {h:'How we work',p:'The method, the measurement, and the proof you can put in front of a board.',href:'/why-teambeam',linkText:'The method'},
+    {h:'What we do',p:'Eight ways to bring a team together, held up by one method.',href:'/what-we-do',linkText:'All offerings'},
+    {h:"Who it's for",p:'By role, by industry, and by the moment your team is in.',href:'/who-we-serve',linkText:'See who'}
+  ]})}
 
   <section class="talk" id="talk">
     <div class="talk__in">
@@ -333,7 +353,13 @@ function secFaq(o){const items=o.items.map(f=>`<details><summary>${esc(f.q)}</su
 function secCTA(o){return `<section class="talk" id="talk"><div class="talk__in"><span class="eyebrow">${esc(o.eyebrow||'Talk to us')}</span><h2>${o.h}</h2>${o.p?`<p>${o.p}</p>`:''}<p class="talk__contact">${contactBits()}</p><div class="hero__cta" style="justify-content:center">${o.cta}</div></div></section>`;}
 function secRaw(o){return o.html;}
 function secProse(o){return `<section class="strip narrow prose-sec">${(o.eyebrow||o.h)?`<div class="sec-head">${o.eyebrow?`<span class="eyebrow">${esc(o.eyebrow)}</span>`:''}${o.h?`<h2>${o.h}</h2>`:''}</div>`:''}${o.blocks.map(b=>`${b.h?`<h3>${esc(b.h)}</h3>`:''}${b.p?`<p>${b.p}</p>`:''}`).join('')}</section>`;}
-const R={hero:secHero,lead:secLead,cards:secCards,steps:secSteps,schedule:secSchedule,proof:secProof,faq:secFaq,cta:secCTA,raw:secRaw,prose:secProse};
+function secNarrative(o){return `<section class="strip narrow"${o.id?` id="${o.id}"`:''}><div class="sec-head">${o.eyebrow?`<span class="eyebrow">${esc(o.eyebrow)}</span>`:''}${o.h?`<h2>${o.h}</h2>`:''}</div><div class="narr">${o.paras.map(p=>`<p>${p}</p>`).join('')}</div></section>`;}
+function secFeatureList(o){return `<section class="strip${o.tint?' strip--tint':''}"${o.id?` id="${o.id}"`:''}><div class="sec-head">${o.eyebrow?`<span class="eyebrow">${esc(o.eyebrow)}</span>`:''}${o.h?`<h2>${o.h}</h2>`:''}${o.lead?`<p class="lead">${o.lead}</p>`:''}</div><div class="flist">${o.items.map(it=>`<div class="fitem"><h3>${it.h}</h3><p>${it.p}</p></div>`).join('')}</div></section>`;}
+function secRelated(o){return `<section class="strip related"><div class="sec-head"><span class="eyebrow">${esc(o.eyebrow||'Keep reading')}</span>${o.h?`<h2>${o.h}</h2>`:''}</div><div class="cards cards--3">${o.links.map(l=>`<a class="card" href="${l.href}"><span class="card__edge"></span><h3>${l.h}</h3><p>${l.p}</p><span class="card__link">${l.linkText||'Explore'} &rarr;</span></a>`).join('')}</div></section>`;}
+function secPull(o){return `<section class="strip"><blockquote class="pull">${o.quote}${o.cite?`<cite>${esc(o.cite)}</cite>`:''}</blockquote></section>`;}
+function secUS(o){return `<section class="strip"><a class="xmodule xmodule--us" href="${CFG.homes.us}"><span class="xmodule__eyebrow">Planning in the United States?</span><span class="xmodule__h">${o.h||'teambeam.us is our home there — the same method, a team on the ground.'}</span><span class="xmodule__go">Visit the US site <span aria-hidden="true">&rarr;</span></span></a></section>`;}
+function secBlog(o){const links=(o.links||[]).map(l=>`<a class="xmodule__link" href="${CFG.homes.blog}${l.href}">${esc(l.t)} <span aria-hidden="true">&#8599;</span></a>`).join('');return `<section class="strip"><div class="xmodule xmodule--blog"><div><span class="xmodule__eyebrow">Insights</span><span class="xmodule__h">${o.h||'The thinking behind the method.'}</span>${links?`<div class="xmodule__links">${links}</div>`:''}</div><a class="cta cta--ghost" href="${CFG.homes.blog}">Read the insights &#8599;</a></div></section>`;}
+const R={hero:secHero,lead:secLead,cards:secCards,steps:secSteps,schedule:secSchedule,proof:secProof,faq:secFaq,cta:secCTA,raw:secRaw,prose:secProse,narrative:secNarrative,featurelist:secFeatureList,related:secRelated,pull:secPull,usmodule:secUS,blogmodule:secBlog};
 function renderPage(p){
   const nodes=[...(p.nodes||[])];
   const faq=p.sections.find(s=>s.type==='faq');
