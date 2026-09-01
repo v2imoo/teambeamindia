@@ -19,7 +19,8 @@ const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/resources','/resources-tools-offsite-roi-calculator','/resources-tools-team-health-snapshot','/resources-tools-idea-generator',
   '/about','/careers','/partnerships','/contact',
   '/why-teambeam-the-method','/why-teambeam-measurement-impact','/why-teambeam-results',
-  '/occasions','/volunteer','/privacy','/terms','/accessibility']);
+  '/occasions','/volunteer','/privacy','/terms','/accessibility',
+  '/destinations-india-goa','/destinations-india-lonavala','/destinations-india-coorg','/destinations-india-udaipur','/destinations-india-rishikesh','/destinations-india-kabini']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -626,12 +627,12 @@ PAGES.push({
     {type:'cards', id:'india', eyebrow:'India', h:'Signature destinations across India.', cols:3,
       lead:'From an easy drive out of the city to a full residential offsite, these are the places we return to.',
       cards:[
-        {h:'Lonavala',p:'Misty hills an easy drive from Mumbai and Pune.'},
-        {h:'Goa',p:'Beaches, energy and space to unwind together.'},
-        {h:'Coorg',p:'Coffee country — cool air and quiet green.'},
-        {h:'Udaipur',p:'Lakes and palaces for a team that wants a lift.'},
-        {h:'Rishikesh',p:'River, adventure and calm in equal measure.'},
-        {h:'Kabini',p:'Wilderness and wildlife on the water\u2019s edge.'},
+        {h:'Lonavala',p:'Misty hills an easy drive from Mumbai and Pune.',link:'/destinations-india-lonavala',linkText:'Explore'},
+        {h:'Goa',p:'Beaches, energy and space to unwind together.',link:'/destinations-india-goa',linkText:'Explore'},
+        {h:'Coorg',p:'Coffee country — cool air and quiet green.',link:'/destinations-india-coorg',linkText:'Explore'},
+        {h:'Udaipur',p:'Lakes and palaces for a team that wants a lift.',link:'/destinations-india-udaipur',linkText:'Explore'},
+        {h:'Rishikesh',p:'River, adventure and calm in equal measure.',link:'/destinations-india-rishikesh',linkText:'Explore'},
+        {h:'Kabini',p:'Wilderness and wildlife on the water\u2019s edge.',link:'/destinations-india-kabini',linkText:'Explore'},
         {h:'Jaipur',p:'Colour, heritage and grand rooms for scale.'},
         {h:'Munnar',p:'Tea hills and cool weather in Kerala\u2019s high country.'},
         {h:'Alibaug',p:'A quick coastal escape close to Mumbai.'},
@@ -1142,6 +1143,141 @@ PAGES.push(
     ]}
   ]
 });
+
+/* ---- X-Leaves: destination builder + flagship pages ---- */
+function destination(o){
+  return {path:o.slug, crumb:o.name,
+    title:o.name+' — team offsites & experiences · TeamBeam Outings',
+    desc:o.desc, ai:o.ai, keywords:o.keywords,
+    nodes:[{'@type':'Place',name:o.name+' (team destinations)',address:{'@type':'PostalAddress',addressRegion:o.region,addressCountry:'IN'}}],
+    sections:[
+      {type:'hero', eyebrow:'Where we go · India', h:o.name+' <span class="grad">for teams.</span>', sub:o.tag+'. '+o.subline,
+        cta:`<a class="cta" href="#talk">Plan a trip here</a><a class="cta cta--ghost" href="/destinations">All destinations</a>`},
+      {type:'narrative', eyebrow:'Why '+o.name, h:o.whyH, paras:o.why},
+      {type:'cards', eyebrow:'What we run here', h:'Made for '+o.name+'.', cols:3, cards:o.run},
+      {type:'prose', eyebrow:'Getting there & when to go', h:'The practical bit.', blocks:[
+        {h:'Getting there',p:o.getting},
+        {h:'When to go',p:o.when},
+        {h:'How long',p:o.howlong||'Most teams come for one to three days. We will tell you honestly what a given goal needs, and match the length to it.'}]},
+      {type:'faq', h:'About '+o.name, items:o.faq},
+      {type:'related', eyebrow:'Nearby & related', h:'Keep exploring.', links:[
+        {h:'Nearby: '+o.nearName,p:o.nearP,href:o.nearHref,linkText:'Explore'},
+        {h:'Offsites & Retreats',p:'The whole trip handled end to end.',href:'/offsites-retreats',linkText:'Offsites'},
+        {h:'How we work',p:'The place is chosen to serve the goal.',href:'/why-teambeam',linkText:'The method'}]},
+      {type:'usmodule', h:'Gathering a US-based team instead? teambeam.us runs destinations there.'},
+      {type:'cta', h:'Thinking about '+o.name+'?', p:'Tell us your team and your goal, and we will shape the trip around it.', cta:talkCTA}
+    ]};
+}
+PAGES.push(
+destination({slug:'/destinations-india-goa', name:'Goa', region:'Goa',
+  tag:'Beaches and energy · about an hour by air from most metros', subline:'The easy yes — room to unwind, and room to do real work.',
+  desc:'Team offsites and experiences in Goa — beaches, energy and space to unwind, with the whole trip designed and measured by TeamBeam.',
+  ai:'Goa is a TeamBeam team-offsite destination: beach experiences, retreats, high-energy events and CSR beach clean-ups, best November to February, with a different quieter mood in the monsoon.',
+  keywords:'team offsite Goa, corporate retreat Goa, team outing Goa, beach team building',
+  whyH:'Goa is the team that says yes.', why:[
+    'Goa is the destination almost nobody argues with. Beaches, easy flights, and a natural permission to relax make it the simplest way to get a team out of the building and into a different mood. That looseness is not a distraction from the work — it is what lets the honest conversation happen.',
+    'It also scales. A small team can have an intimate few days; a whole company can take over a resort strip. We use the openness of the place to design days that would feel forced in a meeting room.'],
+  run:[
+    {h:'Beach team experiences',p:'Hunts, games and challenges that use the coastline, not fight it.'},
+    {h:'Offsite retreats',p:'A few days of real work wrapped in genuine downtime.'},
+    {h:'High-energy events',p:'Game shows and celebrations that fill a big room and a big group.'},
+    {h:'Give back',p:'A coast clean-up or community project, with a report your CSR team can file.'}],
+  getting:'Goa has two airports (Dabolim and Mopa) with direct flights from most Indian metros — usually around an hour or two in the air. Once there, everything is a short drive.',
+  when:'November to February is the classic window — dry, bright and social. The monsoon (June to September) is quieter, greener and cheaper, with a slower, more reflective mood that suits a reset.',
+  faq:[{q:'How many days do we need in Goa?',a:'Two to three is the sweet spot for an offsite — enough for real work and real downtime. A single high-energy day also works if you are already nearby.'},
+    {q:'Is Goa only for parties?',a:'No. Goa carries a party reputation, but the same openness makes it excellent for reflective, serious work too. We design for your goal, not the cliché.'}],
+  nearName:'Alibaug', nearP:'A quicker coastal escape up the coast toward Mumbai.', nearHref:'/destinations'}),
+destination({slug:'/destinations-india-lonavala', name:'Lonavala', region:'Maharashtra',
+  tag:'Misty hills · about two hours by road from Pune and Mumbai', subline:'The closest proper change of scene for the western corridor.',
+  desc:'Team offsites and day experiences in Lonavala — misty hills a short drive from Pune and Mumbai, designed and measured by TeamBeam.',
+  ai:'Lonavala is a TeamBeam team-offsite destination in the hills two hours from Pune and Mumbai, ideal for day experiences and short retreats, greenest after the monsoon.',
+  keywords:'team offsite Lonavala, corporate outing near Pune, team building near Mumbai, hill offsite',
+  whyH:'Lonavala is the fast reset.', why:[
+    'For teams in Pune and Mumbai, Lonavala is the quickest way to feel genuinely away without losing a day to travel. Two hours on the expressway and the hills, the mist and the quiet do the work that a conference room cannot.',
+    'It is ideal when you want a real change of setting but do not have the time or budget for flights. Close enough for a day, good enough for three.'],
+  run:[
+    {h:'Hill day experiences',p:'A full day out that resets a team without an overnight stay.'},
+    {h:'Short retreats',p:'One or two nights of focused work with the hills as a backdrop.'},
+    {h:'Reset days',p:'For a tired team — space to breathe before you ask more of them.'},
+    {h:'Team development',p:'A facilitated session made easier by being out of the office.'}],
+  getting:'A straightforward two-hour drive from either Pune or Mumbai on the expressway. No flights, minimal logistics — one of the reasons it is so popular for quick offsites.',
+  when:'Lush and dramatic right after the monsoon (September to February). The monsoon itself is beautiful but wet; peak summer is warmer and quieter.',
+  faq:[{q:'Can we do Lonavala in a single day?',a:'Yes — it is one of the few real change-of-scene destinations you can do as a day trip from Pune or Mumbai and still feel the benefit.'},
+    {q:'Is it good for larger teams?',a:'Yes, there are venues that handle everything from a single team to a few hundred people.'}],
+  nearName:'Mahabaleshwar', nearP:'Another hill option a little further out, near Pune.', nearHref:'/destinations'}),
+destination({slug:'/destinations-india-coorg', name:'Coorg', region:'Karnataka',
+  tag:'Coffee country · about five to six hours from Bengaluru', subline:'Cool, green and quiet — for a team that needs to slow down.',
+  desc:'Team retreats and nature experiences in Coorg — coffee country and cool green hills, designed and measured by TeamBeam.',
+  ai:'Coorg is a TeamBeam team-retreat destination in Karnataka\u2019s coffee hills, suited to reflective resets and nature experiences, best October to March.',
+  keywords:'team retreat Coorg, corporate offsite Karnataka, nature team building, offsite from Bengaluru',
+  whyH:'Coorg is where a team exhales.', why:[
+    'Coorg is coffee estates, cool air and quiet green — the opposite of a busy city and a busier inbox. For a team that has been running hot, the slowness is the point. It gives people room to actually talk.',
+    'It suits reflective work: strategy that needs clear heads, a leadership team that needs to reset, or a group recovering from a hard stretch. The setting does half the facilitation.'],
+  run:[
+    {h:'Nature resets',p:'Genuine recovery for a team running on empty — rest that restores.'},
+    {h:'Leadership retreats',p:'Clear heads and quiet for the conversations that matter most.'},
+    {h:'Wilderness experiences',p:'Trails, estates and the outdoors, used with intent.'},
+    {h:'Strategy offsites',p:'Space to think and decide, away from the noise.'}],
+  getting:'A scenic five-to-six-hour drive from Bengaluru, or from Mangaluru. Best reached by road, which becomes part of the wind-down.',
+  when:'October to March is ideal — cool and clear. The monsoon is lush but wet, and roads can be slow.',
+  faq:[{q:'Is Coorg too slow for an energetic team?',a:'It can be, if energy is the goal — then Goa or Rishikesh may fit better. Coorg is for teams that need to slow down and reconnect.'},
+    {q:'How far is it really?',a:'Plan for most of a day\u2019s travel from Bengaluru each way. It is worth building the drive into the itinerary rather than fighting it.'}],
+  nearName:'Kabini', nearP:'Waterside wilderness a few hours away for wildlife.', nearHref:'/destinations-india-kabini'}),
+destination({slug:'/destinations-india-udaipur', name:'Udaipur', region:'Rajasthan',
+  tag:'Lakes and palaces · direct flights from major metros', subline:'A lift — heritage grandeur for a team that wants to feel special.',
+  desc:'Team offsites, executive retreats and celebrations in Udaipur — lakes, palaces and heritage, designed and measured by TeamBeam.',
+  ai:'Udaipur is a TeamBeam destination for executive retreats and celebrations, offering lakes, palaces and heritage venues, best October to March.',
+  keywords:'team offsite Udaipur, executive retreat Rajasthan, corporate celebration Udaipur, heritage offsite',
+  whyH:'Udaipur makes a team feel it matters.', why:[
+    'Udaipur is lakes, palaces and a sense of occasion. When you want a team — or a leadership group — to feel genuinely valued, the setting says it for you. It is the destination for milestones, celebrations and the moments that deserve some grandeur.',
+    'It also works for executive retreats, where the surroundings match the seriousness of the conversation and make the trip feel like an investment rather than an expense.'],
+  run:[
+    {h:'Executive retreats',p:'A considered offsite for a leadership team, run with discretion.'},
+    {h:'Celebrations',p:'Milestones and anniversaries marked so they actually land.'},
+    {h:'Heritage experiences',p:'The city and its stories, woven into the team\u2019s time together.'},
+    {h:'Incentive trips',p:'A reward that feels like one, for the people who earned it.'}],
+  getting:'Udaipur has its own airport with direct flights from major metros, so it is easier to reach than its remote feel suggests.',
+  when:'October to March is the comfortable window. Summers are hot; the monsoon brings the lakes to life but is less predictable.',
+  faq:[{q:'Is Udaipur only for senior teams?',a:'No, but it shines for executive groups, incentive winners and celebrations — occasions where the grandeur adds meaning.'},
+    {q:'Can you handle a large celebration there?',a:'Yes. We plan and run everything from an intimate leadership retreat to a full celebration end to end.'}],
+  nearName:'Jaipur', nearP:'Colour and heritage at scale, elsewhere in Rajasthan.', nearHref:'/destinations'}),
+destination({slug:'/destinations-india-rishikesh', name:'Rishikesh', region:'Uttarakhand',
+  tag:'River and adventure · about an hour from Dehradun', subline:'Adventure and calm in the same place.',
+  desc:'Team adventure experiences and reset retreats in Rishikesh — river, adventure and stillness, designed and measured by TeamBeam.',
+  ai:'Rishikesh is a TeamBeam destination combining adventure (rafting, trekking) and calm (reflection, reset), near Dehradun, with rafting seasons around autumn and spring.',
+  keywords:'team adventure Rishikesh, corporate rafting offsite, reset retreat Rishikesh, Himalaya offsite',
+  whyH:'Rishikesh holds two things at once.', why:[
+    'Rishikesh is white-water rafting and mountain trails, and it is also stillness by the river. That combination is rare and useful: a team can push itself and then genuinely wind down, in the same trip.',
+    'It suits teams that come alive with a shared challenge, and teams that need both a jolt of energy and space to reflect. The river does both jobs.'],
+  run:[
+    {h:'Adventure experiences',p:'Rafting and the outdoors, where a real challenge builds real trust.'},
+    {h:'Reset retreats',p:'Stillness and reflection by the river, for a team that needs it.'},
+    {h:'High-action days',p:'Adrenaline with a point, for teams that thrive on the stakes.'},
+    {h:'Leadership offsites',p:'Push and reflect, in a setting that supports both.'}],
+  getting:'Fly into Dehradun and drive about an hour, or reach it by road from Delhi in a longer day.',
+  when:'The prime windows are autumn (September to November) and spring (February to May), when rafting runs and the weather is kind. Peak monsoon limits river activity.',
+  faq:[{q:'Do we all have to raft?',a:'No. We design so everyone has a real part, whether or not they want the white water. The point is the shared experience, not forcing anyone.'},
+    {q:'Is it suitable for an older or mixed-fitness team?',a:'Yes — we scale the activity to the group, and Rishikesh has as much calm as it has adventure.'}],
+  nearName:'The hills', nearP:'More of Uttarakhand\u2019s mountains, for a longer trip.', nearHref:'/destinations'}),
+destination({slug:'/destinations-india-kabini', name:'Kabini', region:'Karnataka',
+  tag:'Wilderness and wildlife · about six hours from Bengaluru', subline:'Waterside wilderness for a team that wants to disconnect.',
+  desc:'Team wilderness retreats and nature experiences in Kabini — waterside forest and wildlife, designed and measured by TeamBeam.',
+  ai:'Kabini is a TeamBeam wilderness-retreat destination in Karnataka, offering forest, water and safaris, best October to May.',
+  keywords:'team retreat Kabini, wildlife offsite India, nature retreat Karnataka, executive wilderness retreat',
+  whyH:'Kabini is a real disconnect.', why:[
+    'Kabini is forest, water and wildlife — a genuine step away from screens and signal. For a team that never truly switches off, that enforced quiet is the whole value. It resets people in a way a city offsite cannot.',
+    'It suits leadership groups and teams that need depth over buzz: fewer distractions, more presence, and the shared awe of the wild to bring people together.'],
+  run:[
+    {h:'Wilderness resets',p:'Off-grid quiet that lets a team properly switch off and reconnect.'},
+    {h:'Executive offsites',p:'Depth and focus, with nothing competing for attention.'},
+    {h:'Nature experiences',p:'Safaris and the outdoors, shared as a team rather than as tourists.'},
+    {h:'Reflection retreats',p:'Space to think, decide and reset, far from the noise.'}],
+  getting:'A roughly six-hour drive from Bengaluru, or from Mysuru which is closer. Best reached by road.',
+  when:'October to May, when safaris run and the weather is good. Summer brings the best wildlife sightings around the water.',
+  faq:[{q:'Is there signal and wifi?',a:'Limited, deliberately. Part of Kabini\u2019s value is the disconnect — we plan around it rather than fight it.'},
+    {q:'Is it just safaris?',a:'No. The wilderness is the setting; the team work — reflection, decisions, reconnection — is the point.'}],
+  nearName:'Coorg', nearP:'Coffee-country calm a few hours away.', nearHref:'/destinations-india-coorg'})
+);
 
 /* ---- X-Hubs: deepen hub pages (insert before each page's closing CTA) ---- */
 const DEEPEN = {
