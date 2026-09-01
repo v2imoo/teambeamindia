@@ -667,40 +667,62 @@ const ROITOOL = `
     <div class="field"><label for="roi-size">Team size</label><input id="roi-size" type="number" min="1" value="50" inputmode="numeric"></div>
     <div class="field"><label for="roi-sal">Average annual salary — CTC per person (\u20B9)</label><input id="roi-sal" type="number" min="0" step="50000" value="1200000" inputmode="numeric"></div>
     <div class="field"><label for="roi-attr">Current annual attrition (%)</label><input id="roi-attr" type="number" min="0" max="100" step="1" value="18" inputmode="numeric"></div>
-    <div class="field"><label for="roi-dis">How disengaged does the team feel?</label><select id="roi-dis"><option value="low">A little</option><option value="some" selected>Somewhat</option><option value="high">Quite a lot</option></select></div>
+    <div class="field"><label for="roi-eng">Team engagement today</label><select id="roi-eng"><option value="high">Mostly engaged</option><option value="mixed" selected>Mixed</option><option value="low">Largely checked-out</option></select></div>
+    <div class="field"><label for="roi-seat">Roles are mostly…</label><select id="roi-seat"><option value="ind">Individual contributors</option><option value="mix" selected>A mix</option><option value="senior">Senior / specialist</option></select></div>
     <div class="field"><label for="roi-budget">Planned investment per year (\u20B9, optional)</label><input id="roi-budget" type="number" min="0" step="50000" value="500000" inputmode="numeric"></div>
   </div>
   <div class="tool__out" id="roi-out" aria-live="polite"></div>
   <details class="tool__assume"><summary>The assumptions behind this</summary><div id="roi-assume"></div></details>
-  <p class="tool__note">This is a model to size the opportunity — not a quote, and not a claim about your business. The figures are conservative, adjustable assumptions, not published statistics. Your real numbers will differ, which is exactly why we measure the actual change at Day 14, 30 and 60.</p>
-  <div class="hero__cta"><a class="cta" href="/why-teambeam">See how we measure</a><a class="cta cta--ghost" href="mailto:${CFG.email}">Talk to us</a></div>
+  <p class="tool__note">A model to size the opportunity — not a quote, and not a claim about your business. It uses widely-cited ranges for the cost of turnover and disengagement as adjustable, conservative assumptions, not as published facts about you. Your real numbers will differ, which is exactly why we measure the actual change at Day 14, 30 and 60. Runs in your browser; nothing is saved.</p>
+  <div class="hero__cta"><button class="cta cta--ghost" id="roi-copy" type="button">Copy the summary</button><a class="cta" href="/why-teambeam">See how we measure</a></div>
 </div></section>
 <script>
 (function(){
-  var ids=['roi-size','roi-sal','roi-attr','roi-dis','roi-budget'];
+  var ids=['roi-size','roi-sal','roi-attr','roi-eng','roi-seat','roi-budget'];
   var el={}; ids.forEach(function(i){el[i]=document.getElementById(i);});
   var out=document.getElementById('roi-out'), asm=document.getElementById('roi-assume');
   var inr=new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0});
-  var DIS={low:[0.03,0.08],some:[0.08,0.16],high:[0.15,0.25]};
-  var LAB={low:'a little',some:'a somewhat',high:'a quite'};
-  var REPL=[0.5,1.5];
+  // seniority raises replacement cost; engagement sets the share disengaged and the loss per person
+  var REPL={ind:[0.4,0.9],mix:[0.6,1.4],senior:[1.0,2.0]};
+  var ENG={high:{share:0.15,loss:[0.10,0.20]},mixed:{share:0.32,loss:[0.14,0.28]},low:{share:0.52,loss:[0.18,0.34]}};
+  var ENGLAB={high:'mostly-engaged',mixed:'mixed',low:'largely checked-out'};
+  var SCN=[['Conservative',0.05],['Likely',0.10],['Optimistic',0.18]];
+  var last='';
   function calc(){
-    var n=+el['roi-size'].value||0, sal=+el['roi-sal'].value||0, attr=(+el['roi-attr'].value||0)/100, dis=el['roi-dis'].value, budget=+el['roi-budget'].value||0;
+    var n=+el['roi-size'].value||0, sal=+el['roi-sal'].value||0, attr=(+el['roi-attr'].value||0)/100,
+        eng=ENG[el['roi-eng'].value]||ENG.mixed, rep=REPL[el['roi-seat'].value]||REPL.mix, budget=+el['roi-budget'].value||0;
     var dep=n*attr;
-    var aLow=dep*sal*REPL[0], aHigh=dep*sal*REPL[1];
-    var d=DIS[dis]||DIS.some;
-    var dLow=n*sal*d[0], dHigh=n*sal*d[1];
-    var tLow=aLow+dLow, tHigh=aHigh+dHigh;
-    var rLow=tLow*0.05, rHigh=tHigh*0.15;
-    var html='<div class="stat"><span class="stat__k">Estimated annual cost of a disengaged, higher-attrition team</span><span class="stat__v">'+inr.format(tLow)+' &ndash; '+inr.format(tHigh)+'</span></div>';
-    html+='<div class="stat"><span class="stat__k">What a measured improvement could be worth each year</span><span class="stat__v grad">'+inr.format(rLow)+' &ndash; '+inr.format(rHigh)+'</span></div>';
+    var aLow=dep*sal*rep[0], aHigh=dep*sal*rep[1];
+    var disN=n*eng.share;
+    var dLow=disN*sal*eng.loss[0], dHigh=disN*sal*eng.loss[1];
+    var tLow=aLow+dLow, tHigh=aHigh+dHigh, tMid=(tLow+tHigh)/2;
+    var html='<div class="roi-grid">'+
+      '<div class="stat"><span class="stat__k">Attrition — replacing regretted leavers</span><span class="stat__v">'+inr.format(aLow)+' &ndash; '+inr.format(aHigh)+'</span></div>'+
+      '<div class="stat"><span class="stat__k">Disengagement — lost productivity (~'+Math.round(disN)+' people)</span><span class="stat__v">'+inr.format(dLow)+' &ndash; '+inr.format(dHigh)+'</span></div></div>'+
+      '<div class="stat stat--total"><span class="stat__k">Estimated annual cost of the status quo</span><span class="stat__v grad">'+inr.format(tLow)+' &ndash; '+inr.format(tHigh)+'</span></div>';
+    html+='<p class="roi-sub">What recovering part of that is worth each year:</p><div class="roi-scn">';
+    SCN.forEach(function(s){ html+='<div class="scn"><span class="scn__k">'+s[0]+' ('+(s[1]*100)+'%)</span><span class="scn__v">'+inr.format(tMid*s[1])+'</span></div>'; });
+    html+='</div>';
+    var likely=tMid*0.10;
     if(budget>0){
-      var mid=(tLow+tHigh)/2; var pct=mid>0?Math.max(0,Math.min(100,budget/mid*100)):0;
-      html+='<p class="tool__read">Your investment of '+inr.format(budget)+' pays for itself if it recovers about <b>'+pct.toFixed(1)+'%</b> of that estimated cost. Even the low end of a measured improvement ('+inr.format(rLow)+') '+(rLow>=budget?'clears that on its own.':'moves you a long way toward it.')+'</p>';
+      var pct=tMid>0?Math.max(0,Math.min(100,budget/tMid*100)):0;
+      html+='<p class="tool__read">Your investment of '+inr.format(budget)+' pays for itself if it recovers about <b>'+pct.toFixed(1)+'%</b> of the estimated cost. At the <b>likely</b> case ('+inr.format(likely)+' a year), it '+(likely>=budget?'more than covers itself.':'is well on the way to covering itself.')+'</p>';
     }
     out.innerHTML=html;
-    asm.innerHTML='<ul><li>Replacing someone who leaves costs '+(REPL[0]*100)+'&ndash;'+(REPL[1]*100)+'% of their annual salary (recruiting, ramp-up, lost momentum).</li><li>'+(LAB[dis]||LAB.some)+'-disengaged team loses '+(d[0]*100)+'&ndash;'+(d[1]*100)+'% of salary in productivity per person, per year.</li><li>A measured team programme recovers 5&ndash;15% of the total. These are conservative model figures you can weigh for yourself, not published statistics.</li></ul>';
+    last='TeamBeam ROI estimate — team of '+n+', '+ENGLAB[el['roi-eng'].value]+'.\\n'
+      +'Estimated annual cost of the status quo: '+inr.format(tLow)+' to '+inr.format(tHigh)+'.\\n'
+      +'Value of recovering part of it: Conservative '+inr.format(tMid*0.05)+', Likely '+inr.format(tMid*0.10)+', Optimistic '+inr.format(tMid*0.18)+'.\\n'
+      +(budget>0?('Planned investment: '+inr.format(budget)+'.\\n'):'')
+      +'A model estimate, not a quote — TeamBeam measures the real change at Day 14/30/60.';
+    asm.innerHTML='<ul>'
+      +'<li><b>Turnover cost.</b> Replacing a departure is widely estimated at roughly half to twice annual salary depending on seniority (recruiting, ramp-up, lost momentum). We use '+(rep[0]*100)+'\u2013'+(rep[1]*100)+'% here.</li>'
+      +'<li><b>Disengagement.</b> Engagement research consistently links checked-out employees to materially lower productivity. We assume about '+Math.round(eng.share*100)+'% of a '+ENGLAB[el['roi-eng'].value]+' team is disengaged, each losing '+(eng.loss[0]*100)+'\u2013'+(eng.loss[1]*100)+'% of salary in output.</li>'
+      +'<li><b>Recovery.</b> A measured programme is modelled to recover 5\u201318% of the total. All figures are conservative, adjustable assumptions you can weigh — not published statistics about your company.</li></ul>';
   }
+  document.getElementById('roi-copy').addEventListener('click',function(){
+    if(!last)return; var b=this;
+    (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(last):Promise.reject()).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy the summary';},1600);}).catch(function(){b.textContent='Select & copy above';});
+  });
   ids.forEach(function(i){el[i].addEventListener('input',calc);el[i].addEventListener('change',calc);});
   calc();
 })();
@@ -747,36 +769,52 @@ PAGES.push(
 });
 
 const DIMS=[
-  ['Trust','People admit mistakes and ask for help without worrying it will be used against them.'],
-  ['Communication','The important things get said — including the hard ones — and they land.'],
-  ['Alignment','Everyone could tell you the same top priority right now.'],
-  ['Collaboration','People build on each other\u2019s work rather than running in parallel.'],
-  ['Decision-making','We make decisions, and they stay made.'],
-  ['Energy','The team has the capacity to take on what is in front of it.'],
-  ['Belonging','Everyone feels part of the team, not adjacent to it.'],
-  ['Leadership','The people leading create the conditions for the rest to do their best work.']
+  ['Trust',['People admit mistakes and ask for help without worrying it will be used against them.','People give each other the benefit of the doubt rather than assuming the worst.']],
+  ['Communication',['The important things get said — including the hard ones — and they land.','Bad news reaches the right people early, not after it is too late to act.']],
+  ['Alignment',['Everyone could tell you the same top priority right now.','Day-to-day work clearly connects to where the team is trying to go.']],
+  ['Collaboration',['People build on each other\u2019s work rather than running in parallel.','Handoffs between people and functions are smooth, not a source of friction.']],
+  ['Decision-making',['We make decisions, and they stay made.','It is clear who decides what, so decisions do not stall.']],
+  ['Energy',['The team has the capacity to take on what is in front of it.','People are not running on empty or quietly heading for burnout.']],
+  ['Belonging',['Everyone feels part of the team, not adjacent to it.','New and quieter voices are heard, not just the loudest few.']],
+  ['Leadership',['The people leading create the conditions for the rest to do their best work.','Leaders model the honesty and behaviour they ask for.']]
 ];
 const DIMLINK={Trust:'/trust-inside-a-team/',Belonging:'/onboarding-at-scale-belong-faster/',Leadership:'/the-leadership-team-sets-the-weather/'};
+const DIMGUIDE={
+  Trust:'Build the safety to be honest before anything else — it is the dimension the other seven lean on.',
+  Communication:'Create the habit and the moments for the hard message to be said and heard.',
+  Alignment:'Get everyone genuinely pointed the same way; busy and aligned are not the same thing.',
+  Collaboration:'Smooth the seams between people and functions who have to work together.',
+  'Decision-making':'Make ownership clear so decisions get made and stay made.',
+  Energy:'Address the load before you add to it — a tired team needs recovery, not a competition.',
+  Belonging:'Make sure everyone, not just the loudest, feels part of it.',
+  Leadership:'Work with the team that sets every other team\u2019s weather.'
+};
 const SNAPSHOT = `
 <section class="strip"><div class="tool" id="ths">
-  <div class="ths__qs">${DIMS.map(([d,q],i)=>`<div class="ths__q"><div class="ths__q-t"><span>${d}</span><label for="ths-${i}">${q}</label></div><input id="ths-${i}" class="ths__range" type="range" min="1" max="5" value="3" data-dim="${d}"><div class="ths__scale"><span>Rarely true</span><span>Always true</span></div></div>`).join('')}</div>
+  <div class="ths__qs">${DIMS.map(([d,qs])=>`<div class="ths__dim"><div class="ths__dim-h">${d}</div>${qs.map((q,j)=>`<div class="ths__q"><label for="ths-${d.replace(/[^a-z]/gi,'')}-${j}">${q}</label><input id="ths-${d.replace(/[^a-z]/gi,'')}-${j}" class="ths__range" type="range" min="1" max="5" value="3" data-dim="${d}"><div class="ths__scale"><span>Rarely true</span><span>Always true</span></div></div>`).join('')}</div>`).join('')}</div>
   <button class="cta" id="ths-go" type="button">See the snapshot</button>
   <div class="tool__out" id="ths-out" aria-live="polite"></div>
-  <p class="tool__note">A quick self-check to get you thinking — not a diagnosis. We read team health properly across these eight dimensions before we design anything. It runs in your browser; nothing is saved.</p>
+  <p class="tool__note">A structured self-check to get you thinking — not a diagnosis. It is adapted from established team-effectiveness thinking; the full, proper reading is the one we take before we design. It runs in your browser; nothing is saved.</p>
 </div></section>
 <script>
 (function(){
-  var LINK=${JSON.stringify(DIMLINK)}, BLOG='${CFG.homes.blog}', DEF='/the-eight-dimensions-of-a-healthy-team/';
+  var LINK=${JSON.stringify(DIMLINK)}, GUIDE=${JSON.stringify(DIMGUIDE)}, BLOG='${CFG.homes.blog}', DEF='/the-eight-dimensions-of-a-healthy-team/';
   var rs=[].slice.call(document.querySelectorAll('.ths__range'));
   var out=document.getElementById('ths-out');
+  function band(v){return v>=4?['Strong','b-strong']:v>=3?['Developing','b-dev']:['Fragile','b-frag'];}
   document.getElementById('ths-go').addEventListener('click',function(){
-    var vals=rs.map(function(r){return {d:r.getAttribute('data-dim'),v:+r.value};});
-    var sorted=vals.slice().sort(function(a,b){return a.v-b.v;});
-    var low=sorted.slice(0,2), high=sorted[sorted.length-1];
-    var bars=vals.map(function(x){return '<div class="bar"><span class="bar__k">'+x.d+'</span><div class="bar__track"><div class="bar__fill" style="width:'+(x.v/5*100)+'%"></div></div></div>';}).join('');
-    var focus=low[0], link=BLOG+(LINK[focus.d]||DEF);
-    out.innerHTML='<div class="bars">'+bars+'</div>'+
-      '<p class="tool__read">Your team looks strongest on <b>'+high.d+'</b>. The dimension worth attention first is <b>'+focus.d.toLowerCase()+'</b>'+((low[1]&&low[1].v===focus.v)?' (with '+low[1].d.toLowerCase()+' close behind)':'')+'. That is where a well-designed experience would earn the most.</p>'+
+    var agg={};
+    rs.forEach(function(r){var d=r.getAttribute('data-dim');(agg[d]=agg[d]||[]).push(+r.value);});
+    var dims=Object.keys(agg).map(function(d){var a=agg[d];var avg=a.reduce(function(x,y){return x+y;},0)/a.length;return {d:d,v:avg};});
+    var overall=dims.reduce(function(s,x){return s+x.v;},0)/dims.length;
+    var sorted=dims.slice().sort(function(a,b){return a.v-b.v;});
+    var focus=sorted[0], second=sorted[1], high=sorted[sorted.length-1];
+    var ob=band(overall);
+    var bars=dims.map(function(x){var bb=band(x.v);return '<div class="bar"><span class="bar__k">'+x.d+'</span><div class="bar__track"><div class="bar__fill" style="width:'+(x.v/5*100)+'%"></div></div><span class="bar__band '+bb[1]+'">'+bb[0]+'</span></div>';}).join('');
+    var link=BLOG+(LINK[focus.d]||DEF);
+    out.innerHTML='<div class="stat stat--total"><span class="stat__k">Overall team health</span><span class="stat__v grad">'+overall.toFixed(1)+' / 5 · '+ob[0]+'</span></div>'+
+      '<div class="bars">'+bars+'</div>'+
+      '<p class="tool__read">Your team looks strongest on <b>'+high.d+'</b>. The two dimensions worth attention first are <b>'+focus.d.toLowerCase()+'</b> and <b>'+second.d.toLowerCase()+'</b>. '+(GUIDE[focus.d]||'')+'</p>'+
       '<div class="hero__cta"><a class="cta" href="'+link+'">Read about '+focus.d.toLowerCase()+' &#8599;</a><a class="cta cta--ghost" href="mailto:${CFG.email}">Talk to us</a></div>';
     out.scrollIntoView({behavior:'smooth',block:'nearest'});
   });
