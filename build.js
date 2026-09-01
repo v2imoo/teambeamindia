@@ -1105,6 +1105,72 @@ PAGES.push(
   ]
 });
 
+/* ---- X-Hubs: deepen hub pages (insert before each page's closing CTA) ---- */
+const DEEPEN = {
+'/what-we-do':[
+  {type:'narrative',eyebrow:'One idea under eight offerings',h:'The format is the easy part.',paras:[
+    'Teams rarely drift because they picked the wrong activity. They drift because trust thins, decisions stall, or new people never quite belong. The eight things we run are just different doors into the same work — giving a team what it is actually missing.',
+    'So we do not start from a catalogue. We start from your team, and let the format follow. A hunt, a retreat, a give-back day and a leadership session can each be the right answer, for very different reasons.']},
+  {type:'blogmodule',h:'The thinking behind what we do.',links:[{t:'The eight dimensions of a healthy team',href:'/the-eight-dimensions-of-a-healthy-team/'},{t:'Diagnostic-first: design should follow evidence',href:'/diagnostic-first-design-follows-evidence/'}]},
+  {type:'related',h:'Where to go next.',links:[
+    {h:'How we work',p:'The method that holds all eight offerings up.',href:'/why-teambeam',linkText:'The method'},
+    {h:"Who it's for",p:'By role, industry and the moment your team is in.',href:'/who-we-serve',linkText:'See who'},
+    {h:'Tools',p:'Size the opportunity before you talk to us.',href:'/resources',linkText:'Open the tools'}]}
+],
+'/why-teambeam':[
+  {type:'narrative',eyebrow:'Why the order matters',h:'Design should follow evidence, not habit.',paras:[
+    'Most team building is chosen backwards — pick the activity, then hope it fits. It is the equivalent of prescribing before examining. Sometimes it works by luck; often it produces a pleasant day that changes nothing.',
+    'Reading the team first is what makes the design fit and the result measurable. You cannot prove a change you never defined, which is why diagnosis and measurement are two ends of the same idea.']},
+  {type:'blogmodule',h:'More on measurement.',links:[{t:'Why measurement changes the conversation',href:'/why-measurement-changes-the-conversation/'},{t:'What a Day 14 / 30 / 60 follow-up tells you',href:'/what-day-14-30-60-tells-you/'}]},
+  {type:'related',h:'Go deeper.',links:[
+    {h:'The method',p:'Scan, design, build, deliver, measure — in order, and for a reason.',href:'/why-teambeam-the-method',linkText:'The method'},
+    {h:'Measurement & proof',p:'The Day 14 / 30 / 60 schedule, and what we read.',href:'/why-teambeam-measurement-impact',linkText:'How we measure'},
+    {h:'Results',p:'A change you can put in front of a board.',href:'/why-teambeam-results',linkText:'See results'}]}
+],
+'/who-we-serve':[
+  {type:'narrative',eyebrow:'The same dimensions, different pressure',h:'Every team is the same underneath — and different on top.',paras:[
+    'Trust, communication, alignment and belonging matter for every team. What changes is the pressure each role, industry and moment puts on them. A trading floor and a factory floor can need very different days to reach the same place.',
+    'So we map to your situation — the seat you sit in, the sector you are in, and the moment your team is living through — and design for the pressure that is actually on it.']},
+  {type:'usmodule',h:'A GCC or a US-headquartered team? teambeam.us is our home there — one company, two continents.'},
+  {type:'related',h:'Explore.',links:[
+    {h:'What we do',p:'Eight formats, matched to the goal you own.',href:'/what-we-do',linkText:'All offerings'},
+    {h:'How we work',p:'Read the team first, then design for it.',href:'/why-teambeam',linkText:'The method'},
+    {h:'Where we go',p:'The right setting for your team and your moment.',href:'/destinations',linkText:'Destinations'}]}
+],
+'/destinations':[
+  {type:'narrative',eyebrow:'Why place does half the work',h:'The right setting lowers everyone\u2019s guard.',paras:[
+    'People behave differently out of the building. A change of place quiets the hierarchy, loosens the routine, and makes the honest conversation a little easier to have. That is not a holiday perk — it is part of the design.',
+    'We match the place to the goal: somewhere calm for a team that needs to reset, somewhere lively for one that needs energy, somewhere close for a quick shift, and somewhere further when the trip itself is the point.']},
+  {type:'usmodule',h:'Gathering a team in the United States? teambeam.us runs it on the ground there.'},
+  {type:'related',h:'Plan it.',links:[
+    {h:'Offsites & Retreats',p:'The whole offsite handled — venue, travel, run-of-show.',href:'/offsites-retreats',linkText:'Offsites'},
+    {h:'Beam Journeys',p:'Team travel where the journey does the work.',href:'/beam-journeys',linkText:'Journeys'},
+    {h:'How we work',p:'The place is chosen to serve the goal.',href:'/why-teambeam',linkText:'The method'}]}
+],
+'/resources':[
+  {type:'narrative',eyebrow:'Tools, not toys',h:'Numbers you can take into a real conversation.',paras:[
+    'These tools will not run your offsite for you. What they will do is help you size the opportunity, spot the dimension that needs attention, and arrive at a conversation with something concrete rather than a vague sense that you should do something.',
+    'Each one is a starting point. The real reading — and the real design — comes after, once we understand your specific team.']},
+  {type:'blogmodule',h:'The thinking the tools are built on.',links:[{t:'The eight dimensions of a healthy team',href:'/the-eight-dimensions-of-a-healthy-team/'},{t:'Proving the ROI of culture spend',href:'/hr-proving-roi-of-culture-spend/'}]},
+  {type:'related',h:'Use them.',links:[
+    {h:'ROI calculator',p:'What a disengaged team costs, and what a change is worth.',href:'/resources-tools-offsite-roi-calculator',linkText:'Open'},
+    {h:'Team Health Snapshot',p:'A quick read across the eight dimensions.',href:'/resources-tools-team-health-snapshot',linkText:'Take it'},
+    {h:'How we work',p:'What happens after the self-check.',href:'/why-teambeam',linkText:'The method'}]}
+],
+'/about':[
+  {type:'pull',quote:'\u201cWe build teams. And we prove it.\u201d That second sentence is the whole company.'},
+  {type:'narrative',eyebrow:'How we got here',h:'We were tired of days that felt good and changed nothing.',paras:[
+    'TeamBeam grew out of a simple frustration: teams spend real money on events that are forgotten by Friday, and nobody can say whether they helped. We wanted to run the other experiment — understand the team, design for a real goal, and measure what actually changed.',
+    'Today we do that as one business with two homes: teambeam.in for India and the world, and teambeam.us for the United States. Same method, same standard, wherever your team sits.']},
+  {type:'usmodule',h:'In the United States? teambeam.us is our home there — the same practice, the same people.'},
+  {type:'related',h:'Explore.',links:[
+    {h:'What we do',p:'Eight ways to bring a team together.',href:'/what-we-do',linkText:'All offerings'},
+    {h:'How we work',p:'The method behind every one of them.',href:'/why-teambeam',linkText:'The method'},
+    {h:'Careers',p:'Do work that leaves a team different.',href:'/careers',linkText:'Join us'}]}
+]
+};
+PAGES.forEach(p=>{ if(DEEPEN[p.path]){ const cta=p.sections.pop(); p.sections.push.apply(p.sections, DEEPEN[p.path]); p.sections.push(cta); }});
+
 /* ---- build ---- */
 function cp(src,dst){fs.mkdirSync(path.dirname(dst),{recursive:true});fs.copyFileSync(src,dst);}
 function write(rel,html){const f=path.join(OUT,rel,'index.html');fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,html);}
