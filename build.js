@@ -14,7 +14,7 @@ const attr = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
 
 /* ---- top-level navigation (Phase 1a: anchors to home sections; becomes a full mega-menu with inner pages in 1b) ---- */
 /* Pages that exist in this build. Grows every batch, so nav links light up progressively. */
-const BUILT = new Set(['/','/what-we-do','/why-teambeam']);
+const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & facilitation','/development-facilitation'],
@@ -22,7 +22,7 @@ const NAVGROUPS = [
   {label:'How we work', slug:'/why-teambeam', anchor:'#how', items:[
     ['The method','/why-teambeam-the-method'],['Measurement & proof','/why-teambeam-measurement-impact'],['Results','/why-teambeam-results']]},
   {label:"Who it's for", slug:'/who-we-serve', anchor:'#who', items:[
-    ['By role','/who-we-serve'],['By industry','/who-we-serve'],['By moment','/who-we-serve']]},
+    ['By role','/who-we-serve#roles'],['By industry','/who-we-serve#industries'],['By moment','/who-we-serve#moments']]},
   {label:'Where we go', slug:'/destinations', anchor:'#where', items:[['Destinations','/destinations']]},
   {label:'Tools', slug:'/resources', anchor:'#tools', items:[
     ['ROI calculator','/resources-tools-offsite-roi-calculator'],['Team Health Snapshot','/resources-tools-team-health-snapshot'],['Idea Generator','/resources-tools-idea-generator']]},
@@ -101,7 +101,7 @@ function wordmark(cls){
 }
 
 function header(){
-  const link = (l,s,hub)=>`<a href="${BUILT.has(s)?s:hub}">${esc(l)}</a>`;
+  const link = (l,s,hub)=>`<a href="${BUILT.has(s.split('#')[0])?s:hub}">${esc(l)}</a>`;
   const links = NAVGROUPS.map(g=>{
     const hub = resolve(g.slug,g.anchor);
     const kids = g.items.map(([l,s])=>link(l,s,hub)).join('');
@@ -401,6 +401,50 @@ const PAGES = [
       {q:'Do you work outside Pune?',a:'Yes. We are based in Pune and run across the major hubs — Bengaluru, Hyderabad, Mumbai, Chennai, Delhi NCR and more — plus offsites anywhere in India and abroad.'}
     ]},
     {type:'cta', h:'Tell us what you\u2019re trying to change.', p:'Not the activity — what you want to be different afterwards.',
+      cta:talkCTA}
+  ]
+},
+{
+  path:'/who-we-serve', crumb:"Who it's for",
+  title:"Who it's for — roles, industries & moments · TeamBeam Outings",
+  desc:'From GCCs and IT to banks and factories, from CHROs to people managers, from onboarding to reorgs — TeamBeam maps to your team, your role and your moment.',
+  ai:'TeamBeam serves teams by role (CXO, HR/People, L&D, managers, chiefs of staff, BU leaders), by industry (technology & GCCs, financial services, healthcare, manufacturing, retail, professional services), and by moment (onboarding, burnout recovery, restructure, kickoff, milestones, post-merger).',
+  keywords:'team building for GCCs, HR team building India, industry team experiences, onboarding, offsite India',
+  sections:[
+    {type:'hero', eyebrow:"Who it's for", h:"Built for India's teams — <span class=\"grad\">whatever shape you're in.</span>",
+      sub:'Large in-office teams, hybrid setups, fast-growing startups, teams that just merged or just lost half their people to attrition. Whatever your situation, there is a starting point that fits.',
+      cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/what-we-do">What we do</a>`},
+    {type:'cards', id:'roles', eyebrow:'By role', h:'A plan that fits the goal you own.', cols:3,
+      lead:'Whatever seat you sit in, you get a plan shaped around what you are accountable for.',
+      cards:[
+        {h:'CXOs &amp; boards',p:'Retention, culture, and the health of the teams that carry the business.'},
+        {h:'HR &amp; People leaders',p:'A programme you can defend — with a measured change to show for it.'},
+        {h:'L&amp;D leads',p:'Development that connects to a real gap, not a generic workshop.'},
+        {h:'People managers',p:'The team you can actually influence, and a way to shift it.'},
+        {h:'Chiefs of staff &amp; EAs',p:'The whole thing handled end to end, so you can hand it off with confidence.'},
+        {h:'Business-unit leaders',p:'A fractured or newly-merged team, brought back into one.'}
+      ]},
+    {type:'cards', id:'industries', tint:true, eyebrow:'By industry', h:'Every sector has its own pressures.', cols:3,
+      lead:'We have built for teams across the sectors that define India\u2019s workforce — each with its own shape and its own stakes.',
+      cards:[
+        {h:'Technology &amp; GCCs',p:'High-talent, high-mobility teams, and centres that must feel like one company across two continents.'},
+        {h:'Financial services',p:'High-stakes, high-pressure teams where trust and clear decisions matter most.'},
+        {h:'Healthcare &amp; life sciences',p:'Teams carrying real weight, who need genuine recovery — not just a day off.'},
+        {h:'Manufacturing',p:'Large, layered teams across shifts and sites, brought together with purpose.'},
+        {h:'Retail &amp; e-commerce',p:'Fast-moving, seasonal teams that scale up and need to cohere quickly.'},
+        {h:'Professional services',p:'Billable, deadline-driven teams that rarely get the time to become a team.'}
+      ]},
+    {type:'cards', id:'moments', eyebrow:'By moment', h:'We map to the moment you\u2019re in.', cols:3,
+      lead:'Some experiences are for a specific turning point. We meet the team where it is.',
+      cards:[
+        {h:'Onboarding a cohort',p:'Make new joiners belong faster, so they contribute sooner and stay longer.'},
+        {h:'Burnout recovery',p:'Real recovery for a team running on empty — rest that actually restores.'},
+        {h:'Restructure or reset',p:'Rebuild trust and direction after a change has unsettled everyone.'},
+        {h:'Sales kickoff',p:'Energy that survives past week one, built on a team worth staying on.'},
+        {h:'Milestones &amp; anniversaries',p:'Mark the moment so it means something, not just another party.'},
+        {h:'Post-merger',p:'Two cultures becoming one team, on purpose rather than by hope.'}
+      ]},
+    {type:'cta', h:'Tell us where your team is.', p:'Your role, your industry, your moment — and what you want to be different afterwards.',
       cta:talkCTA}
   ]
 }
