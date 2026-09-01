@@ -16,7 +16,7 @@ const attr = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
 /* Pages that exist in this build. Grows every batch, so nav links light up progressively. */
 const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/team-experiences','/impact-csr','/development-facilitation','/offsites-retreats','/beam-occasions','/beam-journeys','/beam-platform','/self-serve-kits','/destinations',
-  '/resources','/resources-tools-offsite-roi-calculator']);
+  '/resources','/resources-tools-offsite-roi-calculator','/resources-tools-team-health-snapshot','/resources-tools-idea-generator']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -690,8 +690,8 @@ PAGES.push(
     {type:'cards', eyebrow:'The tools', h:'Start with a question.', cols:3,
       cards:[
         {h:'ROI calculator',p:'Size what a disengaged, higher-attrition team costs — and what a measured change is worth.',link:'/resources-tools-offsite-roi-calculator',linkText:'Open the calculator'},
-        {h:'Team Health Snapshot',p:'A short self-check across the eight dimensions of a healthy team. Arriving in the next batch.'},
-        {h:'Idea Generator',p:'A starting point for the kind of experience your team needs. Arriving in the next batch.'}
+        {h:'Team Health Snapshot',p:'A short self-check across the eight dimensions of a healthy team, with the one to focus on.',link:'/resources-tools-team-health-snapshot',linkText:'Take the snapshot'},
+        {h:'Idea Generator',p:'A starting point for the kind of experience your team needs, matched to your goal.',link:'/resources-tools-idea-generator',linkText:'Get an idea'}
       ]},
     {type:'cta', h:'Rather just talk it through?', p:'Tell us what you\u2019re trying to change, and we will take it from there.',
       cta:talkCTA}
@@ -712,6 +712,110 @@ PAGES.push(
       {q:'Is my data stored?',a:'No. The calculator runs entirely in your browser. Nothing you type is sent or saved.'}
     ]},
     {type:'cta', h:'Now let\u2019s make the number real.', p:'Tell us what you\u2019re trying to change, and we will design for it — and measure it.',
+      cta:talkCTA}
+  ]
+});
+
+const DIMS=[
+  ['Trust','People admit mistakes and ask for help without worrying it will be used against them.'],
+  ['Communication','The important things get said — including the hard ones — and they land.'],
+  ['Alignment','Everyone could tell you the same top priority right now.'],
+  ['Collaboration','People build on each other\u2019s work rather than running in parallel.'],
+  ['Decision-making','We make decisions, and they stay made.'],
+  ['Energy','The team has the capacity to take on what is in front of it.'],
+  ['Belonging','Everyone feels part of the team, not adjacent to it.'],
+  ['Leadership','The people leading create the conditions for the rest to do their best work.']
+];
+const DIMLINK={Trust:'/trust-inside-a-team/',Belonging:'/onboarding-at-scale-belong-faster/',Leadership:'/the-leadership-team-sets-the-weather/'};
+const SNAPSHOT = `
+<section class="strip"><div class="tool" id="ths">
+  <div class="ths__qs">${DIMS.map(([d,q],i)=>`<div class="ths__q"><div class="ths__q-t"><span>${d}</span><label for="ths-${i}">${q}</label></div><input id="ths-${i}" class="ths__range" type="range" min="1" max="5" value="3" data-dim="${d}"><div class="ths__scale"><span>Rarely true</span><span>Always true</span></div></div>`).join('')}</div>
+  <button class="cta" id="ths-go" type="button">See the snapshot</button>
+  <div class="tool__out" id="ths-out" aria-live="polite"></div>
+  <p class="tool__note">A quick self-check to get you thinking — not a diagnosis. We read team health properly across these eight dimensions before we design anything. It runs in your browser; nothing is saved.</p>
+</div></section>
+<script>
+(function(){
+  var LINK=${JSON.stringify(DIMLINK)}, BLOG='${CFG.homes.blog}', DEF='/the-eight-dimensions-of-a-healthy-team/';
+  var rs=[].slice.call(document.querySelectorAll('.ths__range'));
+  var out=document.getElementById('ths-out');
+  document.getElementById('ths-go').addEventListener('click',function(){
+    var vals=rs.map(function(r){return {d:r.getAttribute('data-dim'),v:+r.value};});
+    var sorted=vals.slice().sort(function(a,b){return a.v-b.v;});
+    var low=sorted.slice(0,2), high=sorted[sorted.length-1];
+    var bars=vals.map(function(x){return '<div class="bar"><span class="bar__k">'+x.d+'</span><div class="bar__track"><div class="bar__fill" style="width:'+(x.v/5*100)+'%"></div></div></div>';}).join('');
+    var focus=low[0], link=BLOG+(LINK[focus.d]||DEF);
+    out.innerHTML='<div class="bars">'+bars+'</div>'+
+      '<p class="tool__read">Your team looks strongest on <b>'+high.d+'</b>. The dimension worth attention first is <b>'+focus.d.toLowerCase()+'</b>'+((low[1]&&low[1].v===focus.v)?' (with '+low[1].d.toLowerCase()+' close behind)':'')+'. That is where a well-designed experience would earn the most.</p>'+
+      '<div class="hero__cta"><a class="cta" href="'+link+'">Read about '+focus.d.toLowerCase()+' &#8599;</a><a class="cta cta--ghost" href="mailto:${CFG.email}">Talk to us</a></div>';
+    out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+})();
+</script>`;
+
+const IDEA = `
+<section class="strip"><div class="tool" id="idea">
+  <div class="tool__form">
+    <div class="field"><label for="idea-size">Team size</label><input id="idea-size" type="number" min="1" value="30" inputmode="numeric"></div>
+    <div class="field"><label for="idea-mode">Where</label><select id="idea-mode"><option value="office">In our office / a venue nearby</option><option value="away">Away together</option><option value="online">Online, across cities</option></select></div>
+    <div class="field"><label for="idea-goal">What are you trying to do?</label><select id="idea-goal"><option value="trust">Build trust</option><option value="communication">Improve communication</option><option value="reenergise">Re-energise a tired team</option><option value="celebrate">Celebrate a milestone</option><option value="onboard">Onboard new joiners</option><option value="giveback">Give back / CSR</option></select></div>
+    <div class="field"><label for="idea-energy">Energy</label><select id="idea-energy"><option value="calm">Calm and reflective</option><option value="balanced" selected>Balanced</option><option value="high">High and lively</option></select></div>
+  </div>
+  <button class="cta" id="idea-go" type="button">Suggest something</button>
+  <div class="tool__out" id="idea-out" aria-live="polite"></div>
+  <p class="tool__note">A starting point, not a fixed menu. Tell us the goal and we design around your actual team.</p>
+</div></section>
+<script>
+(function(){
+  var OFF={
+    trust:['Development & Facilitation','/development-facilitation','A facilitated session that builds the safety to be honest, cemented by a shared experience.'],
+    communication:['Development & Facilitation','/development-facilitation','A workshop that surfaces where communication breaks, with practice that carries back to work.'],
+    reenergise:['Team Experiences','/team-experiences','A high-spirit experience designed to restore a tired team, not drain it further.'],
+    celebrate:['Beam Occasions','/beam-occasions','An occasion built around the milestone, framed so everyone feels part of it.'],
+    onboard:['Team Experiences','/team-experiences','An experience that helps new joiners belong faster, so they contribute sooner.'],
+    giveback:['Impact & CSR','/impact-csr','A give-back project that does real good and produces a report you can file.']
+  };
+  var MODE={office:'run in your workplace or a venue in your city — half a day, no travel.',away:'taken off-site — a day trip nearby or a full residential offsite.',online:'live-hosted online with kits posted to every home, for a team across cities.'};
+  var out=document.getElementById('idea-out');
+  document.getElementById('idea-go').addEventListener('click',function(){
+    var mode=document.getElementById('idea-mode').value, goal=document.getElementById('idea-goal').value, n=+document.getElementById('idea-size').value||0;
+    var o=OFF[goal]||OFF.reenergise;
+    var second = mode==='away' ? ['Offsites & Retreats','/offsites-retreats','Since you are going away, we can handle the whole offsite — venue, travel and run-of-show.'] : ['How we measure','/why-teambeam','Whatever we run, we read the team first and measure the change at Day 14, 30 and 60.'];
+    function card(t,l,p){return '<a class="card" href="'+l+'"><span class="card__edge"></span><h3>'+t+'</h3><p>'+p+'</p><span class="card__link">Explore &rarr;</span></a>';}
+    out.innerHTML='<p class="tool__read">For a team of about '+n+', we\\u2019d '+MODE[mode]+'</p>'+
+      '<div class="cards cards--3">'+card(o[0],o[1],o[2])+card(second[0],second[1],second[2])+'</div>'+
+      '<div class="hero__cta"><a class="cta" href="mailto:${CFG.email}">Talk to us about this</a></div>';
+    out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+})();
+</script>`;
+
+PAGES.push(
+{
+  path:'/resources-tools-team-health-snapshot', crumb:'Team Health Snapshot',
+  title:'Team Health Snapshot — a quick eight-dimension self-check · TeamBeam Outings',
+  desc:'A short, free self-check across the eight dimensions of a healthy team — trust, communication, alignment and more — that shows the one to focus on first.',
+  ai:'The TeamBeam Team Health Snapshot is a quick self-assessment across eight dimensions (trust, communication, alignment, collaboration, decision-making, energy, belonging, leadership) that highlights a team\u2019s strongest dimension and the one to focus on.',
+  keywords:'team health check, team assessment, eight dimensions of a team, team self-assessment India',
+  sections:[
+    {type:'hero', eyebrow:'Tools · Team Health Snapshot', h:'Where is your team <span class="grad">actually strong?</span>',
+      sub:'Rate your team on eight quick statements and see where it stands — and the one dimension worth attention first.'},
+    {type:'raw', html:SNAPSHOT},
+    {type:'cta', h:'Want the real reading?', p:'This is a self-check. Before we design anything, we read your team properly across these eight dimensions.',
+      cta:talkCTA}
+  ]
+},
+{
+  path:'/resources-tools-idea-generator', crumb:'Idea Generator',
+  title:'Idea Generator — the right experience for your team · TeamBeam Outings',
+  desc:'Tell us your team size, where you want to gather, and what you are trying to do — and get a starting point matched to the goal.',
+  ai:'The TeamBeam Idea Generator suggests experience directions based on team size, delivery mode (in-office, away, online) and goal (build trust, improve communication, re-energise, celebrate, onboard, give back).',
+  keywords:'team building ideas India, offsite ideas, team activity suggestions, corporate event ideas',
+  sections:[
+    {type:'hero', eyebrow:'Tools · Idea Generator', h:'Not sure where to start? <span class="grad">Start here.</span>',
+      sub:'Tell us the shape of your team and what you are trying to do, and we will point you to the right kind of experience.'},
+    {type:'raw', html:IDEA},
+    {type:'cta', h:'Like where this is going?', p:'Tell us the goal and we will design the real thing around your team.',
       cta:talkCTA}
   ]
 });
