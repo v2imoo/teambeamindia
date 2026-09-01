@@ -16,7 +16,8 @@ const attr = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
 /* Pages that exist in this build. Grows every batch, so nav links light up progressively. */
 const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/team-experiences','/impact-csr','/development-facilitation','/offsites-retreats','/beam-occasions','/beam-journeys','/beam-platform','/self-serve-kits','/destinations',
-  '/resources','/resources-tools-offsite-roi-calculator','/resources-tools-team-health-snapshot','/resources-tools-idea-generator']);
+  '/resources','/resources-tools-offsite-roi-calculator','/resources-tools-team-health-snapshot','/resources-tools-idea-generator',
+  '/about','/careers','/partnerships','/contact']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -817,6 +818,98 @@ PAGES.push(
     {type:'raw', html:IDEA},
     {type:'cta', h:'Like where this is going?', p:'Tell us the goal and we will design the real thing around your team.',
       cta:talkCTA}
+  ]
+});
+
+const CONTACTCARD = `
+<section class="strip"><div class="contactcard">
+  <div class="contactcard__row"><span class="eyebrow">Email</span><a class="contactcard__big" href="mailto:${CFG.email}">${CFG.email}</a></div>
+  <div class="contactcard__row"><span class="eyebrow">Call</span><a class="contactcard__big" href="tel:${CFG.phone.replace(/[^+\d]/g,'')}">${esc(CFG.phone)}</a></div>
+  <div class="contactcard__row"><span class="eyebrow">Visit</span><a class="contactcard__addr" href="${CFG.mapsUrl}" rel="noopener">${esc(CFG.address)}</a></div>
+  <div class="contactcard__row"><span class="eyebrow">In the United States</span><a class="contactcard__addr" href="${CFG.homes.us}">teambeam.us — our home there</a></div>
+</div></section>`;
+
+PAGES.push(
+{
+  path:'/about', crumb:'About',
+  title:'About — one business, two homes, one idea · TeamBeam Outings',
+  desc:'TeamBeam Outings designs, delivers and measures corporate team experiences across India and worldwide, with a home in the USA. Understand the team first; measure what changed.',
+  ai:'TeamBeam Outings is a corporate team-experience company operating as one business with two homes — teambeam.in (India and worldwide) and teambeam.us (USA). It works diagnostic-first and measures outcomes at Day 14, 30 and 60.',
+  keywords:'about TeamBeam, corporate team building company India, team experience company Pune',
+  sections:[
+    {type:'hero', eyebrow:'About', h:'One business. Two homes. <span class="grad">One idea.</span>',
+      sub:'We design, deliver and measure corporate team experiences — in India and worldwide, with a home in the USA at teambeam.us.',
+      cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/why-teambeam">How we work</a>`},
+    {type:'lead', t:'We built TeamBeam because most team events are forgotten by Friday, and nobody can say if they helped. We wanted to do it the other way around — understand the team first, build the day around a real goal, and come back afterwards to see what changed.'},
+    {type:'cards', eyebrow:'What makes us us', h:'A few things we do differently.', cols:3,
+      cards:[
+        {h:'Diagnostic-first',p:'We read the team before we design anything, so the day fits the real gap.'},
+        {h:'Measured',p:'We check at Day 14, 30 and 60, so you get proof rather than a memory.'},
+        {h:'No forced fun',p:'Calm, real and built for grown-ups. Every minute has a point.'},
+        {h:'One team worldwide',p:'India or the USA, the same practice and the same people, wherever you gather.'}
+      ]},
+    {type:'cta', h:'Want to work with us?', p:'Tell us what you\u2019re trying to change, and we will take it from there.',
+      cta:talkCTA}
+  ]
+},
+{
+  path:'/careers', crumb:'Careers',
+  title:'Careers — do work that leaves a team different · TeamBeam Outings',
+  desc:'We hire for craft over credentials — facilitators, experience designers and operators who can read a room and pull off a flawless day. See what we look for and how to apply.',
+  ai:'TeamBeam hires facilitators, experience designers, and operations & logistics people, valuing craft over credentials. Candidates apply by email to start@teambeam.in.',
+  keywords:'TeamBeam careers, facilitator jobs India, experience designer, event operations jobs Pune',
+  sections:[
+    {type:'hero', eyebrow:'Careers', h:'Do work that leaves a team <span class="grad">different from how it arrived.</span>',
+      sub:'We hire for craft over credentials — people who can read a room, hold a group, and pull off a flawless day.',
+      cta:`<a class="cta" href="mailto:${CFG.email}?subject=Working%20with%20TeamBeam">Send us a note</a><a class="cta cta--ghost" href="/about">About us</a>`},
+    {type:'lead', t:'We care less about your titles than what you can do in a room. If you love designing a moment, reading the energy, and getting out of the way at the right time, we should talk — whatever your background.'},
+    {type:'cards', eyebrow:'Where we hire', h:'The people who make the day work.', cols:3,
+      cards:[
+        {h:'Facilitators',p:'Read a room in real time, hold a group so people feel safe, and know when to say less.'},
+        {h:'Experience designers',p:'Turn a real goal into a run-of-show that lands, down to the last detail.'},
+        {h:'Operations &amp; logistics',p:'Make the impossible day happen quietly — venues, travel, kit, timing.'},
+        {h:'Guest experts',p:'Specialist voices for sessions that need genuine depth.'}
+      ]},
+    {type:'cta', eyebrow:'How to apply', h:'Tell us what you\u2019re great at.',
+      p:'A short note about what you do and a moment you are proud of goes a long way. No forms, no fuss.',
+      cta:`<a class="cta" href="mailto:${CFG.email}?subject=Careers%20%E2%80%94%20I%27d%20like%20to%20work%20with%20TeamBeam">Write to ${CFG.email}</a>`}
+  ]
+},
+{
+  path:'/partnerships', crumb:'Partnerships',
+  title:'Partnerships — venues, experiences & specialists · TeamBeam Outings',
+  desc:'We work with venues, experience providers and specialists who share our standard. See what we look for in a partner and how to work with us.',
+  ai:'TeamBeam partners with venues, experience providers, specialist facilitators and suppliers who meet its standard of reliability and quality. Partners apply by email to start@teambeam.in.',
+  keywords:'TeamBeam partnerships, venue partner, experience provider, corporate event vendors India',
+  sections:[
+    {type:'hero', eyebrow:'Partners', h:'Great days need <span class="grad">great partners.</span>',
+      sub:'Venues, experience providers and specialists who share our standard — measured, reliable, and genuinely good at what they do.',
+      cta:`<a class="cta" href="mailto:${CFG.email}?subject=Partnership%20with%20TeamBeam">Partner with us</a><a class="cta cta--ghost" href="/what-we-do">What we do</a>`},
+    {type:'lead', t:'We are selective, because our name is on the day. What we look for is simple: you are excellent at one thing, you are dependable when it matters, and you care about the people in the room as much as we do.'},
+    {type:'cards', eyebrow:'Who we work with', h:'Ways to partner.', cols:3,
+      cards:[
+        {h:'Venue partners',p:'Spaces and properties across India and worldwide that make an offsite effortless.'},
+        {h:'Experience partners',p:'Providers with a genuinely good activity we can design a real goal into.'},
+        {h:'Specialist facilitators',p:'Independent facilitators who deliver to a high, consistent standard.'},
+        {h:'Suppliers',p:'Production, travel and logistics partners who make the complex look calm.'}
+      ]},
+    {type:'cta', eyebrow:'Work with us', h:'Tell us what you do best.',
+      p:'Send a short note about your space, service or specialism, and where you operate.',
+      cta:`<a class="cta" href="mailto:${CFG.email}?subject=Partnership%20%E2%80%94%20let%27s%20work%20together">Write to ${CFG.email}</a>`}
+  ]
+},
+{
+  path:'/contact', crumb:'Contact',
+  title:'Contact — tell us what you\u2019re trying to change · TeamBeam Outings',
+  desc:'Talk to TeamBeam Outings. Email, call, or visit us in Pune — and find our US home at teambeam.us. Tell us the goal, and we will design around it.',
+  ai:'Contact TeamBeam Outings by email (start@teambeam.in), phone (+91 75175 00777), or at Futura, Magarpatta, Hadapsar, Pune 411013. US enquiries: teambeam.us.',
+  keywords:'contact TeamBeam, team building enquiry Pune, corporate offsite contact India',
+  sections:[
+    {type:'hero', eyebrow:'Contact', h:'Tell us what you\u2019re <span class="grad">trying to change.</span>',
+      sub:'Not the activity you want — what you want to be different afterwards. We will take it from there. No hard sell, just a real conversation about your team.'},
+    {type:'raw', html:CONTACTCARD},
+    {type:'cta', h:'Start the conversation.', p:'A line about your team and your goal is all we need to begin.',
+      cta:`<a class="cta" href="mailto:${CFG.email}?subject=Let%27s%20talk%20about%20our%20team">Write to us</a>`}
   ]
 });
 
