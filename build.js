@@ -15,7 +15,8 @@ const attr = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
 /* ---- top-level navigation (Phase 1a: anchors to home sections; becomes a full mega-menu with inner pages in 1b) ---- */
 /* Pages that exist in this build. Grows every batch, so nav links light up progressively. */
 const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
-  '/team-experiences','/impact-csr','/development-facilitation','/offsites-retreats','/beam-occasions','/beam-journeys','/beam-platform','/self-serve-kits','/destinations']);
+  '/team-experiences','/impact-csr','/development-facilitation','/offsites-retreats','/beam-occasions','/beam-journeys','/beam-platform','/self-serve-kits','/destinations',
+  '/resources','/resources-tools-offsite-roi-calculator']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -327,7 +328,8 @@ function secSchedule(o){const c=o.items.map(x=>`<div class="card sched"><span cl
 function secProof(o){return `<section class="proof"><div class="proof__in"><h2>${o.h}</h2><p>${o.p}</p></div></section>`;}
 function secFaq(o){const items=o.items.map(f=>`<details><summary>${esc(f.q)}</summary><p>${f.a}</p></details>`).join('');return `<section class="strip faqsec"><div class="sec-head"><span class="eyebrow">${esc(o.eyebrow||'Common questions')}</span><h2>${o.h||'Things people ask'}</h2></div><div class="faqs">${items}</div></section>`;}
 function secCTA(o){return `<section class="talk" id="talk"><div class="talk__in"><span class="eyebrow">${esc(o.eyebrow||'Talk to us')}</span><h2>${o.h}</h2>${o.p?`<p>${o.p}</p>`:''}<p class="talk__contact">${contactBits()}</p><div class="hero__cta" style="justify-content:center">${o.cta}</div></div></section>`;}
-const R={hero:secHero,lead:secLead,cards:secCards,steps:secSteps,schedule:secSchedule,proof:secProof,faq:secFaq,cta:secCTA};
+function secRaw(o){return o.html;}
+const R={hero:secHero,lead:secLead,cards:secCards,steps:secSteps,schedule:secSchedule,proof:secProof,faq:secFaq,cta:secCTA,raw:secRaw};
 function renderPage(p){
   const nodes=[...(p.nodes||[])];
   const faq=p.sections.find(s=>s.type==='faq');
@@ -625,6 +627,91 @@ PAGES.push({
         {h:'Run on the ground',p:'Hosted and delivered wherever you land, to the same standard.'}
       ]},
     {type:'cta', h:'Tell us where your team is — and where it could go.', p:'We will suggest the place that fits the goal, and handle everything after.',
+      cta:talkCTA}
+  ]
+});
+
+const ROITOOL = `
+<section class="strip"><div class="tool" id="roi">
+  <div class="tool__form">
+    <div class="field"><label for="roi-size">Team size</label><input id="roi-size" type="number" min="1" value="50" inputmode="numeric"></div>
+    <div class="field"><label for="roi-sal">Average annual salary — CTC per person (\u20B9)</label><input id="roi-sal" type="number" min="0" step="50000" value="1200000" inputmode="numeric"></div>
+    <div class="field"><label for="roi-attr">Current annual attrition (%)</label><input id="roi-attr" type="number" min="0" max="100" step="1" value="18" inputmode="numeric"></div>
+    <div class="field"><label for="roi-dis">How disengaged does the team feel?</label><select id="roi-dis"><option value="low">A little</option><option value="some" selected>Somewhat</option><option value="high">Quite a lot</option></select></div>
+    <div class="field"><label for="roi-budget">Planned investment per year (\u20B9, optional)</label><input id="roi-budget" type="number" min="0" step="50000" value="500000" inputmode="numeric"></div>
+  </div>
+  <div class="tool__out" id="roi-out" aria-live="polite"></div>
+  <details class="tool__assume"><summary>The assumptions behind this</summary><div id="roi-assume"></div></details>
+  <p class="tool__note">This is a model to size the opportunity — not a quote, and not a claim about your business. The figures are conservative, adjustable assumptions, not published statistics. Your real numbers will differ, which is exactly why we measure the actual change at Day 14, 30 and 60.</p>
+  <div class="hero__cta"><a class="cta" href="/why-teambeam">See how we measure</a><a class="cta cta--ghost" href="mailto:${CFG.email}">Talk to us</a></div>
+</div></section>
+<script>
+(function(){
+  var ids=['roi-size','roi-sal','roi-attr','roi-dis','roi-budget'];
+  var el={}; ids.forEach(function(i){el[i]=document.getElementById(i);});
+  var out=document.getElementById('roi-out'), asm=document.getElementById('roi-assume');
+  var inr=new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0});
+  var DIS={low:[0.03,0.08],some:[0.08,0.16],high:[0.15,0.25]};
+  var LAB={low:'a little',some:'a somewhat',high:'a quite'};
+  var REPL=[0.5,1.5];
+  function calc(){
+    var n=+el['roi-size'].value||0, sal=+el['roi-sal'].value||0, attr=(+el['roi-attr'].value||0)/100, dis=el['roi-dis'].value, budget=+el['roi-budget'].value||0;
+    var dep=n*attr;
+    var aLow=dep*sal*REPL[0], aHigh=dep*sal*REPL[1];
+    var d=DIS[dis]||DIS.some;
+    var dLow=n*sal*d[0], dHigh=n*sal*d[1];
+    var tLow=aLow+dLow, tHigh=aHigh+dHigh;
+    var rLow=tLow*0.05, rHigh=tHigh*0.15;
+    var html='<div class="stat"><span class="stat__k">Estimated annual cost of a disengaged, higher-attrition team</span><span class="stat__v">'+inr.format(tLow)+' &ndash; '+inr.format(tHigh)+'</span></div>';
+    html+='<div class="stat"><span class="stat__k">What a measured improvement could be worth each year</span><span class="stat__v grad">'+inr.format(rLow)+' &ndash; '+inr.format(rHigh)+'</span></div>';
+    if(budget>0){
+      var mid=(tLow+tHigh)/2; var pct=mid>0?Math.max(0,Math.min(100,budget/mid*100)):0;
+      html+='<p class="tool__read">Your investment of '+inr.format(budget)+' pays for itself if it recovers about <b>'+pct.toFixed(1)+'%</b> of that estimated cost. Even the low end of a measured improvement ('+inr.format(rLow)+') '+(rLow>=budget?'clears that on its own.':'moves you a long way toward it.')+'</p>';
+    }
+    out.innerHTML=html;
+    asm.innerHTML='<ul><li>Replacing someone who leaves costs '+(REPL[0]*100)+'&ndash;'+(REPL[1]*100)+'% of their annual salary (recruiting, ramp-up, lost momentum).</li><li>'+(LAB[dis]||LAB.some)+'-disengaged team loses '+(d[0]*100)+'&ndash;'+(d[1]*100)+'% of salary in productivity per person, per year.</li><li>A measured team programme recovers 5&ndash;15% of the total. These are conservative model figures you can weigh for yourself, not published statistics.</li></ul>';
+  }
+  ids.forEach(function(i){el[i].addEventListener('input',calc);el[i].addEventListener('change',calc);});
+  calc();
+})();
+</script>`;
+
+PAGES.push(
+{
+  path:'/resources', crumb:'Tools',
+  title:'Tools — size the opportunity before you talk to us · TeamBeam Outings',
+  desc:'Free tools to size the opportunity and shape the brief — an ROI calculator, a team-health self-check, and an idea generator.',
+  ai:'TeamBeam offers free planning tools: an ROI calculator that sizes the cost of disengagement and attrition, a Team Health Snapshot self-check across eight dimensions, and an Idea Generator.',
+  keywords:'team building ROI calculator, team health check, offsite idea generator, HR tools India',
+  sections:[
+    {type:'hero', eyebrow:'Tools', h:'Think it through <span class="grad">before you talk to us.</span>',
+      sub:'A few tools to size the opportunity and shape the brief. Free, and no sign-up.',
+      cta:`<a class="cta" href="/resources-tools-offsite-roi-calculator">Open the ROI calculator</a><a class="cta cta--ghost" href="/why-teambeam">How we work</a>`},
+    {type:'cards', eyebrow:'The tools', h:'Start with a question.', cols:3,
+      cards:[
+        {h:'ROI calculator',p:'Size what a disengaged, higher-attrition team costs — and what a measured change is worth.',link:'/resources-tools-offsite-roi-calculator',linkText:'Open the calculator'},
+        {h:'Team Health Snapshot',p:'A short self-check across the eight dimensions of a healthy team. Arriving in the next batch.'},
+        {h:'Idea Generator',p:'A starting point for the kind of experience your team needs. Arriving in the next batch.'}
+      ]},
+    {type:'cta', h:'Rather just talk it through?', p:'Tell us what you\u2019re trying to change, and we will take it from there.',
+      cta:talkCTA}
+  ]
+},
+{
+  path:'/resources-tools-offsite-roi-calculator', crumb:'ROI calculator',
+  title:'Team ROI calculator — the cost of a disengaged team · TeamBeam Outings',
+  desc:'A free calculator that sizes the annual cost of disengagement and attrition on your team, and what a measured improvement could be worth.',
+  ai:'The TeamBeam ROI calculator estimates the annual cost of disengagement and regretted attrition for a team, using transparent adjustable assumptions, and shows the potential value of a measured improvement and the break-even on an investment.',
+  keywords:'team building ROI calculator India, cost of employee disengagement, attrition cost calculator, offsite ROI',
+  sections:[
+    {type:'hero', eyebrow:'Tools · ROI calculator', h:'What is a disengaged team <span class="grad">actually costing you?</span>',
+      sub:'Put in a few numbers and see the annual cost of disengagement and attrition — and what recovering even part of it is worth. Everything updates as you type.'},
+    {type:'raw', html:ROITOOL},
+    {type:'faq', h:'About this calculator', items:[
+      {q:'Where do the numbers come from?',a:'From transparent, conservative assumptions you can see and weigh — not published statistics. The tool is a way to size the opportunity, not a promise. The real figure is the one we measure at Day 14, 30 and 60.'},
+      {q:'Is my data stored?',a:'No. The calculator runs entirely in your browser. Nothing you type is sent or saved.'}
+    ]},
+    {type:'cta', h:'Now let\u2019s make the number real.', p:'Tell us what you\u2019re trying to change, and we will design for it — and measure it.',
       cta:talkCTA}
   ]
 });
