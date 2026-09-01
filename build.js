@@ -15,7 +15,7 @@ const attr = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
 /* ---- top-level navigation (Phase 1a: anchors to home sections; becomes a full mega-menu with inner pages in 1b) ---- */
 /* Pages that exist in this build. Grows every batch, so nav links light up progressively. */
 const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
-  '/team-experiences','/impact-csr','/development-facilitation','/offsites-retreats','/beam-occasions','/beam-journeys','/beam-platform','/self-serve-kits']);
+  '/team-experiences','/impact-csr','/development-facilitation','/offsites-retreats','/beam-occasions','/beam-journeys','/beam-platform','/self-serve-kits','/destinations']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -25,7 +25,8 @@ const NAVGROUPS = [
     ['The method','/why-teambeam-the-method'],['Measurement & proof','/why-teambeam-measurement-impact'],['Results','/why-teambeam-results']]},
   {label:"Who it's for", slug:'/who-we-serve', anchor:'#who', items:[
     ['By role','/who-we-serve#roles'],['By industry','/who-we-serve#industries'],['By moment','/who-we-serve#moments']]},
-  {label:'Where we go', slug:'/destinations', anchor:'#where', items:[['Destinations','/destinations']]},
+  {label:'Where we go', slug:'/destinations', anchor:'#where', items:[
+    ['India destinations','/destinations#india'],['Nearby Asia','/destinations#asia'],['Worldwide','/destinations#worldwide']]},
   {label:'Tools', slug:'/resources', anchor:'#tools', items:[
     ['ROI calculator','/resources-tools-offsite-roi-calculator'],['Team Health Snapshot','/resources-tools-team-health-snapshot'],['Idea Generator','/resources-tools-idea-generator']]},
   {label:'About', slug:'/about', anchor:'#principles', items:[['Our story','/about'],['Careers','/careers'],['Partners','/partnerships']]}
@@ -579,6 +580,54 @@ offering({path:'/self-serve-kits', crumb:'Self-Serve & Kits',
     {h:'Offsite in a box',p:'A full day\u2019s structure your team can pick up and run on their own.'}
   ]})
 );
+
+PAGES.push({
+  path:'/destinations', crumb:'Where we go',
+  title:'Destinations — where we run team experiences · TeamBeam Outings',
+  desc:'Signature destinations across India, easy options nearby in Asia, and worldwide planning for distributed teams. The right place does half the work.',
+  ai:'TeamBeam runs team experiences and offsites at destinations across India (Lonavala, Goa, Coorg, Udaipur, Rishikesh, Kabini and more), nearby Asia (Bali, Dubai, Singapore, Sri Lanka, Thailand, Vietnam), and worldwide for distributed teams.',
+  keywords:'team offsite destinations India, corporate retreat locations, offsite near Pune Mumbai Bangalore, Asia offsite',
+  sections:[
+    {type:'hero', eyebrow:'Where we go', h:'The right place <span class="grad">does half the work.</span>',
+      sub:'Signature spots across India, easy options nearby in Asia, and worldwide planning for teams spread across cities. We match the place to the goal, then handle the rest.',
+      cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/offsites-retreats">Offsites &amp; retreats</a>`},
+    {type:'cards', id:'india', eyebrow:'India', h:'Signature destinations across India.', cols:3,
+      lead:'From an easy drive out of the city to a full residential offsite, these are the places we return to.',
+      cards:[
+        {h:'Lonavala',p:'Misty hills an easy drive from Mumbai and Pune.'},
+        {h:'Goa',p:'Beaches, energy and space to unwind together.'},
+        {h:'Coorg',p:'Coffee country — cool air and quiet green.'},
+        {h:'Udaipur',p:'Lakes and palaces for a team that wants a lift.'},
+        {h:'Rishikesh',p:'River, adventure and calm in equal measure.'},
+        {h:'Kabini',p:'Wilderness and wildlife on the water\u2019s edge.'},
+        {h:'Jaipur',p:'Colour, heritage and grand rooms for scale.'},
+        {h:'Munnar',p:'Tea hills and cool weather in Kerala\u2019s high country.'},
+        {h:'Alibaug',p:'A quick coastal escape close to Mumbai.'},
+        {h:'Mahabaleshwar',p:'Strawberry hills and viewpoints near Pune.'},
+        {h:'Shimla &amp; Manali',p:'Mountains and pine for a proper change of scene.'},
+        {h:'Jim Corbett',p:'Forest, safari and a real reset in the foothills.'}
+      ]},
+    {type:'cards', id:'asia', tint:true, eyebrow:'Nearby Asia', h:'A short hop for a bigger reset.', cols:3,
+      lead:'When the moment calls for somewhere further, these are close, easy and memorable.',
+      cards:[
+        {h:'Bali',p:'Island calm and culture for a memorable offsite.'},
+        {h:'Dubai',p:'Fast, glossy and easy to reach for a big statement.'},
+        {h:'Singapore',p:'Efficient, walkable and world-class for teams.'},
+        {h:'Sri Lanka',p:'Beaches, hills and heritage — close and affordable.'},
+        {h:'Thailand',p:'Beaches and buzz, from Bangkok to the islands.'},
+        {h:'Vietnam',p:'Coast, food and character for the adventurous.'}
+      ]},
+    {type:'cards', id:'worldwide', eyebrow:'Worldwide', h:'Wherever your team can gather.', cols:3,
+      lead:'For distributed teams, the destination is often the point of the trip. We find the right place to meet and run the days on the ground.',
+      cards:[
+        {h:'One place to meet',p:'A central gather-point chosen for your team\u2019s map, not ours.'},
+        {h:'Planned end to end',p:'Venue, travel and run-of-show handled, so the reunion is all people feel.'},
+        {h:'Run on the ground',p:'Hosted and delivered wherever you land, to the same standard.'}
+      ]},
+    {type:'cta', h:'Tell us where your team is — and where it could go.', p:'We will suggest the place that fits the goal, and handle everything after.',
+      cta:talkCTA}
+  ]
+});
 
 /* ---- build ---- */
 function cp(src,dst){fs.mkdirSync(path.dirname(dst),{recursive:true});fs.copyFileSync(src,dst);}
