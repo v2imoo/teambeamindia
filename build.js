@@ -17,7 +17,9 @@ const attr = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
 const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/team-experiences','/impact-csr','/development-facilitation','/offsites-retreats','/beam-occasions','/beam-journeys','/beam-platform','/self-serve-kits','/destinations',
   '/resources','/resources-tools-offsite-roi-calculator','/resources-tools-team-health-snapshot','/resources-tools-idea-generator',
-  '/about','/careers','/partnerships','/contact']);
+  '/about','/careers','/partnerships','/contact',
+  '/why-teambeam-the-method','/why-teambeam-measurement-impact','/why-teambeam-results',
+  '/occasions','/volunteer','/privacy','/terms','/accessibility']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -167,7 +169,7 @@ function footer(){
     </div>
     <nav class="foot__col" aria-label="Explore">
       <h3>Explore</h3>
-      <a href="#what">What we do</a><a href="#how">How we work</a><a href="#who">Who it's for</a><a href="#where">Where we go</a><a href="#tools">Tools</a>
+      <a href="/what-we-do">What we do</a><a href="/why-teambeam">How we work</a><a href="/who-we-serve">Who it's for</a><a href="/destinations">Where we go</a><a href="/resources">Tools</a><a href="/occasions">Occasions</a><a href="/volunteer">Volunteer</a>
     </nav>
     <nav class="foot__col" aria-label="TeamBeam">
       <h3>TeamBeam</h3>
@@ -183,7 +185,7 @@ function footer(){
   <div class="foot__dest"><span class="foot__dest-h">Where we go</span>${dest}<span class="foot__dest-more">and worldwide</span></div>
   <div class="foot__legal">
     <span>&copy; ${YEAR} TeamBeam Outings. One business, two homes — <a href="${CFG.homes.in}">teambeam.in</a> and <a href="${CFG.homes.us}">teambeam.us</a>.</span>
-    <a class="foot__top" href="#top">Back to top &#8593;</a>
+    <span class="foot__legal-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/accessibility">Accessibility</a> <a class="foot__top" href="#top">Back to top &#8593;</a></span>
   </div>
 </footer>
 <script>
@@ -330,7 +332,8 @@ function secProof(o){return `<section class="proof"><div class="proof__in"><h2>$
 function secFaq(o){const items=o.items.map(f=>`<details><summary>${esc(f.q)}</summary><p>${f.a}</p></details>`).join('');return `<section class="strip faqsec"><div class="sec-head"><span class="eyebrow">${esc(o.eyebrow||'Common questions')}</span><h2>${o.h||'Things people ask'}</h2></div><div class="faqs">${items}</div></section>`;}
 function secCTA(o){return `<section class="talk" id="talk"><div class="talk__in"><span class="eyebrow">${esc(o.eyebrow||'Talk to us')}</span><h2>${o.h}</h2>${o.p?`<p>${o.p}</p>`:''}<p class="talk__contact">${contactBits()}</p><div class="hero__cta" style="justify-content:center">${o.cta}</div></div></section>`;}
 function secRaw(o){return o.html;}
-const R={hero:secHero,lead:secLead,cards:secCards,steps:secSteps,schedule:secSchedule,proof:secProof,faq:secFaq,cta:secCTA,raw:secRaw};
+function secProse(o){return `<section class="strip narrow prose-sec">${(o.eyebrow||o.h)?`<div class="sec-head">${o.eyebrow?`<span class="eyebrow">${esc(o.eyebrow)}</span>`:''}${o.h?`<h2>${o.h}</h2>`:''}</div>`:''}${o.blocks.map(b=>`${b.h?`<h3>${esc(b.h)}</h3>`:''}${b.p?`<p>${b.p}</p>`:''}`).join('')}</section>`;}
+const R={hero:secHero,lead:secLead,cards:secCards,steps:secSteps,schedule:secSchedule,proof:secProof,faq:secFaq,cta:secCTA,raw:secRaw,prose:secProse};
 function renderPage(p){
   const nodes=[...(p.nodes||[])];
   const faq=p.sections.find(s=>s.type==='faq');
@@ -910,6 +913,169 @@ PAGES.push(
     {type:'raw', html:CONTACTCARD},
     {type:'cta', h:'Start the conversation.', p:'A line about your team and your goal is all we need to begin.',
       cta:`<a class="cta" href="mailto:${CFG.email}?subject=Let%27s%20talk%20about%20our%20team">Write to us</a>`}
+  ]
+});
+
+const LEGAL_UPDATED = 'This statement was last reviewed in ' + new Date().toLocaleDateString('en-IN',{month:'long',year:'numeric'}) + '.';
+PAGES.push(
+{
+  path:'/why-teambeam-the-method', crumb:'The method',
+  title:'The method — scan, design, build, deliver, measure · TeamBeam Outings',
+  desc:'The five steps behind every TeamBeam experience — read the team, design for the real gap, build it, deliver it well, and measure what changed.',
+  ai:'TeamBeam\u2019s method has five steps: Scan (read the team across eight dimensions), Design (build for the real gap), Build (produce end to end), Deliver (host and run it), Measure (re-check at Day 14, 30 and 60).',
+  keywords:'team building method, diagnostic team building, scan design build deliver measure',
+  sections:[
+    {type:'hero', eyebrow:'How we work · The method', h:'Five steps behind <span class="grad">every experience.</span>',
+      sub:'The same method runs behind a small workshop and a thousand-person event. It is what turns a good day into a change that holds.',
+      cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/why-teambeam-measurement-impact">Measurement &amp; proof</a>`},
+    {type:'lead', t:'Most team events are chosen backwards — an activity is booked, then everyone hopes it fits. We reverse the order. We read the team first, and every step after follows from what we find.'},
+    {type:'steps', eyebrow:'The five steps', h:'In order, and for a reason.',
+      steps:[
+        {h:'Scan',p:'We read the team across eight dimensions — trust, communication, alignment and more — before we plan a thing.'},
+        {h:'Design',p:'We design for the specific gap the reading reveals, not a package pulled off a shelf.'},
+        {h:'Build',p:'We produce every detail end to end, in-house, so nothing is left to chance on the day.'},
+        {h:'Deliver',p:'We host and run it so it lands, and so your people can simply be present.'},
+        {h:'Measure',p:'We re-check at Day 14, 30 and 60, and hand you the proof of what changed.'}
+      ]},
+    {type:'faq', h:'About the method', items:[
+      {q:'Why read the team before designing?',a:'Because the activity a team enjoys and the thing a team needs are often different. Reading first is what makes the design fit — and what makes the result measurable.'},
+      {q:'Does this work at scale?',a:'Yes. The run-of-show changes with the size, but the five steps are the same for a single team and a full-company event.'}
+    ]},
+    {type:'cta', h:'Tell us what you\u2019re trying to change.', p:'We will read the team, then design for it.', cta:talkCTA}
+  ]
+},
+{
+  path:'/why-teambeam-measurement-impact', crumb:'Measurement & proof',
+  title:'Measurement & proof — Day 14, 30 and 60 · TeamBeam Outings',
+  desc:'We set a baseline before an experience, then measure again at Day 14, 30 and 60 — so the change is something you can show, not something to take on faith.',
+  ai:'TeamBeam measures team health before an experience and again at Day 14, 30 and 60, producing a report that shows what changed and whether it held.',
+  keywords:'measure team building, team building ROI, day 14 30 60, team health measurement India',
+  sections:[
+    {type:'hero', eyebrow:'How we work · Measurement & proof', h:'The part most skip: <span class="grad">we come back.</span>',
+      sub:'Most companies run a day and hope it worked. We set a baseline before, then measure again on a fixed schedule — so you get proof rather than a memory.',
+      cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/why-teambeam-the-method">The method</a>`},
+    {type:'schedule', eyebrow:'The schedule, every time', h:'Three readings after the day.',
+      lead:'The day is the intervention. What is still true weeks later is the result. So we read at three points, and the shape of the curve tells us what happened.',
+      items:[
+        {day:'Day 14',h:'First signal',p:'What actually shifted right after the experience, once the glow has settled.'},
+        {day:'Day 30',h:'Is it sticking?',p:'Whether the change holds once the team is back under real pressure.'},
+        {day:'Day 60',h:'The proof',p:'Whether it has become the new normal — written up as a report for leadership.'}
+      ]},
+    {type:'cards', eyebrow:'What we read', h:'Eight dimensions of a healthy team.', cols:3,
+      lead:'We read the same eight dimensions before and after. We keep how the reading is taken to ourselves; what matters is that the change is real, and visible over time.',
+      cards:[
+        {h:'Trust · Communication',p:'Whether people can be honest, and whether the important things travel.'},
+        {h:'Alignment · Collaboration',p:'Whether the team is pointed the same way and building on each other.'},
+        {h:'Decision-making · Energy',p:'Whether decisions stick, and whether the team has the capacity to act.'},
+        {h:'Belonging · Leadership',p:'Whether people feel part of it, and whether leaders set the right conditions.'}
+      ]},
+    {type:'proof', h:'Numbers you can show your boss — not just nice photos.',
+      p:'A change still visible two months later, after normal pressure, is not enthusiasm. It is a different team. That is what we hand you: a measured shift you can defend.'},
+    {type:'cta', h:'Make the change measurable.', p:'Tell us the goal, and we will show you what moved.', cta:talkCTA}
+  ]
+},
+{
+  path:'/why-teambeam-results', crumb:'Results',
+  title:'Results — a change you can put in front of a board · TeamBeam Outings',
+  desc:'Not photos — a measured shift in how a team works, and a clear report that explains it. Here is what results with TeamBeam look like.',
+  ai:'TeamBeam results are presented as a measured movement in team health across eight dimensions, written up in a report leadership can act on — not just event photos.',
+  keywords:'team building results, prove an offsite worked, team health report',
+  sections:[
+    {type:'hero', eyebrow:'How we work · Results', h:'A change you can <span class="grad">put in front of a board.</span>',
+      sub:'Not photos, and not a feeling you have to argue for — a measured shift in how a team works, and a report that explains it.',
+      cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/why-teambeam-measurement-impact">How we measure</a>`},
+    {type:'cards', eyebrow:'What you get', h:'Proof, in a form you can use.', cols:3,
+      cards:[
+        {h:'A movement',p:'A before-and-after across the dimensions that mattered for your goal.'},
+        {h:'A report',p:'Written up clearly, so it belongs on the same slide as the numbers.'},
+        {h:'A next step',p:'A read on what to reinforce next — so each experience makes the next one sharper.'}
+      ]},
+    {type:'proof', h:'The result is what is still true in two months.',
+      p:'We would rather show you a smaller change that held than a big day that faded. That is the whole point of measuring: to know the difference.'},
+    {type:'cta', h:'Let\u2019s make it real.', p:'Tell us what you want to be different, and we will design and measure for it.', cta:talkCTA}
+  ]
+},
+{
+  path:'/occasions', crumb:'Occasions',
+  title:'Occasions — a year-round calendar of reasons to gather · TeamBeam Outings',
+  desc:'From new-year resets to year-end celebrations, festivals to appreciation days — a year-round calendar of reasons to bring your team together, framed so everyone feels included.',
+  ai:'TeamBeam Occasions cover the year — festivals of light and colour, appreciation days, women\u2019s day, national and heritage days, new year and year-end — marked inclusively and secularly.',
+  keywords:'corporate occasions calendar India, festival celebration at work, employee appreciation day, year-end party',
+  sections:[
+    {type:'hero', eyebrow:'Occasions', h:'Mark the moments <span class="grad">that matter.</span>',
+      sub:'A year-round calendar of reasons to bring people together — framed so everyone feels included, and run so it means something.',
+      cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/beam-occasions">Beam Occasions</a>`},
+    {type:'cards', eyebrow:'Across the year', h:'Reasons to gather, all year long.', cols:3,
+      cards:[
+        {h:'Festivals of light &amp; colour',p:'Mark the season inclusively — the shared value under the festival, for everyone.'},
+        {h:'Employee appreciation',p:'Recognition that lands because it is specific and genuine.'},
+        {h:'Women\u2019s day &amp; inclusion',p:'Belonging marked with meaning, not a token gesture.'},
+        {h:'National &amp; heritage days',p:'Shared pride and story, celebrated as a team.'},
+        {h:'New year resets',p:'Open the year pointed the same way, with energy that lasts.'},
+        {h:'Year-end celebrations',p:'Close the year with a gathering that actually feels earned.'}
+      ]},
+    {type:'cta', h:'Which moment is coming up?', p:'Tell us the occasion, and we will make it one people remember.', cta:talkCTA}
+  ]
+},
+{
+  path:'/volunteer', crumb:'Volunteer',
+  title:'Volunteer — give back with your team · TeamBeam Outings',
+  desc:'Ways for your team to give back — employee volunteering and CSR projects that do real good and produce a report you can file.',
+  ai:'TeamBeam runs employee volunteering and give-back projects as part of its Impact & CSR work, producing a filable report.',
+  keywords:'employee volunteering India, corporate volunteering, CSR team activity',
+  sections:[
+    {type:'hero', eyebrow:'Volunteer', h:'Give back — <span class="grad">together.</span>',
+      sub:'Bring your team to a project that does real good, and walk away with a report your CSR and ESG teams can file.',
+      cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/impact-csr">Impact &amp; CSR</a>`},
+    {type:'lead', t:'The best give-back days are the ones a team can see the result of. We match your people to a cause and a project that fits, run it well, and document the impact.'},
+    {type:'cta', h:'Want to give back with your team?', p:'Tell us your cause and your numbers, and we will build the day.', cta:talkCTA}
+  ]
+},
+{
+  path:'/privacy', crumb:'Privacy',
+  title:'Privacy · TeamBeam Outings',
+  desc:'How TeamBeam Outings handles the limited personal information you share with us.',
+  ai:'TeamBeam Outings privacy statement: the site collects minimal information; personal data shared by email is used only to respond to enquiries.',
+  sections:[
+    {type:'hero', eyebrow:'Privacy', h:'Your information, handled simply.',
+      sub:'We keep this short because we keep it minimal.'},
+    {type:'prose', blocks:[
+      {h:'What we collect',p:'This website does not use sign-up forms. If you email or call us, we receive what you choose to share — your name, contact details, and what you tell us about your team. The site may use privacy-respecting analytics to understand traffic; it is not used to track you across the web.'},
+      {h:'How we use it',p:'Only to respond to your enquiry and, if you become a client, to plan and run your experience. We do not sell your information, and we do not share it except with the partners needed to deliver what you have asked for.'},
+      {h:'Your rights',p:'You can ask us what we hold about you, to correct it, or to delete it. Write to <a href="mailto:'+CFG.email+'">'+CFG.email+'</a> and we will act on it.'},
+      {h:'Retention',p:'We keep enquiry information only as long as needed to help you, then remove it.'},
+      {p:LEGAL_UPDATED+' This is a plain-language summary; if you need a formal policy for procurement, write to us and we will provide one.'}
+    ]}
+  ]
+},
+{
+  path:'/terms', crumb:'Terms',
+  title:'Terms · TeamBeam Outings',
+  desc:'The terms for using the TeamBeam Outings website.',
+  ai:'TeamBeam Outings website terms of use.',
+  sections:[
+    {type:'hero', eyebrow:'Terms', h:'Using this website.'},
+    {type:'prose', blocks:[
+      {h:'This site',p:'This website is provided for information about TeamBeam Outings and our services. We work to keep it accurate, but we do not warrant that everything is complete or current at all times.'},
+      {h:'Our content',p:'The text, design and marks on this site — including the TeamBeam name and logo — belong to us. Please do not reproduce them without permission.'},
+      {h:'Engaging us',p:'Nothing on this site is a binding offer. Any work we do together is governed by the specific proposal and agreement we share with you.'},
+      {p:LEGAL_UPDATED+' Questions? Write to <a href="mailto:'+CFG.email+'">'+CFG.email+'</a>.'}
+    ]}
+  ]
+},
+{
+  path:'/accessibility', crumb:'Accessibility',
+  title:'Accessibility · TeamBeam Outings',
+  desc:'Our commitment to keeping the TeamBeam Outings website usable for everyone.',
+  ai:'TeamBeam Outings accessibility statement: the site targets WCAG 2.2 AA, with keyboard navigation, sufficient contrast and semantic structure.',
+  sections:[
+    {type:'hero', eyebrow:'Accessibility', h:'Built to be usable by everyone.',
+      sub:'We want this site to work well for every visitor, however they browse.'},
+    {type:'prose', blocks:[
+      {h:'What we aim for',p:'We build to the WCAG 2.2 AA standard — sufficient colour contrast, full keyboard navigation, visible focus, meaningful structure for screen readers, and text that scales and reflows on any device.'},
+      {h:'If something is not working',p:'Accessibility is never finished. If you hit a barrier on this site, please tell us at <a href="mailto:'+CFG.email+'">'+CFG.email+'</a> and we will fix it.'},
+      {p:LEGAL_UPDATED}
+    ]}
   ]
 });
 

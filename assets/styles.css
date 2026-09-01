@@ -257,6 +257,12 @@ body:not(.home){background:radial-gradient(900px 520px at 100% -12%, rgba(255,19
 .contactcard__addr:hover{color:var(--blue)}
 @media (max-width:560px){.contactcard{grid-template-columns:1fr}}
 
+.prose-sec h3{font-family:"Fraunces";font-size:1.2rem;font-weight:600;margin:1.5em 0 .3em}
+.prose-sec p{color:var(--ink-2);margin:0 0 1em}
+.prose-sec p a{color:var(--blue)}
+.foot__legal-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.foot__legal-links a{color:#C6D2DE;text-decoration:none}
+
 /* ---- Responsive ---- */
 @media (max-width:940px){
   .nav__links,.nav__right .switch,.nav__right .nav__insights,.nav__right .cta{display:none}
