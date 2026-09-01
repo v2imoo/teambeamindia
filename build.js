@@ -14,11 +14,13 @@ const attr = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
 
 /* ---- top-level navigation (Phase 1a: anchors to home sections; becomes a full mega-menu with inner pages in 1b) ---- */
 /* Pages that exist in this build. Grows every batch, so nav links light up progressively. */
-const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve']);
+const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
+  '/team-experiences','/impact-csr','/development-facilitation','/offsites-retreats','/beam-occasions','/beam-journeys','/beam-platform','/self-serve-kits']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
-    ['Team experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & facilitation','/development-facilitation'],
-    ['Offsites & retreats','/offsites-retreats'],['Beam Occasions','/beam-occasions'],['Self-serve & kits','/self-serve-kits']]},
+    ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
+    ['Offsites & Retreats','/offsites-retreats'],['Beam Occasions','/beam-occasions'],['Beam Journeys','/beam-journeys'],
+    ['The Beam Platform','/beam-platform'],['Self-Serve & Kits','/self-serve-kits']]},
   {label:'How we work', slug:'/why-teambeam', anchor:'#how', items:[
     ['The method','/why-teambeam-the-method'],['Measurement & proof','/why-teambeam-measurement-impact'],['Results','/why-teambeam-results']]},
   {label:"Who it's for", slug:'/who-we-serve', anchor:'#who', items:[
@@ -353,6 +355,8 @@ const PAGES = [
         {h:'Development &amp; Facilitation',p:'Turn a good day into a better team, led by facilitators who read the room.',link:'/development-facilitation'},
         {h:'Offsites &amp; Retreats',p:'The whole offsite handled — venue, travel, experiences, debrief.',link:'/offsites-retreats'},
         {h:'Beam Occasions',p:'Mark the moments that matter, in a way people actually enjoy.',link:'/beam-occasions'},
+        {h:'Beam Journeys',p:'Explore India together, with the experience built into the trip.',link:'/beam-journeys'},
+        {h:'The Beam Platform',p:'The tech that runs the day — and the proof that it worked.',link:'/beam-platform'},
         {h:'Self-Serve &amp; Kits',p:'Our design, your hands — kits, playbooks and facilitator certification.',link:'/self-serve-kits'}
       ]},
     {type:'cards', tint:true, eyebrow:'One method under all of it', h:'The format changes. The care behind it does not.',
@@ -449,6 +453,132 @@ const PAGES = [
   ]
 }
 ];
+
+/* ---- offering pages (batch 1d) ---- */
+function offering(o){return {path:o.path, crumb:o.crumb, title:o.title, desc:o.desc, ai:o.ai, keywords:o.keywords, sections:[
+  {type:'hero', eyebrow:o.eyebrow, h:o.h, sub:o.sub, cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/what-we-do">All offerings</a>`},
+  {type:'cards', eyebrow:o.cardsEyebrow||"What\u2019s inside", h:o.cardsH, lead:o.lead, cols:3, cards:o.cards},
+  {type:'cta', h:o.ctaH||"Tell us what you\u2019re trying to do.", p:o.ctaP||'Tell us the goal, and we will shape it around your team.', cta:talkCTA}
+]};}
+
+PAGES.push(
+offering({path:'/team-experiences', crumb:'Team Experiences',
+  title:'Team Experiences — hunts, game shows, makers & more · TeamBeam Outings',
+  desc:'Genuinely fun team experiences — hunts, game shows, mysteries, makers, music and more — each built around a real goal underneath the fun.',
+  ai:'TeamBeam team experiences include hunts, game shows, mysteries, maker sessions, high-action and tech, music, and culinary formats, all designed around a team goal and measured afterwards.',
+  keywords:'team building activities India, corporate game show, treasure hunt, team experiences',
+  eyebrow:'Team Experiences', h:'Genuinely fun. <span class="grad">Quietly designed.</span>',
+  sub:'The kind of day people actually talk about — with a real goal working underneath the fun.',
+  cardsH:'Ways to bring a team together',
+  cards:[
+    {h:'Beam Hunts',p:'City and venue hunts that get a team moving, thinking and laughing together.'},
+    {h:'Beam Arena',p:'High-energy game shows that light up a full room, from one team to a thousand.'},
+    {h:'Beam Mysteries',p:'Solve-it-together mysteries that reward listening and shared decisions.'},
+    {h:'Beam Makers',p:'Build and create something real, together — with something to keep at the end.'},
+    {h:'High-action &amp; tech',p:'Adrenaline and gadgets, for teams that come alive when the stakes feel real.'},
+    {h:'Rhythm &amp; music',p:'Drumming and music that get a whole group in sync within minutes.'}
+  ]}),
+offering({path:'/impact-csr', crumb:'Impact & CSR',
+  title:'Impact & CSR — give back together, file the report · TeamBeam Outings',
+  desc:'Do real good as a team, meet your CSR mandate, and get an Impact Report your CSR and ESG teams can file.',
+  ai:'TeamBeam Impact & CSR experiences let teams give back through environmental, build and community projects, and produce a filable CSR/ESG impact report.',
+  keywords:'corporate CSR activities India, team volunteering, CSR mandate, ESG report',
+  eyebrow:'Impact & CSR', h:'Give back together. <span class="grad">And file the report.</span>',
+  sub:'Do real good as a team, meet your CSR mandate, and walk away with a report your CSR and ESG teams can file.',
+  cardsH:'Ways to give back',
+  cards:[
+    {h:'Beam Green',p:'Environmental projects a team can see the result of — planting, cleaning, restoring.'},
+    {h:'Beam Builds',p:'Build something a community needs, together, in a single focused day.'},
+    {h:'Beam Community',p:'Hands-on community projects matched to your people and your cause.'},
+    {h:'DIY Impact Kits',p:'Self-run give-back kits for teams who want to do it in their own time.'}
+  ]}),
+offering({path:'/development-facilitation', crumb:'Development & Facilitation',
+  title:'Development & Facilitation — turn a good day into a better team · TeamBeam Outings',
+  desc:'Facilitator-led development that connects to a real gap — leadership team training, strategic workshops and more.',
+  ai:'TeamBeam development and facilitation includes assessment-led development, expert facilitation, leadership team training, strategic workshops and guest experts, tied to a diagnosed gap.',
+  keywords:'team facilitation India, leadership team training, strategic offsite, development workshop',
+  eyebrow:'Development & Facilitation', h:'Turn a good day <span class="grad">into a better team.</span>',
+  sub:'Led by facilitators who read the room — development that connects to a real gap, not a generic workshop.',
+  cardsH:'Ways to develop a team',
+  cards:[
+    {h:'Assessment-led development',p:'Start from a reading of the team, then build the session around what it shows.'},
+    {h:'Expert facilitation',p:'A skilled facilitator to hold a hard conversation and land it well.'},
+    {h:'Leadership team training',p:'Work on the team that sets every other team\u2019s weather.'},
+    {h:'Strategic workshops',p:'Align a group around a direction, and leave with decisions that hold.'},
+    {h:'Professional excellence',p:'Focused skill-building that a team applies the next week, not someday.'},
+    {h:'Guest expert in residence',p:'Bring in a specialist voice for a session that needs real depth.'}
+  ]}),
+offering({path:'/offsites-retreats', crumb:'Offsites & Retreats',
+  title:'Offsites & Retreats — the whole offsite, handled · TeamBeam Outings',
+  desc:'Multi-day offsites and retreats — venue, travel, experiences and debrief, planned and run end to end across India and worldwide.',
+  ai:'TeamBeam plans and runs offsites and retreats end to end — venue, travel, experiences and debrief — for team programs, executive groups, and large-scale events.',
+  keywords:'corporate offsite India, team retreat, offsite planning, executive retreat',
+  eyebrow:'Offsites & Retreats', h:'The whole offsite, <span class="grad">handled.</span>',
+  sub:'Venue, travel, experiences and debrief — planned and run end to end, so you can be present with your team instead of managing logistics.',
+  cardsH:'Ways we run an offsite',
+  cards:[
+    {h:'Team programs',p:'A focused multi-day program built around what your team needs to shift.'},
+    {h:'Executive experiences',p:'A considered retreat for a leadership team, run with discretion.'},
+    {h:'High-energy &amp; scale',p:'Large offsites, town-halls and celebrations that hold a big group together.'},
+    {h:'Sourcing &amp; planning',p:'The venue found, the travel arranged, the run-of-show built — all handled.'}
+  ]}),
+offering({path:'/beam-occasions', crumb:'Beam Occasions',
+  title:'Beam Occasions — mark the moments that matter · TeamBeam Outings',
+  desc:'A year-round calendar of reasons to bring people together — from new-year resets to year-end celebrations — framed so everyone feels included.',
+  ai:'TeamBeam Occasions mark the moments that matter across the year — festivals, appreciation, milestones, new year and year-end — inclusively and secularly, tuned by audience and delivery mode.',
+  keywords:'corporate celebrations India, employee appreciation, festival celebration at work, occasions',
+  eyebrow:'Beam Occasions', h:'Mark the moments <span class="grad">that matter.</span>',
+  sub:'A year-round calendar of reasons to bring people together — framed so everyone feels included, and run so it means something.',
+  cardsH:'Occasions across the year',
+  cards:[
+    {h:'Festivals &amp; celebrations',p:'Mark the season inclusively — the shared value under the festival, for everyone.'},
+    {h:'Employee appreciation',p:'Recognition that lands because it is specific and genuine, not generic.'},
+    {h:'New year &amp; year-end',p:'A reset to open the year, and a gathering that closes it well.'},
+    {h:'By audience &amp; mode',p:'Shaped for who it is for and how you gather — in-office, away, or online.'}
+  ]}),
+offering({path:'/beam-journeys', crumb:'Beam Journeys',
+  title:'Beam Journeys — explore India together · TeamBeam Outings',
+  desc:'Team travel where the journey itself does the work — designed trips across India that bring a team closer.',
+  ai:'TeamBeam Journeys are designed team trips across India where travel and shared experience build the team, from signature routes to wilderness and heritage.',
+  keywords:'team trip India, corporate travel, team journey, India offsite destinations',
+  eyebrow:'Beam Journeys', h:'Explore India together — <span class="grad">with the experience built in.</span>',
+  sub:'Team travel where the journey itself does the work — designed trips that bring a team closer while they see somewhere new.',
+  cardsH:'Ways to journey together',
+  cards:[
+    {h:'Signature routes',p:'Our best-loved trails across India, built for a team rather than tourists.'},
+    {h:'City escapes',p:'A short, sharp change of scene that resets a team in a couple of days.'},
+    {h:'Wilderness &amp; hills',p:'Forests, hills and open air, where a team slows down and reconnects.'},
+    {h:'Culture &amp; heritage',p:'Places with a story, shared as a team rather than through a screen.'}
+  ]}),
+offering({path:'/beam-platform', crumb:'The Beam Platform',
+  title:'The Beam Platform — the tech that runs the day and proves it worked · TeamBeam Outings',
+  desc:'The system behind every experience — planning, live delivery, and the measurement that turns a day into a report.',
+  ai:'The Beam Platform is TeamBeam\u2019s technology for planning, live event delivery, a client dashboard, and the Day 14/30/60 measurement that produces the proof.',
+  keywords:'team building platform, event technology, measurement dashboard, team health tracking',
+  eyebrow:'The Beam Platform', h:'The tech that runs the day — <span class="grad">and proves it worked.</span>',
+  sub:'The system behind every experience: planning, live delivery, and the measurement that turns a good day into a report you can show.',
+  cardsH:'What the platform does',
+  cards:[
+    {h:'Planning assistant',p:'Shapes the brief and the run-of-show, so nothing is left to the day.'},
+    {h:'Live event app',p:'Runs the experience on the day — scores, prompts and flow, in one place.'},
+    {h:'Client dashboard',p:'Your view of the plan, the day and the results, in one clear place.'},
+    {h:'Measurement &amp; proof',p:'The Day 14, 30 and 60 reading, written up as a report for leadership.'}
+  ]}),
+offering({path:'/self-serve-kits', crumb:'Self-Serve & Kits',
+  title:'Self-Serve & Kits — our design, your hands · TeamBeam Outings',
+  desc:'Kits, playbooks and facilitator certification, so your own people can run a great session with the structure and debrief built in.',
+  ai:'TeamBeam self-serve options include ready-to-run kits, facilitator playbooks, certification, and offsite-in-a-box, so internal teams can deliver a designed experience themselves.',
+  keywords:'team building kit, facilitator playbook, run your own offsite, self-serve team building',
+  eyebrow:'Self-Serve & Kits', h:'Our design. <span class="grad">Your hands.</span>',
+  sub:'Not everything needs us in the room. Kits, playbooks and certification give your own people what they need to run a great session — structure and debrief built in.',
+  cardsH:'Ways to run it yourself',
+  cards:[
+    {h:'Beam Kits',p:'Everything for a specific experience, boxed and ready to run.'},
+    {h:'Beam Playbook',p:'The facilitator\u2019s guide — what to say, when, and why it works.'},
+    {h:'Beam Certify',p:'Train your own facilitators to deliver to our standard.'},
+    {h:'Offsite in a box',p:'A full day\u2019s structure your team can pick up and run on their own.'}
+  ]})
+);
 
 /* ---- build ---- */
 function cp(src,dst){fs.mkdirSync(path.dirname(dst),{recursive:true});fs.copyFileSync(src,dst);}
