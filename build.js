@@ -30,7 +30,8 @@ const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/beam-platform-planning-assistant','/beam-platform-live-event-app','/beam-platform-client-dashboard','/beam-platform-measurement','/beam-platform-always-on',
   '/who-we-serve-industries-technology','/who-we-serve-industries-financial-services','/who-we-serve-industries-healthcare','/who-we-serve-industries-manufacturing','/who-we-serve-industries-media-entertainment','/who-we-serve-industries-professional-services','/who-we-serve-industries-ecommerce-retail','/who-we-serve-industries-non-profit',
   '/who-we-serve-roles-executives','/who-we-serve-roles-people-hr','/who-we-serve-roles-managers','/who-we-serve-roles-chiefs-of-staff-eas','/who-we-serve-roles-employees',
-  '/who-we-serve-moments-onboarding','/who-we-serve-moments-post-merger','/who-we-serve-moments-restructure-reset','/who-we-serve-moments-burnout-recovery','/who-we-serve-moments-sales-kickoff','/who-we-serve-moments-annual-retreat','/who-we-serve-moments-distributed-team-connection','/who-we-serve-moments-milestone-anniversary']);
+  '/who-we-serve-moments-onboarding','/who-we-serve-moments-post-merger','/who-we-serve-moments-restructure-reset','/who-we-serve-moments-burnout-recovery','/who-we-serve-moments-sales-kickoff','/who-we-serve-moments-annual-retreat','/who-we-serve-moments-distributed-team-connection','/who-we-serve-moments-milestone-anniversary',
+  '/occasions-festival-of-lights','/occasions-festival-of-colours','/occasions-new-year','/occasions-financial-year-close','/occasions-employee-appreciation','/occasions-womens-day','/occasions-national-days','/occasions-year-end']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -1087,12 +1088,14 @@ PAGES.push(
       cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/beam-occasions">Beam Occasions</a>`},
     {type:'cards', eyebrow:'Across the year', h:'Reasons to gather, all year long.', cols:3,
       cards:[
-        {h:'Festivals of light &amp; colour',p:'Mark the season inclusively — the shared value under the festival, for everyone.'},
-        {h:'Employee appreciation',p:'Recognition that lands because it is specific and genuine.'},
-        {h:'Women\u2019s day &amp; inclusion',p:'Belonging marked with meaning, not a token gesture.'},
-        {h:'National &amp; heritage days',p:'Shared pride and story, celebrated as a team.'},
-        {h:'New year resets',p:'Open the year pointed the same way, with energy that lasts.'},
-        {h:'Year-end celebrations',p:'Close the year with a gathering that actually feels earned.'}
+        {h:'Festival of lights',p:'Mark the season inclusively — hope and renewal, the value everyone can share.',link:'/occasions-festival-of-lights',linkText:'Explore'},
+        {h:'Festival of colours',p:'Joy, playfulness and a fresh start, marked so everyone can join in.',link:'/occasions-festival-of-colours',linkText:'Explore'},
+        {h:'New year',p:'Open the year pointed the same way, with energy that lasts.',link:'/occasions-new-year',linkText:'Explore'},
+        {h:'Financial year-close',p:'Close a chapter with recognition, and reset before the next one.',link:'/occasions-financial-year-close',linkText:'Explore'},
+        {h:'Employee appreciation',p:'Recognition that lands because it is specific and genuine.',link:'/occasions-employee-appreciation',linkText:'Explore'},
+        {h:'Women\u2019s day &amp; inclusion',p:'Belonging marked with meaning, not a token gesture.',link:'/occasions-womens-day',linkText:'Explore'},
+        {h:'National &amp; heritage days',p:'Shared pride and story, celebrated as a team.',link:'/occasions-national-days',linkText:'Explore'},
+        {h:'Year-end celebrations',p:'Close the year with a gathering that actually feels earned.',link:'/occasions-year-end',linkText:'Explore'}
       ]},
     {type:'cta', h:'Which moment is coming up?', p:'Tell us the occasion, and we will make it one people remember.', cta:talkCTA}
   ]
@@ -1341,6 +1344,178 @@ subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-culinary', name:'C
   faq:[{q:'What about dietary needs?',a:'Fully accommodated — we plan menus around your team\u2019s requirements so everyone takes part and eats well.'},
     {q:'Indoors or out?',a:'Either — a professional kitchen, a venue, or an outdoor setup at an offsite. We arrange it.'}],
   related:teRel({h:'Beam Occasions',p:'Cooking makes a warm, inclusive celebration.',href:'/beam-occasions',linkText:'Occasions'})}))
+);
+
+/* ---- X-Leaves: occasions ---- */
+function occLeaf(o){
+  return {path:o.slug, crumb:o.name, title:o.title, desc:o.desc, ai:o.ai, keywords:o.keywords,
+    sections:[
+      {type:'hero', eyebrow:'Occasions · '+o.name, h:o.h, sub:o.sub, cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/occasions">All occasions</a>`},
+      {type:'narrative', eyebrow:'The value under it', h:o.valH, paras:o.val},
+      {type:'cards', eyebrow:'Ways to mark it', h:o.waysH, cols:3, cards:o.ways},
+      {type:'faq', h:'About marking '+o.name, items:o.faq},
+      {type:'related', eyebrow:'Related', h:'Keep exploring.', links:[
+        {h:'All occasions',p:'A year-round calendar of reasons to gather.',href:'/occasions',linkText:'Occasions'},
+        {h:'Beam Occasions',p:'How we run occasions, by audience and mode.',href:'/beam-occasions',linkText:'Beam Occasions'},
+        o.rel||{h:'Marking holidays inclusively',p:'The value under the festival.',href:'/marking-holidays-inclusively/',linkText:'Read the insight'}]},
+      {type:'cta', h:o.ctaH, p:'Tell us the occasion and your team, and we will make it one people remember.', cta:talkCTA}
+    ]};
+}
+PAGES.push(
+occLeaf({slug:'/occasions-festival-of-lights', name:'the festival of lights',
+  title:'The festival of lights — marking it inclusively at work · TeamBeam Outings',
+  desc:'Marking the festival of lights at work inclusively — hope, renewal and light after dark, the value everyone can share, secular and welcoming. By TeamBeam.',
+  ai:'TeamBeam marks the festival of lights inclusively and secularly at work, focusing on the shared values of hope, renewal and new beginnings rather than religious content.',
+  keywords:'Diwali celebration at work India, festival of lights office, inclusive festival celebration, corporate Diwali',
+  h:'Light, hope and <span class="grad">a fresh beginning.</span>',
+  sub:'Marking the season of lights at work — around the value everyone can share, so it welcomes the whole team rather than sorting it.',
+  valH:'The value under the lights.', val:[
+    'Under the festival of lights is a human idea that belongs to no single group: hope, renewal, and light returning after dark. A workplace does not need to take a position on anyone\u2019s tradition to mark that — it can gather the whole team around the shared feeling of a fresh, brighter beginning.',
+    'Done inclusively, it is one of the warmest moments of the year to bring people together. Done carelessly, it quietly signals whose culture is default. We help you do the first.'],
+  waysH:'Ways to mark the season.',
+  ways:[
+    {h:'An inclusive gathering',p:'A celebration built around the shared value, open to everyone.'},
+    {h:'Light &amp; warmth',p:'Decor, food and moments that mark the season without excluding.'},
+    {h:'Giving',p:'Pairing the celebration with a give-back to those who have less.'},
+    {h:'Appreciation',p:'Using the season to genuinely thank the team.'}],
+  faq:[{q:'How do we keep it inclusive?',a:'By marking the shared human value — hope, renewal, light — rather than the religious specifics, and making sure everyone is welcomed in, not asked to perform.'},
+    {q:'Can it still feel special?',a:'Very much so. The warmth of the season and a genuine gathering land more than any theology would.'}],
+  ctaH:'Marking the festival of lights?'}),
+occLeaf({slug:'/occasions-festival-of-colours', name:'the festival of colours',
+  title:'The festival of colours — marking it inclusively at work · TeamBeam Outings',
+  desc:'Marking the festival of colours at work inclusively — joy, playfulness and a fresh start, welcoming for everyone. By TeamBeam.',
+  ai:'TeamBeam marks the festival of colours inclusively and secularly at work, around joy, renewal and playfulness, with formats everyone can join comfortably.',
+  keywords:'Holi celebration at work India, festival of colours office, inclusive spring celebration, corporate Holi',
+  h:'Joy, play and <span class="grad">a fresh start.</span>',
+  sub:'Marking the season of colours at work — around the joy and renewal everyone can share, in a way that is fun and comfortable for the whole team.',
+  valH:'The value under the colours.', val:[
+    'Under the festival of colours is play, renewal, and the simple joy of letting go together — feelings any team can share, whatever their background. A workplace can mark that spirit of a light-hearted fresh start without anyone feeling on the outside of it.',
+    'The trick is doing it so everyone can join comfortably — which takes a little design, and a light touch.'],
+  waysH:'Ways to mark it.',
+  ways:[
+    {h:'A joyful gathering',p:'A light-hearted celebration built on the spirit of the season.'},
+    {h:'Comfortable formats',p:'Fun that everyone can opt into on their own terms.'},
+    {h:'A spring reset',p:'Using the fresh-start feeling to re-energise a team.'},
+    {h:'Team play',p:'Colour-safe, inclusive experiences that get people laughing.'}],
+  faq:[{q:'What if some people are not comfortable with the traditional version?',a:'We design comfortable, opt-in ways to mark the spirit of the season, so nobody feels put on the spot.'},
+    {q:'Can it double as a team experience?',a:'Yes — the playful energy makes it a natural pairing with a light team experience.'}],
+  ctaH:'Marking the festival of colours?'}),
+occLeaf({slug:'/occasions-new-year', name:'the new year',
+  title:'The new year — a team reset, not just a party · TeamBeam Outings',
+  desc:'Marking the new year at work as a genuine team reset — a fresh start pointed the same way, with energy that lasts. By TeamBeam.',
+  ai:'TeamBeam marks the new year as a team reset, aligning a team on direction and building energy that lasts beyond a single celebration.',
+  keywords:'new year team reset India, company new year kickoff, team goal setting, new year offsite',
+  h:'Open the year <span class="grad">pointed the same way.</span>',
+  sub:'The new year is a rare shared moment to reset — a chance to align a team on where it is going, not just toast the calendar.',
+  valH:'A fresh start, used well.', val:[
+    'The value of the new year at work is not the party; it is the permission to begin again — to close what is done, agree on what matters next, and start the year genuinely pointed the same way. Most companies mark it with a celebration and skip the alignment, then wonder why January drifts.',
+    'We help you use the moment: a reset that combines the celebration with a real sense of shared direction, so the energy lasts past the first week.'],
+  waysH:'Ways to open the year.',
+  ways:[
+    {h:'A reset day',p:'Closing the old year and agreeing the priorities of the new.'},
+    {h:'Alignment',p:'Getting a team genuinely on the same page for what is ahead.'},
+    {h:'Shared intention',p:'A team setting its direction together, not receiving it.'},
+    {h:'Celebration with a point',p:'Marking the moment and using it.'}],
+  faq:[{q:'Is this a strategy session or a party?',a:'It can be both — a genuine reset that combines the celebration with real alignment, so the year starts with direction, not just cheer.'},
+    {q:'When should we run it?',a:'Early in the year, while the fresh-start feeling is real and before the drift sets in.'}],
+  rel:{h:'Strategic workshops',p:'Align the team on direction.',href:'/development-facilitation-strategic-workshops',linkText:'Strategic workshops'},
+  ctaH:'Opening a new year?'}),
+occLeaf({slug:'/occasions-financial-year-close', name:'the financial year-close',
+  title:'Financial year-close — mark the chapter, reset for the next · TeamBeam Outings',
+  desc:'Marking the financial year-close at work — recognising what the team achieved and resetting before the next year begins. By TeamBeam.',
+  ai:'TeamBeam marks the financial year-close by recognising a team\u2019s achievements and resetting energy and direction before the new year.',
+  keywords:'financial year end team India, year close recognition, FY end offsite, quarter close team',
+  h:'Close the chapter <span class="grad">with recognition.</span>',
+  sub:'The year-close is a natural moment to acknowledge what a team came through — and to reset before the pressure of a new cycle begins.',
+  valH:'A chapter worth closing well.', val:[
+    'The financial year-close carries a particular weight — targets met or missed, a hard cycle finished, a team that pushed through it. The value of marking it is recognition: naming what people achieved and what they endured, so they feel seen before the next cycle asks the same of them again.',
+    'It is also a chance to reset — to let a team exhale before the new year, so it starts the next cycle with energy rather than fumes.'],
+  waysH:'Ways to mark it.',
+  ways:[
+    {h:'Genuine recognition',p:'Naming what the team achieved, specifically.'},
+    {h:'A reset',p:'Space to exhale before the next cycle begins.'},
+    {h:'Reflection',p:'Learning from the year that just closed.'},
+    {h:'A celebration earned',p:'Marking the finish, not just the numbers.'}],
+  faq:[{q:'What if it was a hard year?',a:'Then recognition matters even more. Marking the effort and the endurance, honestly, is what helps a team reset rather than carry the strain forward.'},
+    {q:'How is this different from year-end?',a:'Similar in spirit, timed to your financial calendar — closing a business chapter and resetting for the next.'}],
+  ctaH:'Closing your financial year?'}),
+occLeaf({slug:'/occasions-employee-appreciation', name:'employee appreciation',
+  title:'Employee appreciation — recognition that actually lands · TeamBeam Outings',
+  desc:'Marking employee appreciation so it actually lands — specific, genuine recognition, not a generic thank-you. By TeamBeam.',
+  ai:'TeamBeam designs employee appreciation that lands through specific, genuine recognition from the right people, building belonging rather than being a generic gesture.',
+  keywords:'employee appreciation day India, recognition that lands, staff appreciation event, meaningful recognition',
+  h:'Recognition that <span class="grad">actually lands.</span>',
+  sub:'Appreciation works when it is specific, genuine and from someone whose view matters — and falls flat when it is a mass thank-you.',
+  valH:'Being genuinely seen.', val:[
+    'The value of appreciation is simple: making a person feel seen for what they actually did. That is why a mass email thanking everyone lands so softly — a thank-you addressed to everyone is addressed to no one. Real appreciation is specific, true, and comes from someone whose opinion the person cares about.',
+    'Get that right and it costs almost nothing and does a great deal, because underneath, appreciation is one of the ways belonging is built.'],
+  waysH:'Ways to appreciate well.',
+  ways:[
+    {h:'Specific recognition',p:'Naming the actual contribution, not a blanket thanks.'},
+    {h:'From the right people',p:'Recognition that carries weight because of who gives it.'},
+    {h:'A real moment',p:'An occasion that makes people feel genuinely valued.'},
+    {h:'Built into the culture',p:'Making specific appreciation a habit, not an annual event.'}],
+  faq:[{q:'Is an appreciation day enough?',a:'On its own, rarely. We help make appreciation specific and genuine — and a habit — so it actually builds belonging rather than ticking a box.'},
+    {q:'Does it need a big budget?',a:'No. The thing that makes appreciation work — specificity, from the right person — does not scale with spend.'}],
+  rel:{h:'Employee appreciation that lands',p:'The thinking behind this.',href:'/employee-appreciation-that-lands/',linkText:'Read the insight'},
+  ctaH:'Planning to appreciate your team?'}),
+occLeaf({slug:'/occasions-womens-day', name:'women\u2019s day & inclusion',
+  title:'Women\u2019s day & inclusion — belonging beyond the calendar · TeamBeam Outings',
+  desc:'Marking women\u2019s day and inclusion at work with genuine meaning — belonging that lasts beyond a single day, never a token gesture. By TeamBeam.',
+  ai:'TeamBeam marks women\u2019s day and inclusion occasions with genuine meaning, focusing on belonging that lasts rather than tokenistic gestures.',
+  keywords:'womens day at work India, inclusion event, belonging in the workplace, diversity celebration',
+  h:'Belonging, marked <span class="grad">with meaning.</span>',
+  sub:'The occasions around inclusion are worth marking — but only if they build real belonging, not a poster and a themed lunch.',
+  valH:'More than a date.', val:[
+    'The value of an inclusion occasion is belonging — the felt sense of being genuinely part of the team, not adjacent to it. That is exactly what a tokenistic gesture undermines: a poster, a themed snack, and nothing that changes how people actually feel can read as a box being ticked, which is worse than doing nothing.',
+    'We help mark these occasions with genuine meaning — moments and experiences that strengthen belonging in a way people feel, and that connect to how the team works the rest of the year.'],
+  waysH:'Ways to mark it well.',
+  ways:[
+    {h:'Genuine, not token',p:'Something people feel, not a gesture they see through.'},
+    {h:'Belonging first',p:'Marking the occasion in a way that strengthens inclusion.'},
+    {h:'Shared, not performed',p:'Everyone included, no one asked to perform their identity.'},
+    {h:'Connected to the everyday',p:'Tied to how the team actually works, all year.'}],
+  faq:[{q:'How do we avoid tokenism?',a:'By making the occasion about real belonging — meaningful moments connected to how the team works — rather than a symbolic gesture.'},
+    {q:'Should it be a one-off?',a:'The occasion is a prompt; belonging is built year-round. We help you mark the day in a way that connects to the everyday.'}],
+  ctaH:'Marking an inclusion occasion?'}),
+occLeaf({slug:'/occasions-national-days', name:'national & heritage days',
+  title:'National & heritage days — shared pride, marked inclusively · TeamBeam Outings',
+  desc:'Marking national and heritage days at work — shared pride and story, celebrated inclusively and secularly as a team. By TeamBeam.',
+  ai:'TeamBeam marks national and heritage days inclusively and secularly, around shared pride and story that a whole team can celebrate together.',
+  keywords:'national day celebration at work India, republic day independence day office, heritage day team',
+  h:'Shared pride, <span class="grad">shared story.</span>',
+  sub:'National and heritage days are a chance to celebrate a shared story together — marked inclusively, so it unites rather than divides.',
+  valH:'A story a team can share.', val:[
+    'The value of a national or heritage day at work is a shared sense of pride and story — a moment where a diverse team can feel part of something bigger together. Marked inclusively and secularly, it is a genuine unifier.',
+    'The care is in keeping it civic and shared rather than exclusionary, so everyone in a diverse team can join the celebration and feel it is theirs too.'],
+  waysH:'Ways to mark it.',
+  ways:[
+    {h:'A shared celebration',p:'A gathering around the pride and story everyone can share.'},
+    {h:'Inclusive framing',p:'Civic and welcoming, so a diverse team feels part of it.'},
+    {h:'Story at the centre',p:'Marking what the day actually means, together.'},
+    {h:'Giving back',p:'Pairing pride with a contribution to the community.'}],
+  faq:[{q:'How do we keep it inclusive?',a:'By keeping it civic and shared rather than partisan, and making sure everyone in the team is welcomed into the celebration.'},
+    {q:'Can it be more than a day off?',a:'Yes — a genuine shared moment lands more than an extra holiday, and can double as a team experience.'}],
+  ctaH:'Marking a national day?'}),
+occLeaf({slug:'/occasions-year-end', name:'year-end',
+  title:'Year-end — a gathering that feels earned · TeamBeam Outings',
+  desc:'Marking year-end at work with a gathering that actually feels earned — gratitude, celebration and a proper close to the year. By TeamBeam.',
+  ai:'TeamBeam marks year-end with a gathering built on gratitude and genuine celebration, giving a team a proper, earned close to the year.',
+  keywords:'year end party India, company holiday celebration, end of year team event, festive team gathering',
+  h:'Close the year <span class="grad">with something earned.</span>',
+  sub:'The year-end gathering should feel like a genuine reward for a year of work — not another obligation on the calendar.',
+  valH:'A proper close.', val:[
+    'The value of a year-end gathering is closure and gratitude — a team pausing together to acknowledge a year of effort before it scatters for the break. Done as a generic party, it is forgettable. Done well, it feels earned: a celebration anchored in what the team actually came through.',
+    'We help you close the year in a way people are glad they were part of — warm, genuine, and worth the time.'],
+  waysH:'Ways to close the year.',
+  ways:[
+    {h:'A celebration that lands',p:'Anchored in the year the team actually had.'},
+    {h:'Gratitude',p:'A genuine thank-you for a year of effort.'},
+    {h:'Reflection',p:'A moment to acknowledge how far the team came.'},
+    {h:'At scale',p:'From a team to a whole company, done with care.'}],
+  faq:[{q:'How do we make it more than a party?',a:'By anchoring it in the year the team had — real recognition and gratitude — so it feels earned rather than routine.'},
+    {q:'Can you run a large one?',a:'Yes — from an intimate team dinner to a full-company celebration, end to end.'}],
+  ctaH:'Planning a year-end gathering?'})
 );
 
 /* ---- X-Leaves: who-we-serve leaves ---- */
