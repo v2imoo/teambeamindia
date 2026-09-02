@@ -31,7 +31,8 @@ const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/who-we-serve-industries-technology','/who-we-serve-industries-financial-services','/who-we-serve-industries-healthcare','/who-we-serve-industries-manufacturing','/who-we-serve-industries-media-entertainment','/who-we-serve-industries-professional-services','/who-we-serve-industries-ecommerce-retail','/who-we-serve-industries-non-profit',
   '/who-we-serve-roles-executives','/who-we-serve-roles-people-hr','/who-we-serve-roles-managers','/who-we-serve-roles-chiefs-of-staff-eas','/who-we-serve-roles-employees',
   '/who-we-serve-moments-onboarding','/who-we-serve-moments-post-merger','/who-we-serve-moments-restructure-reset','/who-we-serve-moments-burnout-recovery','/who-we-serve-moments-sales-kickoff','/who-we-serve-moments-annual-retreat','/who-we-serve-moments-distributed-team-connection','/who-we-serve-moments-milestone-anniversary',
-  '/occasions-festival-of-lights','/occasions-festival-of-colours','/occasions-new-year','/occasions-financial-year-close','/occasions-employee-appreciation','/occasions-womens-day','/occasions-national-days','/occasions-year-end']);
+  '/occasions-festival-of-lights','/occasions-festival-of-colours','/occasions-new-year','/occasions-financial-year-close','/occasions-employee-appreciation','/occasions-womens-day','/occasions-national-days','/occasions-year-end',
+  '/resources-insights']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -44,7 +45,7 @@ const NAVGROUPS = [
   {label:'Where we go', slug:'/destinations', anchor:'#where', items:[
     ['India destinations','/destinations#india'],['Nearby Asia','/destinations#asia'],['Worldwide','/destinations#worldwide']]},
   {label:'Tools', slug:'/resources', anchor:'#tools', items:[
-    ['ROI calculator','/resources-tools-offsite-roi-calculator'],['Team Health Snapshot','/resources-tools-team-health-snapshot'],['Idea Generator','/resources-tools-idea-generator']]},
+    ['ROI calculator','/resources-tools-offsite-roi-calculator'],['Team Health Snapshot','/resources-tools-team-health-snapshot'],['Idea Generator','/resources-tools-idea-generator'],['Insights','/resources-insights']]},
   {label:'About', slug:'/about', anchor:'#principles', items:[['Our story','/about'],['Careers','/careers'],['Partners','/partnerships']]}
 ];
 const resolve = (slug,anchor)=> BUILT.has(slug) ? slug : ('/'+(anchor||''));
@@ -187,7 +188,7 @@ function footer(){
     <nav class="foot__col" aria-label="What we do"><h3>What we do</h3>
       <a href="/team-experiences">Team Experiences</a><a href="/offsites-retreats">Offsites &amp; Retreats</a><a href="/development-facilitation">Development</a><a href="/impact-csr">Impact &amp; CSR</a><a href="/beam-occasions">Occasions</a><a href="/self-serve-kits">Self-Serve &amp; Kits</a></nav>
     <nav class="foot__col" aria-label="Tools & Company"><h3>Tools &amp; company</h3>
-      <a href="/resources-tools-offsite-roi-calculator">ROI calculator</a><a href="/resources-tools-team-health-snapshot">Team Health Snapshot</a><a href="/about">About</a><a href="/careers">Careers</a><a href="/partnerships">Partners</a><a href="/contact">Contact</a></nav>
+      <a href="/resources-tools-offsite-roi-calculator">ROI calculator</a><a href="/resources-tools-team-health-snapshot">Team Health Snapshot</a><a href="/resources-insights">Insights</a><a href="/about">About</a><a href="/careers">Careers</a><a href="/contact">Contact</a></nav>
   </div>
   <div class="foot__bottom">
     <div class="foot__soc">${soc}</div>
@@ -367,7 +368,9 @@ function secRaw(o){return o.html;}
 function secProse(o){return `<section class="strip narrow prose-sec">${(o.eyebrow||o.h)?`<div class="sec-head">${o.eyebrow?`<span class="eyebrow">${esc(o.eyebrow)}</span>`:''}${o.h?`<h2>${o.h}</h2>`:''}</div>`:''}${o.blocks.map(b=>`${b.h?`<h3>${esc(b.h)}</h3>`:''}${b.p?`<p>${b.p}</p>`:''}`).join('')}</section>`;}
 function secNarrative(o){return `<section class="strip narrow"${o.id?` id="${o.id}"`:''}><div class="sec-head">${o.eyebrow?`<span class="eyebrow">${esc(o.eyebrow)}</span>`:''}${o.h?`<h2>${o.h}</h2>`:''}</div><div class="narr">${o.paras.map(p=>`<p>${p}</p>`).join('')}</div></section>`;}
 function secFeatureList(o){return `<section class="strip${o.tint?' strip--tint':''}"${o.id?` id="${o.id}"`:''}><div class="sec-head">${o.eyebrow?`<span class="eyebrow">${esc(o.eyebrow)}</span>`:''}${o.h?`<h2>${o.h}</h2>`:''}${o.lead?`<p class="lead">${o.lead}</p>`:''}</div><div class="flist">${o.items.map(it=>`<div class="fitem"><h3>${it.h}</h3><p>${it.p}</p></div>`).join('')}</div></section>`;}
-function secRelated(o){return `<section class="strip related"><div class="sec-head"><span class="eyebrow">${esc(o.eyebrow||'Keep reading')}</span>${o.h?`<h2>${o.h}</h2>`:''}</div><div class="cards cards--3">${o.links.map(l=>`<a class="card" href="${l.href}"><span class="card__edge"></span><h3>${l.h}</h3><p>${l.p}</p><span class="card__link">${l.linkText||'Explore'} &rarr;</span></a>`).join('')}</div></section>`;}
+const BLOG_SLUGS=new Set(['the-leadership-team-sets-the-weather','employee-appreciation-that-lands','marking-holidays-inclusively','onboarding-at-scale-belong-faster','cxo-the-retention-math','hr-proving-roi-of-culture-spend','gccs-one-company-two-continents','technology-teams-safety-and-retention','post-merger-two-cultures-one-team','sales-teams-what-they-actually-need','why-measurement-changes-the-conversation','what-day-14-30-60-tells-you','diagnostic-first-design-follows-evidence','the-eight-dimensions-of-a-healthy-team','trust-inside-a-team','human-layer-becomes-the-differentiator','what-ai-changes-about-team-work']);
+function blogFix(href){ if(typeof href==='string'){ const s=href.replace(/^\//,'').replace(/\/$/,''); if(BLOG_SLUGS.has(s)) return CFG.homes.blog+'/'+s+'/'; } return href; }
+function secRelated(o){return `<section class="strip related"><div class="sec-head"><span class="eyebrow">${esc(o.eyebrow||'Keep reading')}</span>${o.h?`<h2>${o.h}</h2>`:''}</div><div class="cards cards--3">${o.links.map(l=>`<a class="card" href="${blogFix(l.href)}"><span class="card__edge"></span><h3>${l.h}</h3><p>${l.p}</p><span class="card__link">${l.linkText||'Explore'} &rarr;</span></a>`).join('')}</div></section>`;}
 function secPull(o){return `<section class="strip"><blockquote class="pull">${o.quote}${o.cite?`<cite>${esc(o.cite)}</cite>`:''}</blockquote></section>`;}
 function secUS(o){return `<section class="strip"><a class="xmodule xmodule--us" href="${CFG.homes.us}"><span class="xmodule__eyebrow">Planning in the United States?</span><span class="xmodule__h">${o.h||'teambeam.us is our home there — the same method, a team on the ground.'}</span><span class="xmodule__go">Visit the US site <span aria-hidden="true">&rarr;</span></span></a></section>`;}
 function secBlog(o){const links=(o.links||[]).map(l=>`<a class="xmodule__link" href="${CFG.homes.blog}${l.href}">${esc(l.t)} <span aria-hidden="true">&#8599;</span></a>`).join('');return `<section class="strip"><div class="xmodule xmodule--blog"><div><span class="xmodule__eyebrow">Insights</span><span class="xmodule__h">${o.h||'The thinking behind the method.'}</span>${links?`<div class="xmodule__links">${links}</div>`:''}</div><a class="cta cta--ghost" href="${CFG.homes.blog}">Read the insights &#8599;</a></div></section>`;}
@@ -1345,6 +1348,43 @@ subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-culinary', name:'C
     {q:'Indoors or out?',a:'Either — a professional kitchen, a venue, or an outdoor setup at an offsite. We arrange it.'}],
   related:teRel({h:'Beam Occasions',p:'Cooking makes a warm, inclusive celebration.',href:'/beam-occasions',linkText:'Occasions'})}))
 );
+
+/* ---- X-Insights: insights hub linking to teambeam.blog ---- */
+const B = CFG.homes.blog;
+const insCard=(h,p,slug)=>({h,p,link:B+slug,linkText:'Read on the blog'});
+PAGES.push({
+  path:'/resources-insights', crumb:'Insights',
+  title:'Insights — the thinking behind the method · TeamBeam Outings',
+  desc:'The thinking behind how we work — team health, measurement, roles, moments and the human layer of work. Read in full on teambeam.blog.',
+  ai:'TeamBeam publishes insights on team health, measurement, the eight dimensions, roles and moments, and the human layer of work as AI reshapes it. The full articles live on teambeam.blog.',
+  keywords:'team health insights India, team building research, measurement thinking, TeamBeam blog',
+  sections:[
+    {type:'hero', eyebrow:'Insights', h:'The thinking <span class="grad">behind the method.</span>',
+      sub:'How we think about team health, measurement, and the human layer of work — for the people who decide. The full pieces live on our knowledge site, teambeam.blog.',
+      cta:`<a class="cta" href="${B}">Read the insights &#8599;</a><a class="cta cta--ghost" href="#talk">Talk to us</a>`},
+    {type:'narrative', eyebrow:'Why we publish', h:'We would rather teach than pitch.',paras:[
+      'The best way to earn the trust of the people who decide on team investment is to be genuinely useful to them — so we write about how to think about team health, measurement and the human layer of work, without a sales pitch on every line.',
+      'The full library lives on teambeam.blog, our knowledge site. Here are some of the pieces worth starting with.']},
+    {type:'cards', eyebrow:'Measurement & method', h:'How we know it worked.', cols:3, cards:[
+      insCard('Why measurement changes the conversation','Turning a day out into a defensible investment.','/why-measurement-changes-the-conversation/'),
+      insCard('What a Day 14 / 30 / 60 follow-up tells you','Separating what stuck from what faded.','/what-day-14-30-60-tells-you/'),
+      insCard('Diagnostic-first: design follows evidence','Why we read the team before we design.','/diagnostic-first-design-follows-evidence/')]},
+    {type:'cards', tint:true, eyebrow:'Team health', h:'What a healthy team is made of.', cols:3, cards:[
+      insCard('The eight dimensions of a healthy team','The vocabulary that makes team health improvable.','/the-eight-dimensions-of-a-healthy-team/'),
+      insCard('Trust inside a team','The dimension everything else rests on.','/trust-inside-a-team/'),
+      insCard('The leadership team sets the weather','Why the top team matters most of all.','/the-leadership-team-sets-the-weather/')]},
+    {type:'cards', eyebrow:'For the people who decide', h:'Written to your problem.', cols:3, cards:[
+      insCard('For the CXO: the retention math','The recoverable cost hiding off the slide.','/cxo-the-retention-math/'),
+      insCard('For the HR leader: proving ROI on culture','Evidence in the room\u2019s own currency.','/hr-proving-roi-of-culture-spend/'),
+      insCard('GCCs: one company, two continents','The seam where a centre is won or lost.','/gccs-one-company-two-continents/')]},
+    {type:'cards', tint:true, eyebrow:'Moments & the human layer', h:'The when, and the why-now.', cols:3, cards:[
+      insCard('Onboarding at scale','Making new joiners belong faster.','/onboarding-at-scale-belong-faster/'),
+      insCard('Post-merger: two cultures, one team','Dissolving the us-and-them line.','/post-merger-two-cultures-one-team/'),
+      insCard('As AI absorbs task-work, the human layer wins','Why connection becomes the differentiator.','/human-layer-becomes-the-differentiator/')]},
+    {type:'blogmodule', h:'The full library lives on teambeam.blog.', links:[{t:'What AI changes about team work',href:'/what-ai-changes-about-team-work/'},{t:'Sales teams: what they actually need',href:'/sales-teams-what-they-actually-need/'}]},
+    {type:'cta', h:'Like how we think? See how we work.', p:'The insights are the thinking; the method is how we put it to work for your team.', cta:`<a class="cta" href="/why-teambeam">How we work</a><a class="cta cta--ghost" href="mailto:${CFG.email}">Talk to us</a>`}
+  ]
+});
 
 /* ---- X-Leaves: occasions ---- */
 function occLeaf(o){
