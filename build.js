@@ -25,7 +25,9 @@ const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/team-experiences-beam-hunts','/team-experiences-beam-arena','/team-experiences-beam-mysteries','/team-experiences-beam-makers','/team-experiences-high-action-tech','/team-experiences-rhythm-music','/team-experiences-culinary',
   '/development-facilitation-assessment-led-development','/development-facilitation-expert-facilitation','/development-facilitation-leadership-team-training','/development-facilitation-strategic-workshops','/development-facilitation-professional-excellence','/development-facilitation-guest-expert-in-residence',
   '/impact-csr-beam-green','/impact-csr-beam-builds','/impact-csr-beam-community','/impact-csr-diy-impact-kits',
-  '/self-serve-kits-beam-kits','/self-serve-kits-beam-playbook','/self-serve-kits-beam-certify','/self-serve-kits-offsite-in-a-box']);
+  '/self-serve-kits-beam-kits','/self-serve-kits-beam-playbook','/self-serve-kits-beam-certify','/self-serve-kits-offsite-in-a-box',
+  '/offsites-retreats-team-programs','/offsites-retreats-executive-experiences','/offsites-retreats-high-energy-scale','/offsites-retreats-sourcing-planning',
+  '/beam-platform-planning-assistant','/beam-platform-live-event-app','/beam-platform-client-dashboard','/beam-platform-measurement','/beam-platform-always-on']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -557,10 +559,10 @@ offering({path:'/offsites-retreats', crumb:'Offsites & Retreats',
   sub:'Venue, travel, experiences and debrief — planned and run end to end, so you can be present with your team instead of managing logistics.',
   cardsH:'Ways we run an offsite',
   cards:[
-    {h:'Team programs',p:'A focused multi-day program built around what your team needs to shift.'},
-    {h:'Executive experiences',p:'A considered retreat for a leadership team, run with discretion.'},
-    {h:'High-energy &amp; scale',p:'Large offsites, town-halls and celebrations that hold a big group together.'},
-    {h:'Sourcing &amp; planning',p:'The venue found, the travel arranged, the run-of-show built — all handled.'}
+    {h:'Team programs',p:'A focused multi-day program built around what your team needs to shift.',link:'/offsites-retreats-team-programs',linkText:'Explore'},
+    {h:'Executive experiences',p:'A considered retreat for a leadership team, run with discretion.',link:'/offsites-retreats-executive-experiences',linkText:'Explore'},
+    {h:'High-energy &amp; scale',p:'Large offsites, town-halls and celebrations that hold a big group together.',link:'/offsites-retreats-high-energy-scale',linkText:'Explore'},
+    {h:'Sourcing &amp; planning',p:'The venue found, the travel arranged, the run-of-show built — all handled.',link:'/offsites-retreats-sourcing-planning',linkText:'Explore'}
   ]}),
 offering({path:'/beam-occasions', crumb:'Beam Occasions',
   title:'Beam Occasions — mark the moments that matter · TeamBeam Outings',
@@ -599,10 +601,11 @@ offering({path:'/beam-platform', crumb:'The Beam Platform',
   sub:'The system behind every experience: planning, live delivery, and the measurement that turns a good day into a report you can show.',
   cardsH:'What the platform does',
   cards:[
-    {h:'Planning assistant',p:'Shapes the brief and the run-of-show, so nothing is left to the day.'},
-    {h:'Live event app',p:'Runs the experience on the day — scores, prompts and flow, in one place.'},
-    {h:'Client dashboard',p:'Your view of the plan, the day and the results, in one clear place.'},
-    {h:'Measurement &amp; proof',p:'The Day 14, 30 and 60 reading, written up as a report for leadership.'}
+    {h:'Planning assistant',p:'Shapes the brief and the run-of-show, so nothing is left to the day.',link:'/beam-platform-planning-assistant',linkText:'Explore'},
+    {h:'Live event app',p:'Runs the experience on the day — scores, prompts and flow, in one place.',link:'/beam-platform-live-event-app',linkText:'Explore'},
+    {h:'Client dashboard',p:'Your view of the plan, the day and the results, in one clear place.',link:'/beam-platform-client-dashboard',linkText:'Explore'},
+    {h:'Measurement &amp; proof',p:'The Day 14, 30 and 60 reading, written up as a report for leadership.',link:'/beam-platform-measurement',linkText:'Explore'},
+    {h:'Always-on',p:'Keeping a team connected between events, not just on the day.',link:'/beam-platform-always-on',linkText:'Explore'}
   ]}),
 offering({path:'/self-serve-kits', crumb:'Self-Serve & Kits',
   title:'Self-Serve & Kits — our design, your hands · TeamBeam Outings',
@@ -1332,6 +1335,227 @@ subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-culinary', name:'C
   faq:[{q:'What about dietary needs?',a:'Fully accommodated — we plan menus around your team\u2019s requirements so everyone takes part and eats well.'},
     {q:'Indoors or out?',a:'Either — a professional kitchen, a venue, or an outdoor setup at an offsite. We arrange it.'}],
   related:teRel({h:'Beam Occasions',p:'Cooking makes a warm, inclusive celebration.',href:'/beam-occasions',linkText:'Occasions'})}))
+);
+
+/* ---- X-Leaves: Offsites + Beam Platform pages ---- */
+const OR_PARENT={parent:'/offsites-retreats', parentName:'All offsites & retreats'};
+const orRel=(a)=>[
+  {h:'All offsites & retreats',p:'The full range of multi-day work.',href:'/offsites-retreats',linkText:'Offsites'},
+  a,{h:'Where we go',p:'Destinations for your offsite, in India and worldwide.',href:'/destinations',linkText:'Destinations'}
+];
+const BP_PARENT={parent:'/beam-platform', parentName:'The Beam Platform'};
+const bpRel=(a)=>[
+  {h:'The Beam Platform',p:'The whole system behind every experience.',href:'/beam-platform',linkText:'The platform'},
+  a,{h:'Measurement & proof',p:'How the platform turns a day into a report.',href:'/why-teambeam-measurement-impact',linkText:'How we measure'}
+];
+PAGES.push(
+subformat(Object.assign({},OR_PARENT,{slug:'/offsites-retreats-team-programs', name:'Team programs', tagline:'a multi-day program built around a real goal',
+  desc:'Team programs — a focused multi-day offsite built around what your team actually needs to shift, designed and measured by TeamBeam.',
+  ai:'TeamBeam team programs are multi-day offsites designed around a specific team-development goal, with a diagnosis first and measurement after.',
+  keywords:'team offsite program India, multi day team retreat, team development offsite',
+  eyebrow:'Offsites · Team programs', h:'A multi-day offsite <span class="grad">with a point.</span>',
+  sub:'A focused program built around the specific thing your team needs to shift — not a generic getaway with a workshop bolted on.',
+  whatH:'An arc, not an agenda.', what:[
+    'A good multi-day offsite has a shape: it starts where the team actually is, moves it somewhere on purpose, and lands the change so it survives the trip home. We design the whole arc around a real goal — the dimension your team most needs to move — and weave the experiences, the work and the downtime around it.',
+    'Because the goal is defined up front, we can measure whether the program moved it, weeks later. A team program is the fullest expression of how we work.'],
+  insideH:'What a program includes.',
+  inside:[
+    {h:'A goal and a reading',p:'We start from what the team needs, not a template.'},
+    {h:'A designed arc',p:'Experiences and sessions sequenced to build toward the goal.'},
+    {h:'The whole trip handled',p:'Venue, travel and run-of-show, so you can be present.'},
+    {h:'Measured follow-up',p:'A re-read at Day 14, 30 and 60 to prove the shift.'}],
+  goodH:'When a program fits.', goodLead:'Team programs are our pick when a team needs real change, not just a break.',
+  good:[
+    {h:'A specific goal',p:'When there is a clear thing you want different afterwards.'},
+    {h:'A team ready to invest',p:'A few days is enough to move something that matters.'},
+    {h:'Proof required',p:'Leaders who need to show the offsite worked.'}],
+  faq:[{q:'How many days?',a:'Usually two to four. We scope it to the goal and tell you honestly what the change needs.'},
+    {q:'Is it all work?',a:'No — the downtime is part of the design. The best change happens in the spaces between the sessions.'}],
+  related:orRel({h:'Executive experiences',p:'A program shaped for a leadership team.',href:'/offsites-retreats-executive-experiences',linkText:'Executive'})})),
+subformat(Object.assign({},OR_PARENT,{slug:'/offsites-retreats-executive-experiences', name:'Executive experiences', tagline:'a considered retreat for leadership teams',
+  desc:'Executive experiences — a considered, discreet retreat for a leadership team, designed and measured by TeamBeam.',
+  ai:'TeamBeam executive experiences are discreet, high-touch retreats for leadership teams, focused on trust, alignment and decisions.',
+  keywords:'executive retreat India, leadership offsite, C-suite team retreat, board offsite',
+  eyebrow:'Offsites · Executive experiences', h:'A retreat that matches <span class="grad">the seriousness of the room.</span>',
+  sub:'A considered, discreet offsite for a leadership team — where the setting, the facilitation and the discretion all meet the stakes.',
+  whatH:'The top team needs a different kind of care.', what:[
+    'Working with an executive team is different. The stakes are higher, the discretion required is greater, and the honesty is harder to reach because power makes vulnerability costly. An executive experience is designed for exactly that — a setting worthy of the group, facilitation skilled enough to reach the real conversation, and total discretion.',
+    'Because whatever is true of the top team becomes true of the company, this is the highest-leverage offsite you can run.'],
+  insideH:'What we attend to.',
+  inside:[
+    {h:'The right setting',p:'Somewhere that matches the seriousness and earns the time.'},
+    {h:'Skilled facilitation',p:'Reaching the real conversation, safely, among senior people.'},
+    {h:'Trust & alignment',p:'The health of the team, not just the business plan.'},
+    {h:'Discretion',p:'Handled quietly, start to finish.'}],
+  goodH:'When to run one.', goodLead:'Executive experiences are our pick for leadership teams at consequential moments.',
+  good:[
+    {h:'A new or changed top team',p:'After a merger, reshuffle or new joiners.'},
+    {h:'Before a defining year',p:'Getting aligned before you set everyone else\u2019s direction.'},
+    {h:'A stuck dynamic',p:'When something at the top needs to be worked through.'}],
+  faq:[{q:'How is it different from a strategy offsite?',a:'A strategy offsite works on the plan; an executive experience works on the team behind it — its trust, alignment and decisions. Often the two sit together.'},
+    {q:'How discreet is it?',a:'Entirely. Executive work is handled with the confidentiality it requires.'}],
+  related:orRel({h:'Leadership team training',p:'Focused development for the top team.',href:'/development-facilitation-leadership-team-training',linkText:'Leadership'})})),
+subformat(Object.assign({},OR_PARENT,{slug:'/offsites-retreats-high-energy-scale', name:'High-energy & scale', tagline:'large offsites, town-halls and celebrations',
+  desc:'High-energy & scale — large offsites, town-halls, kickoffs and celebrations that hold a big group together, designed and run by TeamBeam.',
+  ai:'TeamBeam high-energy and scale offsites run large gatherings — all-hands, town-halls, sales kickoffs, holiday parties, milestones — that keep a big group energised and connected.',
+  keywords:'large corporate offsite India, all hands event, sales kickoff, company celebration at scale',
+  eyebrow:'Offsites · High-energy & scale', h:'Make a big group <span class="grad">feel like one team.</span>',
+  sub:'Large offsites, all-hands, kickoffs and celebrations — designed and run so hundreds of people feel connected, not just co-located.',
+  whatH:'Scale is a design problem.', what:[
+    'Most experiences fall apart when the group gets large — energy leaks, people disengage, and a big event becomes a series of small disconnected ones. Doing scale well is a specific craft: a run-of-show that keeps a whole room in it, formats built to include everyone, and production that holds the energy from start to finish.',
+    'We design large gatherings so a company of hundreds leaves feeling like one team, and so the event does real work, not just fills a day.'],
+  insideH:'What we run at scale.',
+  inside:[
+    {h:'All-hands & town-halls',p:'A big gathering that actually lands, not just informs.'},
+    {h:'Sales kickoffs',p:'Energy that survives past week one, built on real connection.'},
+    {h:'Milestones & anniversaries',p:'Marking the moment so a whole company feels it.'},
+    {h:'Holiday & appreciation events',p:'Celebrations that mean something, at scale.'}],
+  goodH:'When scale is the challenge.', goodLead:'High-energy & scale is our pick when the group is large and the energy must hold.',
+  good:[
+    {h:'Whole-company gatherings',p:'When hundreds need to feel like one team.'},
+    {h:'Kickoffs and launches',p:'Openings that set the tone for a year.'},
+    {h:'Celebrations',p:'Milestones that deserve real production.'}],
+  faq:[{q:'How large can you go?',a:'Well into the thousands. Scale is a specific strength of ours, and the design changes with the number.'},
+    {q:'Can it still be meaningful, not just loud?',a:'Yes — that is the whole point. We build in the moments of real connection so the energy has somewhere to go.'}],
+  related:orRel({h:'Beam Arena',p:'The game-show format built for big rooms.',href:'/team-experiences-beam-arena',linkText:'Beam Arena'})})),
+subformat(Object.assign({},OR_PARENT,{slug:'/offsites-retreats-sourcing-planning', name:'Sourcing & planning', tagline:'the whole offsite, handled',
+  desc:'Sourcing & planning — the venue found, the travel arranged, the run-of-show built, so you can be present with your team. By TeamBeam.',
+  ai:'TeamBeam sourcing and planning handles offsite logistics end to end — venue, travel, run-of-show — so internal teams do not have to.',
+  keywords:'offsite planning India, corporate event management, venue sourcing team offsite, offsite logistics',
+  eyebrow:'Offsites · Sourcing & planning', h:'You be present. <span class="grad">We handle the rest.</span>',
+  sub:'The venue found, the travel arranged, the run-of-show built — so the person who would normally run the offsite gets to actually take part in it.',
+  whatH:'The unglamorous work that makes the day.', what:[
+    'Behind every good offsite is a mountain of logistics — venues compared, contracts negotiated, travel booked, timings sequenced, contingencies planned. Usually that falls on one internal person who then spends the offsite running it instead of being in it. Sourcing & planning takes all of that off your plate.',
+    'We find the right place for your goal and budget, arrange the travel, build the run-of-show, and manage the day, so your people simply arrive and take part.'],
+  insideH:'What we handle.',
+  inside:[
+    {h:'Venue sourcing',p:'The right place for your goal, group and budget, negotiated.'},
+    {h:'Travel & logistics',p:'Getting everyone there and back without the headache.'},
+    {h:'Run-of-show',p:'The full day sequenced and timed, with contingencies.'},
+    {h:'On-the-day management',p:'Someone running it so you do not have to.'}],
+  goodH:'When to hand it over.', goodLead:'Sourcing & planning is our pick when you want the offsite handled end to end.',
+  good:[
+    {h:'Stretched internal teams',p:'When no one has time to plan it properly.'},
+    {h:'The person who always runs it',p:'So they can finally take part instead.'},
+    {h:'Complex logistics',p:'Multiple locations, large groups, tight timelines.'}],
+  faq:[{q:'Can you just do the logistics?',a:'Yes — you can take sourcing and planning on its own, or paired with the experiences and facilitation. Your call.'},
+    {q:'Do you work with our preferred venues?',a:'Of course. We can source fresh options or work with places you already like.'}],
+  related:orRel({h:'Team programs',p:'The full designed program, with logistics included.',href:'/offsites-retreats-team-programs',linkText:'Team programs'})})),
+subformat(Object.assign({},BP_PARENT,{slug:'/beam-platform-planning-assistant', name:'Planning assistant', tagline:'shapes the brief and the run-of-show',
+  desc:'The Beam Platform planning assistant shapes the brief and the run-of-show, so nothing is left to the day. By TeamBeam.',
+  ai:'The Beam Platform planning assistant helps shape the brief and run-of-show for a team experience, so planning is structured rather than ad hoc.',
+  keywords:'event planning tool, offsite run of show, team experience planning, beam platform',
+  eyebrow:'Beam Platform · Planning', h:'The plan, <span class="grad">before the day.</span>',
+  sub:'The part of the platform that shapes the brief and builds the run-of-show — so the day is designed, not improvised.',
+  whatH:'Good days are planned twice.', what:[
+    'The difference between a smooth experience and a scramble is almost always the planning. The Beam Platform\u2019s planning layer captures the goal, shapes the brief, and builds a run-of-show detailed enough that everyone knows what happens when — long before anyone arrives.',
+    'It is the quiet backbone that lets the day feel effortless.'],
+  insideH:'What it does.',
+  inside:[
+    {h:'Captures the goal',p:'What you want different afterwards, front and centre.'},
+    {h:'Shapes the brief',p:'Turning a goal into a clear plan.'},
+    {h:'Builds the run-of-show',p:'The day sequenced and timed, with contingencies.'},
+    {h:'Aligns everyone',p:'One shared plan, so nothing is a surprise.'}],
+  goodH:'Why it matters.', goodLead:'Planning is where a good day is won.',
+  good:[
+    {h:'Complex days',p:'Where a lot has to happen in the right order.'},
+    {h:'Large groups',p:'Where improvisation does not scale.'},
+    {h:'Clear accountability',p:'Everyone working from the same plan.'}],
+  faq:[{q:'Do we use the tool ourselves?',a:'We run it for you as part of designing your experience. You see the plan through the client dashboard.'},
+    {q:'Is this the whole platform?',a:'No — it is the planning layer. The live app, dashboard and measurement complete it.'}],
+  related:bpRel({h:'Live event app',p:'What runs the day the plan describes.',href:'/beam-platform-live-event-app',linkText:'Live app'})})),
+subformat(Object.assign({},BP_PARENT,{slug:'/beam-platform-live-event-app', name:'Live event app', tagline:'runs the experience on the day',
+  desc:'The Beam Platform live event app runs the experience on the day — scores, prompts and flow, in one place. By TeamBeam.',
+  ai:'The Beam Platform live event app runs team experiences on the day, handling scoring, prompts and flow in one place.',
+  keywords:'live event app team building, game scoring app, corporate event app, beam platform',
+  eyebrow:'Beam Platform · Live app', h:'The day, <span class="grad">running smoothly.</span>',
+  sub:'The part of the platform that runs the experience live — scores, prompts, timing and flow, in one place, so the day just works.',
+  whatH:'Where the plan meets the room.', what:[
+    'On the day, a hundred small things have to happen at the right moment — a round starts, scores update, a prompt appears, the flow moves on. The live app holds all of that in one place, so the facilitator can focus on the people, not the mechanics.',
+    'It is what lets a large, complex experience feel seamless from the inside.'],
+  insideH:'What it runs.',
+  inside:[
+    {h:'Scoring & leaderboards',p:'Live, accurate, and visible when it should be.'},
+    {h:'Prompts & flow',p:'The right thing on screen at the right moment.'},
+    {h:'Timing',p:'Keeping a big room moving without dragging.'},
+    {h:'Hybrid support',p:'On-site and remote joiners together.'}],
+  goodH:'Why it matters.', goodLead:'The live app is what makes a complex day feel effortless.',
+  good:[
+    {h:'Large events',p:'Where manual would break down.'},
+    {h:'Fast-moving formats',p:'Game shows and challenges that need real-time flow.'},
+    {h:'Hybrid groups',p:'In-room and remote, kept in sync.'}],
+  faq:[{q:'Do participants need to install anything?',a:'Usually it is web-based and effortless to join. We handle the setup so the experience is frictionless.'},
+    {q:'What if the wifi fails?',a:'We plan for it — the day is designed with contingencies so a connection hiccup never derails it.'}],
+  related:bpRel({h:'Client dashboard',p:'Your window into the plan, the day and the results.',href:'/beam-platform-client-dashboard',linkText:'Dashboard'})})),
+subformat(Object.assign({},BP_PARENT,{slug:'/beam-platform-client-dashboard', name:'Client dashboard', tagline:'your view of the plan, the day and the results',
+  desc:'The Beam Platform client dashboard gives you one clear view of the plan, the day and the results. By TeamBeam.',
+  ai:'The Beam Platform client dashboard gives clients a single view of the plan, the live day and the measured results.',
+  keywords:'client dashboard team building, event results dashboard, team health dashboard, beam platform',
+  eyebrow:'Beam Platform · Dashboard', h:'Everything in <span class="grad">one clear place.</span>',
+  sub:'Your single window into it all — the plan before, the day as it happens, and the results after.',
+  whatH:'No chasing for updates.', what:[
+    'Working with a partner should not mean waiting for email updates and wondering where things stand. The client dashboard puts the whole engagement in front of you — the agreed plan, the live day, and the measured results afterwards — so you always know exactly where things are.',
+    'It is transparency by default, and it is where the measurement lands as a report you can use.'],
+  insideH:'What you see.',
+  inside:[
+    {h:'The plan',p:'The agreed brief and run-of-show, in one place.'},
+    {h:'The day',p:'How the experience is unfolding, live.'},
+    {h:'The results',p:'The Day 14, 30 and 60 reading as it comes in.'},
+    {h:'The report',p:'The written outcome, ready for leadership.'}],
+  goodH:'Why it matters.', goodLead:'The dashboard is transparency and proof in one place.',
+  good:[
+    {h:'People leaders',p:'Who need the evidence to hand.'},
+    {h:'Busy sponsors',p:'Who want the picture without the chasing.'},
+    {h:'Multi-event programs',p:'Where a shared view keeps everything joined up.'}],
+  faq:[{q:'Who can access it?',a:'Whoever you choose on your side. We set up access so the right people have the view they need.'},
+    {q:'Is our data private?',a:'Yes. Your dashboard is yours; we treat everything on it with care and confidentiality.'}],
+  related:bpRel({h:'Measurement',p:'The reading that fills the results view.',href:'/beam-platform-measurement',linkText:'Measurement'})})),
+subformat(Object.assign({},BP_PARENT,{slug:'/beam-platform-measurement', name:'Measurement', tagline:'the Day 14/30/60 reading, as a report',
+  desc:'The Beam Platform measurement layer reads team health at Day 14, 30 and 60 and turns it into a report for leadership. By TeamBeam.',
+  ai:'The Beam Platform measurement layer captures team-health readings before and at Day 14, 30 and 60, and produces a leadership report.',
+  keywords:'team health measurement platform, day 14 30 60, team building measurement, impact report',
+  eyebrow:'Beam Platform · Measurement', h:'The part most skip: <span class="grad">the proof.</span>',
+  sub:'The layer that reads team health before and after — at Day 14, 30 and 60 — and turns it into a report you can show.',
+  whatH:'Where a day becomes evidence.', what:[
+    'Most team experiences end when everyone goes home. Ours keep going, quietly, through the measurement layer — a baseline before, then readings at fourteen, thirty and sixty days, so the change can be seen over time rather than assumed on the day.',
+    'The output is a clear report: what moved, and whether it held. It is the reason we can say we prove it.'],
+  insideH:'How it works.',
+  inside:[
+    {h:'A baseline',p:'A reading before the experience, so there is a before.'},
+    {h:'Three follow-ups',p:'Day 14, 30 and 60 — glow, pressure, and new normal.'},
+    {h:'The curve',p:'The shape of the change, which tells you what happened.'},
+    {h:'The report',p:'A clear write-up for leadership.'}],
+  goodH:'Why it matters.', goodLead:'Measurement is the whole difference between a memory and a result.',
+  good:[
+    {h:'Budgets to defend',p:'Evidence that survives a review.'},
+    {h:'Boards to convince',p:'A curve, not a claim.'},
+    {h:'Programs to steer',p:'Knowing what to reinforce next.'}],
+  faq:[{q:'Is this the same as the free Snapshot?',a:'No. The Snapshot is a quick public self-check. This is the proper, tracked measurement built into how we deliver.'},
+    {q:'What does it ask of our people?',a:'Short, light check-ins at each point — a few minutes each — designed for real response rates.'}],
+  related:bpRel({h:'Measurement & proof',p:'The thinking behind the cadence.',href:'/why-teambeam-measurement-impact',linkText:'How we measure'})})),
+subformat(Object.assign({},BP_PARENT,{slug:'/beam-platform-always-on', name:'Always-on', tagline:'keeping a team connected between events',
+  desc:'The Beam Platform always-on layer keeps a team connected between events, not just on the day. By TeamBeam.',
+  ai:'The Beam Platform always-on layer sustains team connection and light engagement between experiences, so momentum does not fade.',
+  keywords:'always on team engagement, continuous team connection, between events engagement, beam platform',
+  eyebrow:'Beam Platform · Always-on', h:'Connection that <span class="grad">outlasts the day.</span>',
+  sub:'The layer that keeps a team connected between experiences — so the momentum from a great day does not quietly fade by the next month.',
+  whatH:'The gap between events is where things slip.', what:[
+    'A single great experience creates a lift, but lifts fade if nothing sustains them. The always-on layer keeps a light thread of connection running between events — small, low-effort touchpoints that keep a team engaged and keep the momentum from an experience alive until the next one.',
+    'It turns team development from an occasional event into something continuous.'],
+  insideH:'What it does.',
+  inside:[
+    {h:'Light touchpoints',p:'Small, regular nudges that keep connection warm.'},
+    {h:'Momentum',p:'Sustaining the lift from an experience rather than losing it.'},
+    {h:'A continuous thread',p:'Team development between events, not just at them.'},
+    {h:'Signal over time',p:'A sense of how the team is doing between readings.'}],
+  goodH:'Why it matters.', goodLead:'Always-on is our pick when you want continuity, not one-off events.',
+  good:[
+    {h:'Ongoing programs',p:'Where you want momentum sustained between sessions.'},
+    {h:'Distributed teams',p:'Who need a connecting thread across distance.'},
+    {h:'Long-term culture work',p:'Where change is a habit, not an event.'}],
+  faq:[{q:'Is this heavy for our people?',a:'No — it is deliberately light. The point is a warm thread, not another thing on the to-do list.'},
+    {q:'Does it replace real experiences?',a:'No. It sustains them. Always-on keeps momentum between the experiences that create it.'}],
+  related:bpRel({h:'The Beam Platform',p:'How always-on fits the whole system.',href:'/beam-platform',linkText:'The platform'})}))
 );
 
 /* ---- X-Leaves: Impact/CSR + Self-Serve pages ---- */
