@@ -22,7 +22,8 @@ const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/occasions','/volunteer','/privacy','/terms','/accessibility',
   '/destinations-india-goa','/destinations-india-lonavala','/destinations-india-coorg','/destinations-india-udaipur','/destinations-india-rishikesh','/destinations-india-kabini',
   '/destinations-india-jaipur','/destinations-india-munnar','/destinations-india-alibaug','/destinations-india-mahabaleshwar','/destinations-india-shimla-manali','/destinations-india-jim-corbett',
-  '/team-experiences-beam-hunts','/team-experiences-beam-arena','/team-experiences-beam-mysteries','/team-experiences-beam-makers','/team-experiences-high-action-tech','/team-experiences-rhythm-music','/team-experiences-culinary']);
+  '/team-experiences-beam-hunts','/team-experiences-beam-arena','/team-experiences-beam-mysteries','/team-experiences-beam-makers','/team-experiences-high-action-tech','/team-experiences-rhythm-music','/team-experiences-culinary',
+  '/development-facilitation-assessment-led-development','/development-facilitation-expert-facilitation','/development-facilitation-leadership-team-training','/development-facilitation-strategic-workshops','/development-facilitation-professional-excellence','/development-facilitation-guest-expert-in-residence']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -538,12 +539,12 @@ offering({path:'/development-facilitation', crumb:'Development & Facilitation',
   sub:'Led by facilitators who read the room — development that connects to a real gap, not a generic workshop.',
   cardsH:'Ways to develop a team',
   cards:[
-    {h:'Assessment-led development',p:'Start from a reading of the team, then build the session around what it shows.'},
-    {h:'Expert facilitation',p:'A skilled facilitator to hold a hard conversation and land it well.'},
-    {h:'Leadership team training',p:'Work on the team that sets every other team\u2019s weather.'},
-    {h:'Strategic workshops',p:'Align a group around a direction, and leave with decisions that hold.'},
-    {h:'Professional excellence',p:'Focused skill-building that a team applies the next week, not someday.'},
-    {h:'Guest expert in residence',p:'Bring in a specialist voice for a session that needs real depth.'}
+    {h:'Assessment-led development',p:'Start from a reading of the team, then build the session around what it shows.',link:'/development-facilitation-assessment-led-development',linkText:'Explore'},
+    {h:'Expert facilitation',p:'A skilled facilitator to hold a hard conversation and land it well.',link:'/development-facilitation-expert-facilitation',linkText:'Explore'},
+    {h:'Leadership team training',p:'Work on the team that sets every other team\u2019s weather.',link:'/development-facilitation-leadership-team-training',linkText:'Explore'},
+    {h:'Strategic workshops',p:'Align a group around a direction, and leave with decisions that hold.',link:'/development-facilitation-strategic-workshops',linkText:'Explore'},
+    {h:'Professional excellence',p:'Focused skill-building that a team applies the next week, not someday.',link:'/development-facilitation-professional-excellence',linkText:'Explore'},
+    {h:'Guest expert in residence',p:'Bring in a specialist voice for a session that needs real depth.',link:'/development-facilitation-guest-expert-in-residence',linkText:'Explore'}
   ]}),
 offering({path:'/offsites-retreats', crumb:'Offsites & Retreats',
   title:'Offsites & Retreats — the whole offsite, handled · TeamBeam Outings',
@@ -1329,6 +1330,153 @@ subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-culinary', name:'C
   faq:[{q:'What about dietary needs?',a:'Fully accommodated — we plan menus around your team\u2019s requirements so everyone takes part and eats well.'},
     {q:'Indoors or out?',a:'Either — a professional kitchen, a venue, or an outdoor setup at an offsite. We arrange it.'}],
   related:teRel({h:'Beam Occasions',p:'Cooking makes a warm, inclusive celebration.',href:'/beam-occasions',linkText:'Occasions'})}))
+);
+
+/* ---- X-Leaves: Development & Facilitation pages ---- */
+const DF_PARENT={parent:'/development-facilitation', parentName:'All development & facilitation'};
+const dfRel=(a)=>[
+  {h:'All development & facilitation',p:'The full range of facilitated work.',href:'/development-facilitation',linkText:'Development'},
+  a,{h:'How we work',p:'We read the team before we design the session.',href:'/why-teambeam',linkText:'The method'}
+];
+PAGES.push(
+subformat(Object.assign({},DF_PARENT,{slug:'/development-facilitation-assessment-led-development', name:'Assessment-led development', tagline:'development built on a reading of the team',
+  desc:'Assessment-led development — start from a reading of the team, then design the session around the gap it reveals. By TeamBeam.',
+  ai:'TeamBeam assessment-led development reads a team across eight dimensions first, then designs targeted development for the specific gap, and measures the change afterwards.',
+  keywords:'assessment led team development India, diagnostic team development, targeted team training',
+  eyebrow:'Development · Assessment-led', h:'Development that <span class="grad">starts from evidence.</span>',
+  sub:'We read where the team actually is, then build the session around the gap that reading reveals — not a stock curriculum.',
+  whatH:'Prescribe after examining, not before.', what:[
+    'Generic development treats every team as if it has the same problem. It rarely does. Assessment-led development flips the order: we read the team first, find the one or two dimensions costing it most, and design directly for those. The session fits because it was built to.',
+    'It also makes the work measurable. Because we defined what we were trying to move before we started, we can come back and show whether it moved — at Day 14, 30 and 60.'],
+  insideH:'How it works.',
+  inside:[
+    {h:'The reading',p:'A structured look at the team across the eight dimensions, before anything is designed.'},
+    {h:'Targeted design',p:'A session built for the specific gap, not a shelf programme.'},
+    {h:'Facilitated delivery',p:'Run by a facilitator who can hold the real conversation.'},
+    {h:'Measured follow-up',p:'A re-read weeks later to confirm what actually changed.'}],
+  goodH:'When this fits.', goodLead:'This is our pick when you want development that is aimed, not generic.',
+  good:[
+    {h:'Teams that tried generic training',p:'And found it did not stick, because it was not built for them.'},
+    {h:'Leaders who need proof',p:'A defined goal and a measured result, not a feelgood day.'},
+    {h:'A known but unnamed problem',p:'When you can feel something is off but cannot quite name it.'}],
+  faq:[{q:'How is the reading taken?',a:'Through a structured, light process we run with the team. We keep the mechanics to ourselves; what you get is a clear picture and a design built on it.'},
+    {q:'Is this the same as the free Snapshot?',a:'No. The Snapshot is a quick public self-check. This is the proper reading we do before real development work.'}],
+  related:dfRel({h:'Measurement & proof',p:'How we show the development actually worked.',href:'/why-teambeam-measurement-impact',linkText:'How we measure'})})),
+subformat(Object.assign({},DF_PARENT,{slug:'/development-facilitation-expert-facilitation', name:'Expert facilitation', tagline:'a skilled facilitator for the conversations that matter',
+  desc:'Expert facilitation — a skilled, neutral facilitator to hold a hard conversation, align a group, or resolve a conflict, and land it well. By TeamBeam.',
+  ai:'TeamBeam expert facilitation provides a skilled neutral facilitator for hard conversations, alignment sessions, conflict resolution and decision workshops.',
+  keywords:'expert facilitation India, team facilitator, meeting facilitation, conflict resolution facilitator',
+  eyebrow:'Development · Expert facilitation', h:'The conversation that <span class="grad">needs a steady hand.</span>',
+  sub:'Some conversations are too important, or too charged, to run yourself. A skilled, neutral facilitator holds the room so the real thing can be said — and resolved.',
+  whatH:'A neutral in the room changes everything.', what:[
+    'When a leader facilitates their own hard conversation, people manage their words. When a skilled neutral holds it, the real thing gets said, safely, and actually moves toward a resolution. That neutrality is the whole value — it is why the same discussion goes differently with the right person at the front.',
+    'We provide facilitators who can read a room in real time, keep it safe, surface what is unsaid, and get a group to a genuine decision rather than a polite non-answer.'],
+  insideH:'Where a facilitator earns their place.',
+  inside:[
+    {h:'Hard conversations',p:'The discussion everyone has been avoiding, held safely.'},
+    {h:'Alignment sessions',p:'Getting a divided group genuinely pointed the same way.'},
+    {h:'Conflict resolution',p:'Working through a real tension toward a workable outcome.'},
+    {h:'Decision workshops',p:'Reaching a call a group will actually commit to.'}],
+  goodH:'When to bring one in.', goodLead:'Expert facilitation is our pick when the stakes or the tension are high.',
+  good:[
+    {h:'High-stakes decisions',p:'Where a poor process would be costly.'},
+    {h:'Simmering tension',p:'When something needs to be aired before it hardens.'},
+    {h:'A leader who wants to take part',p:'So they can be in the conversation, not running it.'}],
+  faq:[{q:'Is the facilitator neutral?',a:'Yes — that is the point. They hold the process, not a position, which is what lets people be honest.'},
+    {q:'Can it be a one-off?',a:'Yes. A single well-facilitated session on the right day can shift something months of meetings could not.'}],
+  related:dfRel({h:'Leadership team training',p:'Facilitation focused on the top team.',href:'/development-facilitation-leadership-team-training',linkText:'Leadership'})})),
+subformat(Object.assign({},DF_PARENT,{slug:'/development-facilitation-leadership-team-training', name:'Leadership team training', tagline:'work on the team that sets the weather',
+  desc:'Leadership team training — work on the executive team whose health cascades through the whole organisation. By TeamBeam.',
+  ai:'TeamBeam leadership team training develops the executive team\u2019s trust, alignment and decision-making, because its health cascades to every team below it.',
+  keywords:'leadership team development India, executive team training, top team offsite, leadership team building',
+  eyebrow:'Development · Leadership team', h:'The team that sets <span class="grad">every other team\u2019s weather.</span>',
+  sub:'The executive team is a team too — usually the least examined, and the most consequential. Whatever is true of it becomes true of the organisation beneath it.',
+  whatH:'Fix the top, and the rest follows.', what:[
+    'If the leadership team does not trust each other, their departments will not either. If it reopens every decision, so will every level below. The top team\u2019s trust, alignment and decision-making cascade downward — which makes it the highest-leverage team in the company to work on, and the hardest, because power makes honesty costly.',
+    'We work with executive teams the way we work with any team, but with the discretion and skill senior people need to be genuinely exposed without it being used against them.'],
+  insideH:'What we work on.',
+  inside:[
+    {h:'Trust at the top',p:'The safety for senior people to be honest with each other.'},
+    {h:'Real alignment',p:'Not alignment in the room and contradiction outside it.'},
+    {h:'Decision rights',p:'Who decides what, so the top team stops relitigating.'},
+    {h:'The example they set',p:'Naming the behaviour the rest of the company copies.'}],
+  goodH:'When this matters most.', goodLead:'Leadership team work is our highest-leverage engagement.',
+  good:[
+    {h:'A newly-formed leadership team',p:'A merger, a reshuffle, or new members joining.'},
+    {h:'Cascading dysfunction',p:'When patterns at the top are showing up everywhere below.'},
+    {h:'Before a big year',p:'Getting the top team right before it sets the tone.'}],
+  faq:[{q:'Is this a strategy offsite?',a:'It can sit alongside one, but the focus here is the health of the team itself — trust, alignment, decisions — not the business plan.'},
+    {q:'How do you handle seniority and ego?',a:'With discretion and a skilled facilitator. The work only happens if senior people feel safe, and creating that safety is the craft.'}],
+  related:dfRel({h:'The leadership team sets the weather',p:'The thinking behind this work.',href:'/the-leadership-team-sets-the-weather/',linkText:'Read the insight'})})),
+subformat(Object.assign({},DF_PARENT,{slug:'/development-facilitation-strategic-workshops', name:'Strategic workshops', tagline:'align a group and leave with decisions that hold',
+  desc:'Strategic workshops — align a group around a direction and leave with decisions that stay made. Facilitated by TeamBeam.',
+  ai:'TeamBeam strategic workshops align a group around direction and priorities and produce decisions that hold, through structured facilitation.',
+  keywords:'strategy workshop facilitation India, planning offsite, prioritisation workshop, OKR workshop',
+  eyebrow:'Development · Strategic workshops', h:'Leave the room <span class="grad">actually decided.</span>',
+  sub:'A structured, facilitated session that gets a group aligned around a direction — and produces decisions that stay made, not reopened next week.',
+  whatH:'Alignment you can act on.', what:[
+    'Most strategy sessions end in a warm sense of agreement that quietly unravels within days. The difference is process: a well-facilitated workshop surfaces the real disagreements, works them through, and lands on decisions a group will actually commit to, with clear ownership.',
+    'We bring the structure and the neutral hand so the leader can take part in the thinking rather than refereeing it.'],
+  insideH:'What we run.',
+  inside:[
+    {h:'Direction-setting',p:'Getting a group genuinely aligned on where it is going.'},
+    {h:'Prioritisation',p:'Deciding what matters most when everything feels urgent.'},
+    {h:'Goal & OKR sessions',p:'Turning direction into goals people own.'},
+    {h:'Planning offsites',p:'A full working session that ends with a real plan.'}],
+  goodH:'When to run one.', goodLead:'Strategic workshops are our pick at alignment moments.',
+  good:[
+    {h:'Start of a planning cycle',p:'Set direction before the year, not after.'},
+    {h:'A group pulling apart',p:'When priorities have quietly diverged.'},
+    {h:'After a change',p:'Re-aligning once something significant has shifted.'}],
+  faq:[{q:'Do you set our strategy?',a:'No — the strategy is yours. We provide the process and facilitation that gets your group to genuine, committed decisions.'},
+    {q:'Half-day or multi-day?',a:'Either. We scope it to the decision at hand and tell you honestly what it needs.'}],
+  related:dfRel({h:'Offsites & Retreats',p:'Run the workshop as part of a full offsite.',href:'/offsites-retreats',linkText:'Offsites'})})),
+subformat(Object.assign({},DF_PARENT,{slug:'/development-facilitation-professional-excellence', name:'Professional excellence', tagline:'focused skills a team applies next week',
+  desc:'Professional excellence — focused, practical skill-building a team applies the next week, not someday. By TeamBeam.',
+  ai:'TeamBeam professional excellence sessions build practical team skills — communication, feedback, collaboration, presentation — designed for immediate application.',
+  keywords:'team skills training India, communication skills workshop, feedback training, professional development team',
+  eyebrow:'Development · Professional excellence', h:'Skills a team <span class="grad">uses next week.</span>',
+  sub:'Focused, practical capability-building — communication, feedback, collaboration — designed to be applied immediately, not filed away.',
+  whatH:'Practical, not theoretical.', what:[
+    'A lot of skills training is interesting in the room and gone by Monday. We design for the opposite: a small number of practical skills, practised until they are usable, tied to the real work the team is doing. The test is whether it shows up next week.',
+    'We keep it grounded — the everyday capabilities that quietly make a team better: saying the hard thing well, giving feedback that lands, collaborating without friction.'],
+  insideH:'What we build.',
+  inside:[
+    {h:'Communication',p:'Saying the important thing clearly, and making it land.'},
+    {h:'Feedback',p:'Giving and receiving it in a way that helps rather than stings.'},
+    {h:'Collaboration',p:'Working across people and functions without friction.'},
+    {h:'Presence & presentation',p:'Being clear and credible in the room.'}],
+  goodH:'When this fits.', goodLead:'Professional excellence is our pick for practical capability lifts.',
+  good:[
+    {h:'Growing teams',p:'New managers and members who need the everyday skills fast.'},
+    {h:'A specific weak spot',p:'When feedback or communication is visibly holding a team back.'},
+    {h:'Follow-through cultures',p:'Teams that will actually apply what they practise.'}],
+  faq:[{q:'Is this generic training?',a:'No — we tie the skills to your team\u2019s real work so they transfer. The measure is application, not attendance.'},
+    {q:'One session or a series?',a:'Either. Some skills land in a focused session; others build better over a short series. We advise honestly.'}],
+  related:dfRel({h:'Assessment-led development',p:'Start from a reading to aim the skill-building.',href:'/development-facilitation-assessment-led-development',linkText:'Assessment-led'})})),
+subformat(Object.assign({},DF_PARENT,{slug:'/development-facilitation-guest-expert-in-residence', name:'Guest expert in residence', tagline:'a specialist voice for real depth',
+  desc:'Guest expert in residence — bring in a specialist voice for a session that needs genuine depth. Curated and run by TeamBeam.',
+  ai:'TeamBeam brings in guest experts in residence — specialist speakers and practitioners — for sessions needing genuine depth, as keynotes, masterclasses or fireside formats.',
+  keywords:'guest speaker corporate India, expert masterclass team, keynote and workshop, specialist facilitator',
+  eyebrow:'Development · Guest expert', h:'When a session needs <span class="grad">a real specialist.</span>',
+  sub:'Some topics deserve a genuine expert. We bring in the right specialist voice and build a session around them, so it is depth with a purpose — not a talk that fades.',
+  whatH:'Depth, made useful.', what:[
+    'A great expert can shift how a team thinks about something. But a keynote alone tends to inspire for a day and evaporate. We pair the right specialist with real facilitation, so the depth turns into something the team actually uses.',
+    'We curate the voice to the need — a leadership thinker, a domain specialist, a practitioner with hard-won experience — and design the format around your goal.'],
+  insideH:'Formats.',
+  inside:[
+    {h:'Keynote + workshop',p:'Inspiration followed by a session that puts it to work.'},
+    {h:'Masterclass',p:'A deeper, hands-on session on a specific capability.'},
+    {h:'Fireside',p:'A candid conversation with a voice worth hearing.'},
+    {h:'Residency',p:'A specialist embedded across a programme, not just a day.'}],
+  goodH:'When to bring one in.', goodLead:'A guest expert is our pick when a topic needs genuine authority.',
+  good:[
+    {h:'A big theme',p:'A shift the team needs to take seriously.'},
+    {h:'Fresh credibility',p:'An outside voice that lands what internal ones cannot.'},
+    {h:'A flagship moment',p:'An offsite or event that deserves a memorable centrepiece.'}],
+  faq:[{q:'Do you have the experts, or do we?',a:'We curate and bring the right voice for your goal, and build the session around them. If you have someone in mind, we can work with them too.'},
+    {q:'Is it just a talk?',a:'Not if we design it well. We wrap the expert in facilitation so the value outlives the applause.'}],
+  related:dfRel({h:'Strategic workshops',p:'Pair expert input with a working session.',href:'/development-facilitation-strategic-workshops',linkText:'Strategic workshops'})}))
 );
 
 /* ---- X-Leaves: destination builder + flagship pages ---- */
