@@ -21,7 +21,8 @@ const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/why-teambeam-the-method','/why-teambeam-measurement-impact','/why-teambeam-results',
   '/occasions','/volunteer','/privacy','/terms','/accessibility',
   '/destinations-india-goa','/destinations-india-lonavala','/destinations-india-coorg','/destinations-india-udaipur','/destinations-india-rishikesh','/destinations-india-kabini',
-  '/destinations-india-jaipur','/destinations-india-munnar','/destinations-india-alibaug','/destinations-india-mahabaleshwar','/destinations-india-shimla-manali','/destinations-india-jim-corbett']);
+  '/destinations-india-jaipur','/destinations-india-munnar','/destinations-india-alibaug','/destinations-india-mahabaleshwar','/destinations-india-shimla-manali','/destinations-india-jim-corbett',
+  '/team-experiences-beam-hunts','/team-experiences-beam-arena','/team-experiences-beam-mysteries','/team-experiences-beam-makers','/team-experiences-high-action-tech','/team-experiences-rhythm-music','/team-experiences-culinary']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -506,12 +507,13 @@ offering({path:'/team-experiences', crumb:'Team Experiences',
   sub:'The kind of day people actually talk about — with a real goal working underneath the fun.',
   cardsH:'Ways to bring a team together',
   cards:[
-    {h:'Beam Hunts',p:'City and venue hunts that get a team moving, thinking and laughing together.'},
-    {h:'Beam Arena',p:'High-energy game shows that light up a full room, from one team to a thousand.'},
-    {h:'Beam Mysteries',p:'Solve-it-together mysteries that reward listening and shared decisions.'},
-    {h:'Beam Makers',p:'Build and create something real, together — with something to keep at the end.'},
-    {h:'High-action &amp; tech',p:'Adrenaline and gadgets, for teams that come alive when the stakes feel real.'},
-    {h:'Rhythm &amp; music',p:'Drumming and music that get a whole group in sync within minutes.'}
+    {h:'Beam Hunts',p:'City and venue hunts that get a team moving, thinking and laughing together.',link:'/team-experiences-beam-hunts',linkText:'Explore'},
+    {h:'Beam Arena',p:'High-energy game shows that light up a full room, from one team to a thousand.',link:'/team-experiences-beam-arena',linkText:'Explore'},
+    {h:'Beam Mysteries',p:'Solve-it-together mysteries that reward listening and shared decisions.',link:'/team-experiences-beam-mysteries',linkText:'Explore'},
+    {h:'Beam Makers',p:'Build and create something real, together — with something to keep at the end.',link:'/team-experiences-beam-makers',linkText:'Explore'},
+    {h:'High-action &amp; tech',p:'Adrenaline and gadgets, for teams that come alive when the stakes feel real.',link:'/team-experiences-high-action-tech',linkText:'Explore'},
+    {h:'Rhythm &amp; music',p:'Drumming and music that get a whole group in sync within minutes.',link:'/team-experiences-rhythm-music',linkText:'Explore'},
+    {h:'Culinary',p:'Cook and eat together — the oldest team-building there is, done well.',link:'/team-experiences-culinary',linkText:'Explore'}
   ]}),
 offering({path:'/impact-csr', crumb:'Impact & CSR',
   title:'Impact & CSR — give back together, file the report · TeamBeam Outings',
@@ -1144,6 +1146,190 @@ PAGES.push(
     ]}
   ]
 });
+
+/* ---- X-Leaves: sub-format builder + Team Experiences pages ---- */
+function subformat(o){
+  return {path:o.slug, crumb:o.name,
+    title:o.name+' — '+o.tagline+' · TeamBeam Outings',
+    desc:o.desc, ai:o.ai, keywords:o.keywords,
+    sections:[
+      {type:'hero', eyebrow:o.eyebrow, h:o.h, sub:o.sub, cta:`<a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="${o.parent}">${o.parentName}</a>`},
+      {type:'narrative', eyebrow:'What it is', h:o.whatH, paras:o.what},
+      {type:'cards', eyebrow:'What\u2019s inside', h:o.insideH, cols:3, cards:o.inside},
+      {type:'featurelist', tint:true, eyebrow:'Good for', h:o.goodH, lead:o.goodLead, items:o.good},
+      {type:'faq', h:'About '+o.name, items:o.faq},
+      {type:'related', eyebrow:'Related', h:'Keep exploring.', links:o.related},
+      {type:'cta', h:o.ctaH||('Want '+o.name+' for your team?'), p:o.ctaP||'Tell us the goal, and we will shape it around your team — and measure what changed.', cta:talkCTA}
+    ]};
+}
+const TE_PARENT={parent:'/team-experiences', parentName:'All team experiences'};
+const teRel=(a,b)=>[
+  {h:'All team experiences',p:'The full family of formats.',href:'/team-experiences',linkText:'Team experiences'},
+  a,{h:'How we work',p:'Every format runs on the same method.',href:'/why-teambeam',linkText:'The method'}
+];
+PAGES.push(
+subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-beam-hunts', name:'Beam Hunts', tagline:'city and venue hunts for teams',
+  desc:'Beam Hunts — city and venue treasure hunts that get a team moving, thinking and laughing together, designed and measured by TeamBeam.',
+  ai:'Beam Hunts are TeamBeam city, venue, themed and virtual treasure hunts that get teams moving and collaborating, suited to breaking silos and welcoming new joiners.',
+  keywords:'corporate treasure hunt India, team scavenger hunt, city hunt team building, office treasure hunt',
+  eyebrow:'Team Experiences · Beam Hunts', h:'Beam Hunts <span class="grad">get a team moving.</span>',
+  sub:'City and venue hunts that get people out of their chairs, mixing across the usual lines, and solving things together.',
+  whatH:'The oldest trick, done properly.', what:[
+    'A hunt sounds simple, and that is the point — it lowers the guard instantly. People who never talk end up in a team, racing a clock, and forget to be self-conscious. Underneath the fun, a hunt quietly forces the things good teams do: split the work, trust each other, decide fast.',
+    'We design the trail around your goal, not a generic route. Whether that is breaking silos, welcoming a new cohort, or just a genuinely good day, the hunt is shaped to produce it.'],
+  insideH:'Ways to run a hunt.',
+  inside:[
+    {h:'City hunts',p:'A neighbourhood becomes the board — landmarks, clues and local colour.'},
+    {h:'Venue hunts',p:'Contained to your office, hotel or offsite space when time is tight.'},
+    {h:'Themed hunts',p:'Built around a story or your company, for extra hook.'},
+    {h:'Virtual hunts',p:'For a distributed team, played live across cities at once.'}],
+  goodH:'When a hunt is the right call.', goodLead:'Hunts are our go-to when the goal is movement, mixing and momentum.',
+  good:[
+    {h:'Breaking silos',p:'Mixed teams mean people meet colleagues they would never otherwise work with.'},
+    {h:'Welcoming new joiners',p:'A cohort bonds faster chasing a clue than sitting through an induction.'},
+    {h:'A genuine lift',p:'When a team just needs a good, energising day out that still means something.'}],
+  faq:[{q:'How big can a hunt be?',a:'From a single team to several hundred people split into groups, in a city or a venue. We scale the trail and the logistics to the number.'},
+    {q:'How long does it take?',a:'Most run two to three hours, and slot neatly into a half-day or into a larger offsite.'}],
+  related:teRel({h:'Beam Mysteries',p:'Solve-it-together mysteries, for teams that like a puzzle.',href:'/team-experiences-beam-mysteries',linkText:'Mysteries'})})),
+subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-beam-arena', name:'Beam Arena', tagline:'high-energy game shows for teams',
+  desc:'Beam Arena — high-energy game shows that light up a full room, from one team to a thousand, designed and measured by TeamBeam.',
+  ai:'Beam Arena is TeamBeam\u2019s high-energy game-show format for large groups, kickoffs and celebrations, scalable from one team to over a thousand people.',
+  keywords:'corporate game show India, large group team building, kickoff entertainment, big room team event',
+  eyebrow:'Team Experiences · Beam Arena', h:'Beam Arena <span class="grad">fills the room.</span>',
+  sub:'High-energy game shows that hold a whole hall — buzzers, big screens, and a whole company on its feet.',
+  whatH:'Energy that actually scales.', what:[
+    'Most activities fall apart at scale — but a game show is built for it. Beam Arena turns a room of hundreds into teams, gives everyone a stake, and keeps the energy high from the first buzzer to the last. It is the answer when you need a big group to feel like one.',
+    'It looks like pure entertainment, and it is genuinely fun. But the format rewards the right things — quick collaboration, shared risk, and cheering for each other — so the energy has somewhere useful to go.'],
+  insideH:'Ways to run the Arena.',
+  inside:[
+    {h:'Quiz-show format',p:'Classic rounds, buzzers and a host who keeps a big room moving.'},
+    {h:'Big-screen spectacle',p:'Production values that make a hall feel like a live show.'},
+    {h:'Custom rounds',p:'Questions and challenges built around your company and moment.'},
+    {h:'Hybrid',p:'On-stage and on-screen together, for rooms and remote joiners at once.'}],
+  goodH:'When the Arena fits.', goodLead:'Arena is our answer for scale and energy.',
+  good:[
+    {h:'Sales kickoffs',p:'Open the year with a room that is genuinely up, not politely clapping.'},
+    {h:'All-hands & celebrations',p:'Turn a big gathering into an event people actually remember.'},
+    {h:'Large teams',p:'When hundreds of people need to feel like one team for an evening.'}],
+  faq:[{q:'How many people can play?',a:'From a single team to well over a thousand. The format is built to scale without losing energy.'},
+    {q:'Do you host it?',a:'Yes. A professional host and full production run the show so it lands from the first minute.'}],
+  related:teRel({h:'Rhythm & music',p:'Another way to get a big group in sync fast.',href:'/team-experiences-rhythm-music',linkText:'Rhythm & music'})})),
+subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-beam-mysteries', name:'Beam Mysteries', tagline:'solve-it-together mysteries for teams',
+  desc:'Beam Mysteries — solve-it-together mysteries and escape challenges that reward listening and shared decisions, designed and measured by TeamBeam.',
+  ai:'Beam Mysteries are TeamBeam murder-mystery and escape-style formats where teams solve a case together, building collaboration, listening and decision-making.',
+  keywords:'murder mystery team building, escape room corporate, problem solving team activity India',
+  eyebrow:'Team Experiences · Beam Mysteries', h:'Beam Mysteries <span class="grad">make a team think together.</span>',
+  sub:'Solve-it-together mysteries and escape challenges where the only way through is to listen, share and decide as one.',
+  whatH:'A puzzle only a team can crack.', what:[
+    'A good mystery is impossible alone — the clues are scattered across people, and the answer only appears when everyone shares what they hold. That is exactly the muscle real teams need: listening, combining, and committing to a call together under a clock.',
+    'It rewards the quiet person with the key detail as much as the loud one, which makes it quietly inclusive. And it is genuinely gripping, so people lean in without being told to.'],
+  insideH:'Ways to run a mystery.',
+  inside:[
+    {h:'Murder mystery',p:'A story to unravel, with roles, clues and a satisfying reveal.'},
+    {h:'Escape challenges',p:'Locked-room style puzzles against the clock, in teams.'},
+    {h:'Case files',p:'A layered investigation that rewards method and collaboration.'},
+    {h:'Custom cases',p:'Built around your company or theme for extra hook.'}],
+  goodH:'When a mystery fits.', goodLead:'Mysteries are our pick when the goal is how a team works, not just whether it bonds.',
+  good:[
+    {h:'Collaboration',p:'The format forces people to combine what only they each know.'},
+    {h:'Decision-making',p:'Teams practise committing to a call together under pressure.'},
+    {h:'Listening',p:'The quiet voice with the key clue finally gets heard.'}],
+  faq:[{q:'Is it competitive or collaborative?',a:'Both — teams compete to solve it, but within each team the only way to win is to collaborate. That balance is the point.'},
+    {q:'Can it be run indoors?',a:'Yes, it is ideal for an office, a hotel or an offsite room. No special venue needed.'}],
+  related:teRel({h:'Beam Makers',p:'Build something together, for teams that prefer making to solving.',href:'/team-experiences-beam-makers',linkText:'Makers'})})),
+subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-beam-makers', name:'Beam Makers', tagline:'build-and-create experiences for teams',
+  desc:'Beam Makers — build and create something real together, with something to keep at the end, designed and measured by TeamBeam.',
+  ai:'Beam Makers are TeamBeam build-and-create formats (build challenges, art and craft, charity builds) that produce a tangible outcome and reward collaboration.',
+  keywords:'team building make create India, build challenge corporate, art team activity, charity build team',
+  eyebrow:'Team Experiences · Beam Makers', h:'Beam Makers <span class="grad">leave something behind.</span>',
+  sub:'Build and create something real, together — with a result you can point to at the end.',
+  whatH:'The satisfaction of a finished thing.', what:[
+    'There is a particular kind of bonding that comes from making something with your hands, as a group, and seeing it finished. Beam Makers use that — build challenges, craft, or a piece created for a cause — to bring a team together around a shared, tangible outcome.',
+    'It suits teams that would rather do than compete, and moments where you want something lasting to come out of the day, not just a memory.'],
+  insideH:'Ways to make.',
+  inside:[
+    {h:'Build challenges',p:'Structures, machines or contraptions, against a brief and a clock.'},
+    {h:'Art & craft',p:'A collaborative piece the whole team contributes to.'},
+    {h:'Charity builds',p:'Make something a community needs — bonding and giving back at once.'},
+    {h:'Custom makes',p:'Tied to your product, brand or occasion.'}],
+  goodH:'When making fits.', goodLead:'Makers are our pick when you want collaboration and a keepsake.',
+  good:[
+    {h:'Collaboration',p:'A shared object forces real coordination, not parallel effort.'},
+    {h:'A tangible outcome',p:'People leave with proof they built something together.'},
+    {h:'Mixed energy',p:'Engaging for quieter teams who dislike high-octane competition.'}],
+  faq:[{q:'Do we keep what we make?',a:'Usually, yes — or it goes to a cause, if it is a charity build. Either way there is a real result at the end.'},
+    {q:'Is it messy or complicated?',a:'We handle all the materials and setup. Your team just makes; we manage the rest.'}],
+  related:teRel({h:'Impact & CSR',p:'Turn the making into a give-back project with a report.',href:'/impact-csr',linkText:'Impact & CSR'})})),
+subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-high-action-tech', name:'High-action & tech', tagline:'adrenaline and gadget experiences for teams',
+  desc:'High-action & tech experiences — adrenaline and gadgets for teams that come alive when the stakes feel real, designed and measured by TeamBeam.',
+  ai:'TeamBeam High-action & tech experiences combine outdoor challenges and technology (drones, VR, tech games) for teams energised by real stakes.',
+  keywords:'high energy team building India, adventure corporate activity, tech team building, adrenaline team event',
+  eyebrow:'Team Experiences · High-action & tech', h:'High-action & tech <span class="grad">for teams that want the stakes.</span>',
+  sub:'Adrenaline and gadgets — for teams that come alive when something is genuinely on the line.',
+  whatH:'When a real challenge builds real trust.', what:[
+    'Some teams bond over a puzzle; others need to feel their heart rate. High-action and tech experiences give a team a genuine challenge — physical, competitive or technical — where relying on each other is not a metaphor. Trust built under real stakes tends to stick.',
+    'We match the intensity to the group, so it is a thrill rather than a threat, and design it so the whole team has a real part regardless of fitness or nerve.'],
+  insideH:'Ways to raise the stakes.',
+  inside:[
+    {h:'Outdoor challenges',p:'Physical, team-against-the-course experiences in the open.'},
+    {h:'Tech games',p:'Gadget-driven challenges that reward quick coordination.'},
+    {h:'Drone & VR',p:'Newer formats that put a modern, memorable spin on the day.'},
+    {h:'Competitions',p:'Team-versus-team stakes, with a clock and a scoreboard.'}],
+  goodH:'When high-action fits.', goodLead:'This is our pick for teams that thrive on energy and edge.',
+  good:[
+    {h:'Energy',p:'A genuine jolt for a team that has gone flat.'},
+    {h:'Trust under pressure',p:'Relying on each other when it actually counts.'},
+    {h:'Competitive cultures',p:'Sales and other teams that love to win.'}],
+  faq:[{q:'What about mixed fitness?',a:'We scale every challenge so everyone has a real, safe part. The point is the shared experience, never leaving people out.'},
+    {q:'Is it safe?',a:'Yes — safety is managed by trained staff, and we match intensity to the group rather than the other way round.'}],
+  related:teRel({h:'Rishikesh',p:'A destination built for adventure experiences.',href:'/destinations-india-rishikesh',linkText:'Rishikesh'})})),
+subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-rhythm-music', name:'Rhythm & music', tagline:'drumming and music experiences for teams',
+  desc:'Rhythm & music experiences — drumming and music-making that get a whole group in sync within minutes, designed and measured by TeamBeam.',
+  ai:'TeamBeam Rhythm & music experiences use drum circles and collaborative music to synchronise large groups quickly and include everyone.',
+  keywords:'drum circle team building India, music team activity, rhythm team building, inclusive team experience',
+  eyebrow:'Team Experiences · Rhythm & music', h:'Rhythm & music <span class="grad">gets a room in sync.</span>',
+  sub:'Drumming and music-making that pull a whole group into time together — within minutes, with no skill required.',
+  whatH:'Sync you can hear.', what:[
+    'There is something almost unfair about rhythm: put instruments in a few hundred hands and, within minutes, a room that arrived as strangers is playing as one. It is the fastest, most literal way to make a large group feel aligned — and it needs zero musical skill to work.',
+    'It is also genuinely inclusive. Everyone can keep a beat, so nobody is left on the sidelines, which makes it a rare activity that works across every kind of team.'],
+  insideH:'Ways to make sound together.',
+  inside:[
+    {h:'Drum circles',p:'The classic — hundreds of drums, one groove, led by a facilitator.'},
+    {h:'Music-making',p:'Building a piece together from scratch, part by part.'},
+    {h:'Body percussion',p:'No instruments needed — the group becomes the rhythm.'},
+    {h:'Finale performances',p:'A crescendo the whole room creates together.'}],
+  goodH:'When rhythm fits.', goodLead:'Rhythm is our pick when you need fast sync and full inclusion.',
+  good:[
+    {h:'Large groups',p:'It scales to a hall and still feels personal.'},
+    {h:'Inclusion',p:'Everyone can take part, whatever their language or role.'},
+    {h:'Energy & alignment',p:'A literal, felt experience of a group moving as one.'}],
+  faq:[{q:'Do we need musical ability?',a:'None at all. The whole point is that anyone can do it, and a room of beginners sounds remarkable within minutes.'},
+    {q:'How big can it be?',a:'From a team to a full auditorium. It is one of the few activities that gets more powerful the larger it gets.'}],
+  related:teRel({h:'Beam Arena',p:'Another format built to move a big room.',href:'/team-experiences-beam-arena',linkText:'Beam Arena'})})),
+subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-culinary', name:'Culinary', tagline:'cook-and-eat experiences for teams',
+  desc:'Culinary experiences — cook and eat together, the oldest team-building there is, done well and designed for a goal by TeamBeam.',
+  ai:'TeamBeam Culinary experiences (cook-offs, team kitchens, mixology) use cooking and eating together to build collaboration and mark celebrations.',
+  keywords:'cooking team building India, corporate cook-off, team kitchen activity, culinary team event',
+  eyebrow:'Team Experiences · Culinary', h:'Culinary <span class="grad">brings a team to the table.</span>',
+  sub:'Cook and eat together — the oldest team-building there is, designed around a real goal and done well.',
+  whatH:'Nobody argues at a shared table.', what:[
+    'Cooking together is disarming. There is a task, a deadline, and a delicious reward, and somewhere in the chopping and plating a team relaxes into working smoothly without noticing. Then everyone sits down and eats what they made, which is its own kind of bonding.',
+    'It suits collaboration and celebration equally, and it is a gentle, inclusive option for teams who would rather create than compete.'],
+  insideH:'Ways to get cooking.',
+  inside:[
+    {h:'Team cook-offs',p:'Kitchens race a brief and a clock, then everyone tastes the results.'},
+    {h:'Guided kitchens',p:'A chef leads the whole team through a shared menu.'},
+    {h:'Mixology',p:'Cocktails and mocktails, for a lighter, celebratory session.'},
+    {h:'Cuisine journeys',p:'Cooking a regional or themed menu together.'}],
+  goodH:'When culinary fits.', goodLead:'Cooking is our pick for warm collaboration and celebration.',
+  good:[
+    {h:'Collaboration',p:'A shared dish needs coordination, hand-offs and trust.'},
+    {h:'Celebration',p:'A natural, warm way to mark a milestone or a good year.'},
+    {h:'Inclusive energy',p:'Gentle and engaging for teams who dislike loud competition.'}],
+  faq:[{q:'What about dietary needs?',a:'Fully accommodated — we plan menus around your team\u2019s requirements so everyone takes part and eats well.'},
+    {q:'Indoors or out?',a:'Either — a professional kitchen, a venue, or an outdoor setup at an offsite. We arrange it.'}],
+  related:teRel({h:'Beam Occasions',p:'Cooking makes a warm, inclusive celebration.',href:'/beam-occasions',linkText:'Occasions'})}))
+);
 
 /* ---- X-Leaves: destination builder + flagship pages ---- */
 function destination(o){
