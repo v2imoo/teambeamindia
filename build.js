@@ -583,10 +583,14 @@ offering({path:'/beam-occasions', crumb:'Beam Occasions',
   sub:'A year-round calendar of reasons to bring people together — framed so everyone feels included, and run so it means something.',
   cardsH:'Occasions across the year',
   cards:[
-    {h:'Festivals &amp; celebrations',p:'Mark the season inclusively — the shared value under the festival, for everyone.'},
-    {h:'Employee appreciation',p:'Recognition that lands because it is specific and genuine, not generic.'},
-    {h:'New year &amp; year-end',p:'A reset to open the year, and a gathering that closes it well.'},
-    {h:'By audience &amp; mode',p:'Shaped for who it is for and how you gather — in-office, away, or online.'}
+    {h:'Festival of lights',p:'Hope and renewal — the value everyone can share.',link:'/occasions-festival-of-lights',linkText:'Explore'},
+    {h:'Festival of colours',p:'Joy, play and a fresh start, for everyone.',link:'/occasions-festival-of-colours',linkText:'Explore'},
+    {h:'New year',p:'Open the year pointed the same way, with energy that lasts.',link:'/occasions-new-year',linkText:'Explore'},
+    {h:'Financial year-close',p:'Close a chapter with recognition, and reset for the next.',link:'/occasions-financial-year-close',linkText:'Explore'},
+    {h:'Employee appreciation',p:'Recognition that lands because it is specific and genuine.',link:'/occasions-employee-appreciation',linkText:'Explore'},
+    {h:'Women\u2019s day &amp; inclusion',p:'Belonging, marked with meaning, not a token gesture.',link:'/occasions-womens-day',linkText:'Explore'},
+    {h:'National &amp; heritage days',p:'Shared pride and story, celebrated as a team.',link:'/occasions-national-days',linkText:'Explore'},
+    {h:'Year-end',p:'Close the year with a gathering that actually feels earned.',link:'/occasions-year-end',linkText:'Explore'}
   ]}),
 offering({path:'/beam-journeys', crumb:'Beam Journeys',
   title:'Beam Journeys — explore India together · TeamBeam Outings',
@@ -597,10 +601,10 @@ offering({path:'/beam-journeys', crumb:'Beam Journeys',
   sub:'Team travel where the journey itself does the work — designed trips that bring a team closer while they see somewhere new.',
   cardsH:'Ways to journey together',
   cards:[
-    {h:'Signature routes',p:'Our best-loved trails across India, built for a team rather than tourists.'},
-    {h:'City escapes',p:'A short, sharp change of scene that resets a team in a couple of days.'},
-    {h:'Wilderness &amp; hills',p:'Forests, hills and open air, where a team slows down and reconnects.'},
-    {h:'Culture &amp; heritage',p:'Places with a story, shared as a team rather than through a screen.'}
+    {h:'Signature routes',p:'Our best-loved trails across India, built for a team rather than tourists.',link:'/destinations',linkText:'Destinations'},
+    {h:'City escapes',p:'A short, sharp change of scene that resets a team in a couple of days.',link:'/destinations-india-goa',linkText:'Explore'},
+    {h:'Wilderness &amp; hills',p:'Forests, hills and open air, where a team slows down and reconnects.',link:'/destinations-india-coorg',linkText:'Explore'},
+    {h:'Culture &amp; heritage',p:'Places with a story, shared as a team rather than through a screen.',link:'/destinations-india-udaipur',linkText:'Explore'}
   ]}),
 offering({path:'/beam-platform', crumb:'The Beam Platform',
   title:'The Beam Platform — the tech that runs the day and proves it worked · TeamBeam Outings',
@@ -2811,6 +2815,18 @@ destination({slug:'/destinations-india-jim-corbett', name:'Jim Corbett', region:
 
 /* ---- X-Hubs: deepen hub pages (insert before each page's closing CTA) ---- */
 const DEEPEN = {
+'/beam-occasions':[
+  {type:'related',eyebrow:'Keep exploring',h:'More ways to mark the moment.',links:[
+    {h:'The occasions calendar',p:'Every occasion across the year, in one place.',href:'/occasions',linkText:'Occasions'},
+    {h:'Milestones & anniversaries',p:'Marking the big moments so they land.',href:'/who-we-serve-moments-milestone-anniversary',linkText:'Milestones'},
+    {h:'How we work',p:'Even a celebration is designed and measured.',href:'/why-teambeam',linkText:'The method'}]}
+],
+'/beam-journeys':[
+  {type:'related',eyebrow:'Keep exploring',h:'Plan the journey.',links:[
+    {h:'Destinations',p:'India, nearby Asia and worldwide.',href:'/destinations',linkText:'Where we go'},
+    {h:'Offsites & Retreats',p:'The whole trip handled end to end.',href:'/offsites-retreats',linkText:'Offsites'},
+    {h:'How we work',p:'The place is chosen to serve the goal.',href:'/why-teambeam',linkText:'The method'}]}
+],
 '/what-we-do':[
   {type:'narrative',eyebrow:'One idea under eight offerings',h:'The format is the easy part.',paras:[
     'Teams rarely drift because they picked the wrong activity. They drift because trust thins, decisions stall, or new people never quite belong. The eight things we run are just different doors into the same work — giving a team what it is actually missing.',
