@@ -23,7 +23,9 @@ const BUILT = new Set(['/','/what-we-do','/why-teambeam','/who-we-serve',
   '/destinations-india-goa','/destinations-india-lonavala','/destinations-india-coorg','/destinations-india-udaipur','/destinations-india-rishikesh','/destinations-india-kabini',
   '/destinations-india-jaipur','/destinations-india-munnar','/destinations-india-alibaug','/destinations-india-mahabaleshwar','/destinations-india-shimla-manali','/destinations-india-jim-corbett',
   '/team-experiences-beam-hunts','/team-experiences-beam-arena','/team-experiences-beam-mysteries','/team-experiences-beam-makers','/team-experiences-high-action-tech','/team-experiences-rhythm-music','/team-experiences-culinary',
-  '/development-facilitation-assessment-led-development','/development-facilitation-expert-facilitation','/development-facilitation-leadership-team-training','/development-facilitation-strategic-workshops','/development-facilitation-professional-excellence','/development-facilitation-guest-expert-in-residence']);
+  '/development-facilitation-assessment-led-development','/development-facilitation-expert-facilitation','/development-facilitation-leadership-team-training','/development-facilitation-strategic-workshops','/development-facilitation-professional-excellence','/development-facilitation-guest-expert-in-residence',
+  '/impact-csr-beam-green','/impact-csr-beam-builds','/impact-csr-beam-community','/impact-csr-diy-impact-kits',
+  '/self-serve-kits-beam-kits','/self-serve-kits-beam-playbook','/self-serve-kits-beam-certify','/self-serve-kits-offsite-in-a-box']);
 const NAVGROUPS = [
   {label:'What we do', slug:'/what-we-do', anchor:'#what', items:[
     ['Team Experiences','/team-experiences'],['Impact & CSR','/impact-csr'],['Development & Facilitation','/development-facilitation'],
@@ -525,10 +527,10 @@ offering({path:'/impact-csr', crumb:'Impact & CSR',
   sub:'Do real good as a team, meet your CSR mandate, and walk away with a report your CSR and ESG teams can file.',
   cardsH:'Ways to give back',
   cards:[
-    {h:'Beam Green',p:'Environmental projects a team can see the result of — planting, cleaning, restoring.'},
-    {h:'Beam Builds',p:'Build something a community needs, together, in a single focused day.'},
-    {h:'Beam Community',p:'Hands-on community projects matched to your people and your cause.'},
-    {h:'DIY Impact Kits',p:'Self-run give-back kits for teams who want to do it in their own time.'}
+    {h:'Beam Green',p:'Environmental projects a team can see the result of — planting, cleaning, restoring.',link:'/impact-csr-beam-green',linkText:'Explore'},
+    {h:'Beam Builds',p:'Build something a community needs, together, in a single focused day.',link:'/impact-csr-beam-builds',linkText:'Explore'},
+    {h:'Beam Community',p:'Hands-on community projects matched to your people and your cause.',link:'/impact-csr-beam-community',linkText:'Explore'},
+    {h:'DIY Impact Kits',p:'Self-run give-back kits for teams who want to do it in their own time.',link:'/impact-csr-diy-impact-kits',linkText:'Explore'}
   ]}),
 offering({path:'/development-facilitation', crumb:'Development & Facilitation',
   title:'Development & Facilitation — turn a good day into a better team · TeamBeam Outings',
@@ -611,10 +613,10 @@ offering({path:'/self-serve-kits', crumb:'Self-Serve & Kits',
   sub:'Not everything needs us in the room. Kits, playbooks and certification give your own people what they need to run a great session — structure and debrief built in.',
   cardsH:'Ways to run it yourself',
   cards:[
-    {h:'Beam Kits',p:'Everything for a specific experience, boxed and ready to run.'},
-    {h:'Beam Playbook',p:'The facilitator\u2019s guide — what to say, when, and why it works.'},
-    {h:'Beam Certify',p:'Train your own facilitators to deliver to our standard.'},
-    {h:'Offsite in a box',p:'A full day\u2019s structure your team can pick up and run on their own.'}
+    {h:'Beam Kits',p:'Everything for a specific experience, boxed and ready to run.',link:'/self-serve-kits-beam-kits',linkText:'Explore'},
+    {h:'Beam Playbook',p:'The facilitator\u2019s guide — what to say, when, and why it works.',link:'/self-serve-kits-beam-playbook',linkText:'Explore'},
+    {h:'Beam Certify',p:'Train your own facilitators to deliver to our standard.',link:'/self-serve-kits-beam-certify',linkText:'Explore'},
+    {h:'Offsite in a box',p:'A full day\u2019s structure your team can pick up and run on their own.',link:'/self-serve-kits-offsite-in-a-box',linkText:'Explore'}
   ]})
 );
 
@@ -1330,6 +1332,204 @@ subformat(Object.assign({},TE_PARENT,{slug:'/team-experiences-culinary', name:'C
   faq:[{q:'What about dietary needs?',a:'Fully accommodated — we plan menus around your team\u2019s requirements so everyone takes part and eats well.'},
     {q:'Indoors or out?',a:'Either — a professional kitchen, a venue, or an outdoor setup at an offsite. We arrange it.'}],
   related:teRel({h:'Beam Occasions',p:'Cooking makes a warm, inclusive celebration.',href:'/beam-occasions',linkText:'Occasions'})}))
+);
+
+/* ---- X-Leaves: Impact/CSR + Self-Serve pages ---- */
+const IC_PARENT={parent:'/impact-csr', parentName:'All Impact & CSR'};
+const icRel=(a)=>[
+  {h:'All Impact & CSR',p:'The full range of give-back work.',href:'/impact-csr',linkText:'Impact & CSR'},
+  a,{h:'Volunteer with your team',p:'Ways to give back, and the report you can file.',href:'/volunteer',linkText:'Volunteer'}
+];
+const SS_PARENT={parent:'/self-serve-kits', parentName:'All Self-Serve & Kits'};
+const ssRel=(a)=>[
+  {h:'All Self-Serve & Kits',p:'Run a great session with your own people.',href:'/self-serve-kits',linkText:'Self-Serve'},
+  a,{h:'How we work',p:'The method behind every kit and playbook.',href:'/why-teambeam',linkText:'The method'}
+];
+PAGES.push(
+subformat(Object.assign({},IC_PARENT,{slug:'/impact-csr-beam-green', name:'Beam Green', tagline:'environmental give-back for teams',
+  desc:'Beam Green — environmental projects a team can see the result of, from planting to clean-ups to restoration, with a report your CSR and ESG teams can file. By TeamBeam.',
+  ai:'Beam Green is TeamBeam\u2019s environmental CSR format: tree planting, restoration, clean-ups and waste projects, delivered with a filable impact report.',
+  keywords:'environmental CSR India, corporate tree planting, beach clean up team, ESG team activity',
+  eyebrow:'Impact & CSR · Beam Green', h:'Give back to the planet — <span class="grad">and see the result.</span>',
+  sub:'Environmental projects a team can point to afterwards — planting, cleaning, restoring — with a report your CSR and ESG teams can file.',
+  whatH:'Real impact, not a token gesture.', what:[
+    'The best environmental days are the ones a team can see the result of by the time they leave. Beam Green is built around visible, real impact — trees in the ground, a stretch of coast cleaned, a habitat restored — so people leave having genuinely done something, not just posed for a photo.',
+    'And because CSR and ESG mandates need evidence, every project produces a report your teams can file — what was done, where, and the measurable outcome.'],
+  insideH:'Ways to go green.',
+  inside:[
+    {h:'Planting & restoration',p:'Trees, habitats and green spaces a team helps bring back.'},
+    {h:'Clean-ups',p:'Coast, lake or neighbourhood — visible, satisfying, immediate.'},
+    {h:'Water & waste',p:'Projects around water bodies and waste that leave a lasting mark.'},
+    {h:'Green builds',p:'Building something sustainable a community will use.'}],
+  goodH:'When Beam Green fits.', goodLead:'Beam Green is our pick when impact needs to be visible and filable.',
+  good:[
+    {h:'A CSR mandate',p:'Real give-back with the documentation your teams need.'},
+    {h:'ESG reporting',p:'A measurable environmental outcome to point to.'},
+    {h:'Teams who want to do good',p:'People who would rather help than compete for a day.'}],
+  faq:[{q:'Do we get a report?',a:'Yes. Every Beam Green project comes with an impact report your CSR and ESG teams can file — what was done, where, and the outcome.'},
+    {q:'Can it be combined with a team day?',a:'Yes. Many teams pair the give-back with a shorter experience so the day does double duty.'}],
+  related:icRel({h:'Beam Builds',p:'Build something a community needs, together.',href:'/impact-csr-beam-builds',linkText:'Beam Builds'})})),
+subformat(Object.assign({},IC_PARENT,{slug:'/impact-csr-beam-builds', name:'Beam Builds', tagline:'build for communities, together',
+  desc:'Beam Builds — build something a community needs in a single focused day, bonding and giving back at once, with a report to file. By TeamBeam.',
+  ai:'Beam Builds is TeamBeam\u2019s build-for-community CSR format: assembling or constructing something a community needs in a day, with an impact report.',
+  keywords:'corporate build project India, community build CSR, assemble donate team, give back team building',
+  eyebrow:'Impact & CSR · Beam Builds', h:'Build something <span class="grad">a community needs.</span>',
+  sub:'A team builds or assembles something a community genuinely needs, in a single focused day — bonding and giving back in the same breath.',
+  whatH:'The best build serves someone.', what:[
+    'There is a particular satisfaction in building something with your team and then handing it to someone who needed it. Beam Builds channels that — assembling bikes or wheelchairs, constructing a facility, putting together equipment — into a day that bonds the team through the work and gives back through the result.',
+    'It is give-back and team-building at once, and like all our CSR work, it comes with a report you can file.'],
+  insideH:'Ways to build.',
+  inside:[
+    {h:'Assembly builds',p:'Bikes, wheelchairs, kits — assembled by teams, donated to a cause.'},
+    {h:'Facility builds',p:'Constructing or refurbishing something a community will use.'},
+    {h:'Equipment drives',p:'Building and packing kit for schools, shelters or NGOs.'},
+    {h:'Custom builds',p:'Matched to a cause your company cares about.'}],
+  goodH:'When Beam Builds fits.', goodLead:'Beam Builds is our pick for hands-on give-back with a tangible result.',
+  good:[
+    {h:'A CSR day with a keepsake outcome',p:'Something real, handed to someone who needed it.'},
+    {h:'Teams who like to make',p:'Building together is its own kind of bonding.'},
+    {h:'A cause you already support',p:'We match the build to it.'}],
+  faq:[{q:'Where does what we build go?',a:'To a matched cause or community partner. We arrange the recipient and handle logistics, and you get a report on the impact.'},
+    {q:'How many can take part?',a:'From a single team to a large group split into build stations. We scale the project to the number.'}],
+  related:icRel({h:'Beam Community',p:'Hands-on community projects beyond building.',href:'/impact-csr-beam-community',linkText:'Beam Community'})})),
+subformat(Object.assign({},IC_PARENT,{slug:'/impact-csr-beam-community', name:'Beam Community', tagline:'hands-on community projects for teams',
+  desc:'Beam Community — hands-on community projects matched to your people and your cause, with a report to file. By TeamBeam.',
+  ai:'Beam Community is TeamBeam\u2019s community-engagement CSR format: skilling, mentoring, drives and community events matched to a cause, with an impact report.',
+  keywords:'community CSR India, corporate volunteering project, mentoring drive team, social impact team activity',
+  eyebrow:'Impact & CSR · Beam Community', h:'Time with a community, <span class="grad">not just for it.</span>',
+  sub:'Hands-on community projects — skilling, mentoring, drives, events — matched to your people and a cause you care about.',
+  whatH:'The give-back that is about people.', what:[
+    'Some of the most meaningful give-back is not about building or planting — it is about time spent with people. Beam Community matches your team to a cause and a project where the impact is human: teaching a skill, mentoring, running a community event, driving a collection.',
+    'It tends to move people more than any other format, because the result looks back at you. And it comes with the report your CSR teams need.'],
+  insideH:'Ways to engage.',
+  inside:[
+    {h:'Skilling & teaching',p:'Your team sharing what they know with those who can use it.'},
+    {h:'Mentoring',p:'Time and guidance for people who benefit from both.'},
+    {h:'Drives & collections',p:'Organising and running a collection for a cause.'},
+    {h:'Community events',p:'Putting on an event a community will remember.'}],
+  goodH:'When Beam Community fits.', goodLead:'Beam Community is our pick for human, connection-led give-back.',
+  good:[
+    {h:'A people-first culture',p:'Teams who want their give-back to be personal.'},
+    {h:'An ongoing cause',p:'A partner relationship, not a one-off.'},
+    {h:'Meaning over spectacle',p:'When depth matters more than scale.'}],
+  faq:[{q:'How do you match us to a cause?',a:'We work from what your company and people care about, and connect you with a vetted partner where the project fits.'},
+    {q:'Is there a report?',a:'Yes — as with all our CSR work, you get a report on what was done and its impact.'}],
+  related:icRel({h:'Beam Green',p:'Environmental give-back with visible impact.',href:'/impact-csr-beam-green',linkText:'Beam Green'})})),
+subformat(Object.assign({},IC_PARENT,{slug:'/impact-csr-diy-impact-kits', name:'DIY Impact Kits', tagline:'self-run give-back for distributed teams',
+  desc:'DIY Impact Kits — self-run give-back kits for teams who want to do it in their own time, anywhere, with a report to file. By TeamBeam.',
+  ai:'TeamBeam DIY Impact Kits are self-run give-back kits shipped to teams, ideal for distributed or remote groups, with guidance and an impact report.',
+  keywords:'DIY CSR kit India, remote volunteering kit, distributed team give back, self run CSR',
+  eyebrow:'Impact & CSR · DIY Impact Kits', h:'Give back <span class="grad">in your own time.</span>',
+  sub:'Self-run give-back kits, shipped to your teams, so a distributed group can do good together without gathering in one place.',
+  whatH:'CSR that travels.', what:[
+    'Not every team can be in one place for a give-back day — and distributed teams should not miss out on the connection it brings. DIY Impact Kits solve that: everything needed for a meaningful give-back project, shipped to your people, with clear guidance so they can run it themselves, together or in parallel across cities.',
+    'It keeps the impact real and the report filable, without the logistics of getting everyone to one location.'],
+  insideH:'What is in a kit.',
+  inside:[
+    {h:'Everything needed',p:'Materials, instructions and the cause, in the box.'},
+    {h:'Run-it-yourself guidance',p:'Clear steps so any team can deliver it well.'},
+    {h:'Distributed delivery',p:'Kits shipped to homes or offices across cities.'},
+    {h:'The report',p:'Collated impact your CSR team can still file.'}],
+  goodH:'When DIY kits fit.', goodLead:'DIY Impact Kits are our pick for distributed and remote give-back.',
+  good:[
+    {h:'Distributed teams',p:'People spread across cities who still want to give back together.'},
+    {h:'Remote-first cultures',p:'Give-back that does not depend on gathering.'},
+    {h:'Recurring CSR',p:'A repeatable way to keep giving back through the year.'}],
+  faq:[{q:'Can a remote team do this together?',a:'Yes — kits ship to every location, and we can run it as a live, shared session so it still feels like one team.'},
+    {q:'Do we still get a report?',a:'Yes. We collate the impact across locations into a single report you can file.'}],
+  related:icRel({h:'Self-Serve & Kits',p:'The same self-run idea, across all our experiences.',href:'/self-serve-kits',linkText:'Self-Serve'})})),
+subformat(Object.assign({},SS_PARENT,{slug:'/self-serve-kits-beam-kits', name:'Beam Kits', tagline:'ready-to-run experience kits',
+  desc:'Beam Kits — everything for a specific experience, boxed and ready for your own team to run. By TeamBeam.',
+  ai:'Beam Kits are TeamBeam ready-to-run experience kits: materials and a guide for a specific team experience, boxed and shipped for internal teams to deliver themselves.',
+  keywords:'team building kit India, ready to run team activity, boxed team experience, self run team building',
+  eyebrow:'Self-Serve · Beam Kits', h:'Our experience, <span class="grad">boxed and ready.</span>',
+  sub:'Everything needed for a specific experience, in a box — so your own people can run a genuinely good session without us in the room.',
+  whatH:'Great design, your hands.', what:[
+    'Not everything needs us on site. Beam Kits take one of our experiences and package it — the materials, the structure, and a guide clear enough that anyone can run it well. Your team gets the quality of a designed experience, delivered by your own people, at their own pace.',
+    'It is the affordable, repeatable way to bring good team experiences into a company without booking a facilitator every time.'],
+  insideH:'What is in a kit.',
+  inside:[
+    {h:'The materials',p:'Everything the experience needs, packed and shipped.'},
+    {h:'A clear guide',p:'Step-by-step, so anyone can run it confidently.'},
+    {h:'Themed options',p:'Different experiences for different goals.'},
+    {h:'Debrief built in',p:'The reflection that turns an activity into value.'}],
+  goodH:'When kits fit.', goodLead:'Beam Kits are our pick for repeatable, in-house experiences.',
+  good:[
+    {h:'Frequent small sessions',p:'When you want to run experiences regularly, not occasionally.'},
+    {h:'Budget-conscious teams',p:'Quality without a facilitator fee each time.'},
+    {h:'Distributed offices',p:'Ship the same kit everywhere for a shared experience.'}],
+  faq:[{q:'Do we need a trained facilitator?',a:'No — the guide is written so any capable person can run it. For more, Beam Certify trains your people to our standard.'},
+    {q:'Can kits be branded to us?',a:'Yes, we can tailor a kit to your company or theme.'}],
+  related:ssRel({h:'Beam Playbook',p:'The deeper facilitator\u2019s guide.',href:'/self-serve-kits-beam-playbook',linkText:'Beam Playbook'})})),
+subformat(Object.assign({},SS_PARENT,{slug:'/self-serve-kits-beam-playbook', name:'Beam Playbook', tagline:'the facilitator\u2019s guide',
+  desc:'Beam Playbook — the facilitator\u2019s guide to running our experiences well: what to say, when, and why it works. By TeamBeam.',
+  ai:'Beam Playbook is TeamBeam\u2019s facilitator guide covering run-of-show, prompts, timing and debrief so internal facilitators can deliver experiences to a high standard.',
+  keywords:'facilitator playbook India, team building facilitation guide, run of show guide, internal facilitation',
+  eyebrow:'Self-Serve · Beam Playbook', h:'What to say, when, <span class="grad">and why it works.</span>',
+  sub:'The facilitator\u2019s guide behind our experiences — the run-of-show, the prompts, the timing and the debrief — so your people can deliver to a real standard.',
+  whatH:'The craft, written down.', what:[
+    'Good facilitation looks effortless because someone thought hard about every moment. Beam Playbook captures that thinking — how to open, when to intervene, what to ask in the debrief, when to say less — so a capable person on your team can deliver an experience the way we would.',
+    'It is the difference between running an activity and facilitating one, made available to your own people.'],
+  insideH:'What is inside.',
+  inside:[
+    {h:'Run-of-show',p:'The full sequence, timed, so nothing is left to chance.'},
+    {h:'Prompts & scripts',p:'What to say at each turn, and why.'},
+    {h:'Reading the room',p:'When to push, when to ease, when to step back.'},
+    {h:'The debrief',p:'The questions that turn an experience into a lesson.'}],
+  goodH:'When the Playbook fits.', goodLead:'Beam Playbook is our pick for capable internal facilitators.',
+  good:[
+    {h:'An in-house L&D team',p:'People who facilitate and want to do it better.'},
+    {h:'Scaling experiences',p:'Running the same session well across many teams.'},
+    {h:'Consistency',p:'A shared standard so every run lands the same way.'}],
+  faq:[{q:'Is a playbook enough on its own?',a:'For a capable facilitator, often yes. To build the skill from scratch, Beam Certify adds training and support.'},
+    {q:'Does it cover the debrief?',a:'Yes — the debrief is where the value lands, so the Playbook treats it as carefully as the activity.'}],
+  related:ssRel({h:'Beam Certify',p:'Train your facilitators to our standard.',href:'/self-serve-kits-beam-certify',linkText:'Beam Certify'})})),
+subformat(Object.assign({},SS_PARENT,{slug:'/self-serve-kits-beam-certify', name:'Beam Certify', tagline:'train your own facilitators',
+  desc:'Beam Certify — train your own facilitators to deliver TeamBeam experiences to our standard, with ongoing support. By TeamBeam.',
+  ai:'Beam Certify is TeamBeam\u2019s facilitator certification programme, training internal facilitators to a consistent standard with ongoing support.',
+  keywords:'facilitator certification India, train internal facilitators, team building certification, L&D certification',
+  eyebrow:'Self-Serve · Beam Certify', h:'Your facilitators, <span class="grad">to our standard.</span>',
+  sub:'Train your own people to deliver our experiences consistently and well — with certification and ongoing support, so quality does not depend on us being in the room.',
+  whatH:'Build the capability in-house.', what:[
+    'For companies that want to run experiences often, the smartest move is to build the skill internally. Beam Certify trains your facilitators to our standard — the craft of reading a room, holding a group, and landing a debrief — and certifies them, so you can deliver quality experiences without booking us each time.',
+    'It comes with ongoing support, so your facilitators keep improving rather than drifting.'],
+  insideH:'What certification includes.',
+  inside:[
+    {h:'Facilitator training',p:'The craft, taught and practised until it is usable.'},
+    {h:'Certification',p:'A standard your facilitators are measured against.'},
+    {h:'The toolkit',p:'Playbooks and kits to deliver with.'},
+    {h:'Ongoing support',p:'Refreshers and guidance so the skill keeps growing.'}],
+  goodH:'When to certify.', goodLead:'Beam Certify is our pick for building lasting in-house capability.',
+  good:[
+    {h:'High-volume needs',p:'Companies running experiences across many teams, often.'},
+    {h:'L&D functions',p:'Teams whose job is to develop people internally.'},
+    {h:'Consistency at scale',p:'One standard, wherever and whoever delivers.'}],
+  faq:[{q:'How long does certification take?',a:'It depends on the depth you want. We scope a programme to your goals and the number of facilitators.'},
+    {q:'What happens after?',a:'Your facilitators are certified and supported. We stay available for refreshers and new formats.'}],
+  related:ssRel({h:'Beam Playbook',p:'The guide your certified facilitators run from.',href:'/self-serve-kits-beam-playbook',linkText:'Beam Playbook'})})),
+subformat(Object.assign({},SS_PARENT,{slug:'/self-serve-kits-offsite-in-a-box', name:'Offsite in a box', tagline:'a full day\u2019s structure to run yourself',
+  desc:'Offsite in a box — a full day\u2019s structure your team can pick up and run on their own: agenda, activities, materials and debrief included. By TeamBeam.',
+  ai:'Offsite in a box is a TeamBeam self-run full-day offsite package: agenda, activities, materials and debrief, designed for teams to deliver themselves.',
+  keywords:'offsite in a box India, run your own offsite, DIY team offsite, self run offsite kit',
+  eyebrow:'Self-Serve · Offsite in a box', h:'A whole offsite, <span class="grad">ready to run.</span>',
+  sub:'A full day\u2019s structure your team can pick up and deliver on its own — the agenda, the activities, the materials and the debrief, all designed and packaged.',
+  whatH:'The whole day, thought through.', what:[
+    'Running your own offsite usually means building the day from scratch and hoping it flows. Offsite in a box removes that: a complete, designed day — the arc, the activities, the timing, the materials, the reflection — packaged so a capable person on your team can run a genuinely good offsite without us.',
+    'It is the self-serve version of what we do on site: our design, your delivery, a real day.'],
+  insideH:'What is in the box.',
+  inside:[
+    {h:'A designed agenda',p:'A full day with a real arc, not a list of activities.'},
+    {h:'The activities',p:'Chosen and sequenced to build toward a goal.'},
+    {h:'All the materials',p:'Everything you need to run it, packed.'},
+    {h:'The debrief',p:'The reflection that makes the day worth it.'}],
+  goodH:'When it fits.', goodLead:'Offsite in a box is our pick for teams who want to self-run a full day.',
+  good:[
+    {h:'Budget or timing constraints',p:'A real offsite without a facilitator booking.'},
+    {h:'Capable internal leads',p:'Someone who can run the day from a good structure.'},
+    {h:'Repeat offsites',p:'A reusable framework you can run again and adapt.'}],
+  faq:[{q:'Can we adapt it?',a:'Yes — it is a structure, not a script. We can tailor it to your goal, and your lead can flex it on the day.'},
+    {q:'What if we want you there after all?',a:'Then we simply run it for you. Offsite in a box is for when you would rather do it yourselves.'}],
+  related:ssRel({h:'Offsites & Retreats',p:'Prefer us to run the whole thing? Here is how.',href:'/offsites-retreats',linkText:'Offsites'})}))
 );
 
 /* ---- X-Leaves: Development & Facilitation pages ---- */
