@@ -257,6 +257,7 @@ function homePage(){
     <h1 class="hero__h">We build teams.<br>And we <span class="grad">prove it.</span></h1>
     <p class="hero__sub">We design experiences around what a team actually needs, deliver them with care, and measure what changed. One practice, at home in India and across the world.</p>
     <div class="hero__cta"><a class="cta" href="#talk">Talk to us</a><a class="cta cta--ghost" href="/why-teambeam">How we work</a></div>
+    ${beamHero({cta:'.hero__cta .cta', hideOn:'#talk,.foot', sizes:'(min-width:1100px) 288px, 132px'})}
   </section>
 
   ${secNarrative({eyebrow:'The honest problem',h:'You spend the budget. Everyone has an okay time. Then nothing changes.',paras:[
@@ -343,7 +344,19 @@ function homePage(){
       <p class="talk__addr">Visit us at <a href="${CFG.mapsUrl}" rel="noopener">${esc(CFG.address)}</a></p>
       <a class="cta" href="mailto:${CFG.email}">Write to us</a>
     </div>
-  </section>` + footer();
+  </section>` + footer().replace('</body></html>', beamScript() + '\n</body></html>');
+}
+
+/* ---- Beam mascot (home page only) ----
+ * Media is flat in assets/img/ and every name carries -v1: /assets/* is cached for a year,
+ * so a new cut of Beam ships as -v2 files. The script is assets/beam-mascot.js (minified),
+ * inlined at the end of the home page. */
+const BEAM_IMG = ext => `/assets/img/beam-v1-480.${ext} 288w, /assets/img/beam-v1-960.${ext} 576w`;
+function beamHero(o){
+  return `<div class="beam-hero" data-beam data-wave="/assets/img/beam-wave-v1.mp4" data-cta="${attr(o.cta)}" data-hide-on="${attr(o.hideOn)}" aria-hidden="true"><picture><source type="image/avif" srcset="${BEAM_IMG('avif')}" sizes="${o.sizes}"><source type="image/webp" srcset="${BEAM_IMG('webp')}" sizes="${o.sizes}"><img class="beam__still" src="/assets/img/beam-v1-480.png" srcset="${BEAM_IMG('png')}" sizes="${o.sizes}" width="576" height="960" alt="" decoding="async"></picture></div>`;
+}
+function beamScript(){
+  return `<script>${fs.readFileSync(path.join(ASSETS,'beam-mascot.js'),'utf8').trim()}</script>`;
 }
 
 /* ---- 404 ---- */
